@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.dezdeqness.darkoff"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "26.3.11579264"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
