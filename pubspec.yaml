@@ -19,6 +19,7 @@ dependencies:
   get_it: 9.2.0
   logger: 2.6.2
   cupertino_icons: 1.0.8
+  riverpod_annotation: ^3.0.3
 
 dev_dependencies:
   flutter_test:

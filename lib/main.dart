@@ -1,12 +1,16 @@
 import 'package:darkoff/core/navigation/app_router.dart';
 import 'package:darkoff/core/theme/app_theme.dart';
 import 'package:darkoff/core/theme/app_theme_provider.dart';
+import 'package:darkoff/service_locator/categories_service_locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  setupCategoriesServiceLocator();
 
-  runApp(const DarkoffApp());
+  runApp(const ProviderScope(child: DarkoffApp()));
 }
 
 class DarkoffApp extends StatelessWidget {
