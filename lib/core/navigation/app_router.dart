@@ -6,17 +6,27 @@ import 'app_router.gr.dart';
 class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(
-      initial: true,
-      page: TarkovShellRoute.page,
-      path: '/darkoff',
-      children: [
-        AutoRoute(page: HomeRoute.page, path: '', initial: true),
-        AutoRoute(page: ItemsRoute.page, path: 'items'),
-        AutoRoute(page: MapsRoute.page, path: 'maps'),
-        AutoRoute(page: TasksRoute.page, path: 'tasks'),
-        AutoRoute(page: MoreRoute.page, path: 'more'),
-      ],
-    ),
-  ];
+        AutoRoute(
+          initial: true,
+          page: TarkovShellRoute.page,
+          path: '/darkoff',
+          children: [
+            AutoRoute(page: HomeRoute.page, path: '', initial: true),
+            AutoRoute(
+              page: ItemsShellRoute.page,
+              path: 'items',
+              children: [
+                AutoRoute(
+                  page: CategoriesRoute.page,
+                  path: 'categories',
+                  initial: true,
+                ),
+              ],
+            ),
+            AutoRoute(page: MapsRoute.page, path: 'maps'),
+            AutoRoute(page: TasksRoute.page, path: 'tasks'),
+            AutoRoute(page: MoreRoute.page, path: 'more'),
+          ],
+        ),
+      ];
 }

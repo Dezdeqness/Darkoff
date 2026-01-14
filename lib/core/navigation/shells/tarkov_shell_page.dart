@@ -11,7 +11,7 @@ class TarkovShellScreen extends StatelessWidget {
     return AutoTabsScaffold(
       routes: const [
         HomeRoute(),
-        ItemsRoute(),
+        ItemsShellRoute(),
         MapsRoute(),
         TasksRoute(),
         MoreRoute(),
