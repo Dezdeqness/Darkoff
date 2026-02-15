@@ -1,0 +1,12 @@
+targets:
+  $default:
+    builders:
+      graphql_codegen:
+        options:
+          schema_path: "lib/data/service/qraphql/schema.graphql"
+          queries_path: "lib/data/service/qraphql/queries"
+          output_path: "lib/data/service/qraphql/generated"
+          output_file_name: "graphql_api.dart"
+          nullable: true
+          serde: true
+          json_serializable: true
