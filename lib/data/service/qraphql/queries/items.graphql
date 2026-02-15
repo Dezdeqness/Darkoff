@@ -1,0 +1,19 @@
+query DarkoffItems($language: LanguageCode, $gameMode: GameMode, $limit: Int, $offset: Int, $types: [ItemType]) {
+  items(lang: $language, gameMode: $gameMode, limit: $limit, offset: $offset, types: $types) {
+    id
+    name
+    shortName
+    normalizedName
+    basePrice
+    backgroundColor
+    types
+    iconLink
+    baseImageLink
+    image512pxLink
+    categories {
+      id
+      name
+      normalizedName
+    }
+  }
+}

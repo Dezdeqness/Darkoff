@@ -1,14 +1,14 @@
 import 'package:darkoff/core/navigation/app_router.dart';
 import 'package:darkoff/core/theme/app_theme.dart';
 import 'package:darkoff/core/theme/app_theme_provider.dart';
-import 'package:darkoff/service_locator/categories_service_locator.dart';
+import 'package:darkoff/service_locator/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  setupCategoriesServiceLocator();
+  await setupServiceLocator();
 
   runApp(const ProviderScope(child: DarkoffApp()));
 }

@@ -1,13 +1,13 @@
-class CategoryEntity {
-  final String key;
-  final String displayText;
-  final String icon;
-  final String type;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  const CategoryEntity({
-    required this.key,
-    required this.displayText,
-    required this.icon,
-    required this.type,
-  });
+part 'category_entity.freezed.dart';
+
+@freezed
+abstract class CategoryEntity with _$CategoryEntity {
+  const factory CategoryEntity({
+    required String key,
+    required String displayText,
+    required String icon,
+    required String type,
+  }) = _CategoryEntity;
 }
