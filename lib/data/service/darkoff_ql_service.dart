@@ -8,8 +8,8 @@ class DarkoffQLService {
   DarkoffQLService({required this.client});
 
   Future<QueryResult> getItems({
-    String language = 'ru',
-    String gameMode = 'regular',
+    Enum$LanguageCode language = Enum$LanguageCode.ru,
+    Enum$GameMode gameMode = Enum$GameMode.regular,
     int limit = 100,
     int offset = 0,
     List<Enum$ItemType> types = const [],
@@ -17,8 +17,8 @@ class DarkoffQLService {
     final options = QueryOptions(
       document: documentNodeQueryDarkoffItems,
       variables: Variables$Query$DarkoffItems(
-        language: language == 'ru' ? Enum$LanguageCode.ru : Enum$LanguageCode.en,
-        gameMode: gameMode == 'regular' ? Enum$GameMode.regular : Enum$GameMode.pve,
+        language: language,
+        gameMode: gameMode,
         limit: limit,
         offset: offset,
         types: types,

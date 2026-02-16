@@ -1,5 +1,5 @@
 import 'package:darkoff/domain/entities/category_entity.dart';
 
-abstract class CategoryRepository {
+abstract interface class CategoryRepository {
   Future<Map<String, List<CategoryEntity>>> getCategories();
 }
