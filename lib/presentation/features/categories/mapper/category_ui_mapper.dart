@@ -32,6 +32,7 @@ class CategoryUiMapper {
       displayText: entity.displayText,
       // TODO: env variables
       imageUrl: 'https://tarkov.dev/images/items/${entity.key}-table_thumb.jpg',
+      types: entity.types,
     );
   }
 }
