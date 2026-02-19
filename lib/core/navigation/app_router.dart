@@ -21,6 +21,10 @@ class AppRouter extends RootStackRouter {
                   path: 'categories',
                   initial: true,
                 ),
+                AutoRoute(
+                  page: ItemsRoute.page,
+                  path: 'list',
+                ),
               ],
             ),
             AutoRoute(page: MapsRoute.page, path: 'maps'),

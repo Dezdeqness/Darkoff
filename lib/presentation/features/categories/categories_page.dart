@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/presentation/features/categories/model/category_ui_model.dart';
 import 'package:darkoff/presentation/features/categories/model/category_ui_section.dart';
 import 'package:darkoff/presentation/features/categories/notifiers/category_notifier.dart';
@@ -19,7 +20,7 @@ class CategoriesPage extends ConsumerWidget {
       body: SafeArea(
         child: state.when(
           initial: () => const Center(
-            child: Text('Press to load categories'),
+            child: CircularProgressIndicator(),
           ),
           loading: () => const Center(
             child: CircularProgressIndicator(),
@@ -60,11 +61,6 @@ class CategoriesPage extends ConsumerWidget {
   }
 
   void _onCategoryTap(BuildContext context, CategoryUiModel item) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Tapped on ${item.displayText}'),
-        duration: const Duration(seconds: 1),
-      ),
-    );
+    context.router.push(ItemsRoute(types: item.types));
   }
 }

@@ -8,7 +8,7 @@ class DarkoffQLService {
   DarkoffQLService({required this.client});
 
   Future<QueryResult> getItems({
-    Enum$LanguageCode language = Enum$LanguageCode.ru,
+    Enum$LanguageCode language = Enum$LanguageCode.en,
     Enum$GameMode gameMode = Enum$GameMode.regular,
     int limit = 100,
     int offset = 0,
