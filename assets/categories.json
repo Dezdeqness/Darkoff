@@ -1,0 +1,120 @@
+{
+  "gear": [
+    {
+      "key": "headsets",
+      "displayText": "Headsets",
+      "icon": "mdiHeadset",
+      "type": "headphones",
+      "types": ["headphones"]
+    },
+    {
+      "key": "helmets",
+      "displayText": "Helmets",
+      "icon": "mdiRacingHelmet",
+      "type": "helmet",
+      "types": ["helmet"]
+    },
+    {
+      "key": "glasses",
+      "displayText": "Glasses",
+      "icon": "mdiSunglasses",
+      "type": "glasses",
+      "types": ["glasses"]
+    },
+    {
+      "key": "armors",
+      "displayText": "Armors",
+      "icon": "mdiTshirtCrew",
+      "type": "armor",
+      "types": ["armor", "armorPlate"]
+    },
+    {
+      "key": "rigs",
+      "displayText": "Rigs",
+      "icon": "mdiTshirtCrewOutline",
+      "type": "rig",
+      "types": ["rig"]
+    },
+    {
+      "key": "backpacks",
+      "displayText": "Backpacks",
+      "icon": "mdiBagPersonal",
+      "type": "backpack",
+      "types": ["backpack"]
+    }
+  ],
+  "weaponry": [
+    {
+      "key": "guns",
+      "displayText": "Guns",
+      "icon": "mdiPistol",
+      "type": "preset",
+      "types": ["preset"]
+    },
+    {
+      "key": "ammo",
+      "displayText": "Ammo",
+      "icon": "mdiBullet",
+      "type": "ammo",
+      "types": ["ammo", "ammoBox"]
+    },
+    {
+      "key": "mods",
+      "displayText": "Mods",
+      "icon": "mdiMagazineRifle",
+      "type": "mods",
+      "types": ["mods"]
+    },
+    {
+      "key": "pistol-grips",
+      "displayText": "Pistol Grips",
+      "icon": "mdiHandPointingLeft",
+      "type": "pistolGrip",
+      "types": ["pistolGrip"]
+    },
+    {
+      "key": "suppressors",
+      "displayText": "Suppressors",
+      "icon": "mdiBottleWine",
+      "type": "suppressor",
+      "types": ["suppressor"]
+    }
+  ],
+  "other_stuff": [
+    {
+      "key": "grenades",
+      "displayText": "Grenades",
+      "icon": "mdiGasCylinder",
+      "type": "grenade",
+      "types": ["grenade"]
+    },
+    {
+      "key": "containers",
+      "displayText": "Containers",
+      "icon": "mdiArchive",
+      "type": "container",
+      "types": ["container"]
+    },
+    {
+      "key": "barter-items",
+      "displayText": "Barter Items",
+      "icon": "mdiPliers",
+      "type": "barter",
+      "types": ["barter"]
+    },
+    {
+      "key": "keys",
+      "displayText": "Keys",
+      "icon": "mdiKeyVariant",
+      "type": "keys",
+      "types": ["keys"]
+    },
+    {
+      "key": "provisions",
+      "displayText": "Provisions",
+      "icon": "mdiFoodForkDrink",
+      "type": "provisions",
+      "types": ["provisions", "meds", "injectors"]
+    }
+  ]
+}

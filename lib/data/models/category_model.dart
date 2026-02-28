@@ -16,6 +16,18 @@ class CategoryModel {
     required this.types,
   });
 
+  factory CategoryModel.fromJson(Map<String, dynamic> json) {
+    return CategoryModel(
+      key: json['key'] as String,
+      displayText: json['displayText'] as String,
+      icon: json['icon'] as String,
+      type: json['type'] as String,
+      types: (json['types'] as List<dynamic>)
+          .map((t) => ItemType.values.byName(t as String))
+          .toList(),
+    );
+  }
+
   CategoryEntity toEntity() {
     return CategoryEntity(
       key: key,

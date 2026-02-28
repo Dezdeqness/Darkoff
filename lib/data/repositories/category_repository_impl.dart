@@ -9,7 +9,7 @@ class CategoryRepositoryImpl implements CategoryRepository {
 
   @override
   Future<Map<String, List<CategoryEntity>>> getCategories() async {
-    final categoriesMap = _dataProvider.getCategories();
+    final categoriesMap = await _dataProvider.getCategories();
     
     return categoriesMap.map(
       (key, models) => MapEntry(

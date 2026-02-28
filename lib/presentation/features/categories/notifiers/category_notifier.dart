@@ -21,10 +21,13 @@ class CategoryNotifier extends _$CategoryNotifier {
 
   Future<void> loadCategories() async {
     state = const CategoryState.loading();
-    
-    final categoriesMap = await _repository.getCategories();
-    final sections = _mapper.mapToSections(categoriesMap);
-    
-    state = CategoryState.loaded(sections);
+
+    try {
+      final categoriesMap = await _repository.getCategories();
+      final sections = _mapper.mapToSections(categoriesMap);
+      state = CategoryState.loaded(sections);
+    } on Exception catch (e) {
+      state = CategoryState.error(e.toString());
+    }
   }
 }

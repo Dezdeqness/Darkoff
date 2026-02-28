@@ -26,6 +26,7 @@ class CategoriesPage extends ConsumerWidget {
             child: CircularProgressIndicator(),
           ),
           loaded: (sections) => _buildCategoriesList(context, sections),
+          error: (message) => _buildError(context, ref, message),
         ),
       ),
     );
@@ -57,6 +58,22 @@ class CategoriesPage extends ConsumerWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildError(BuildContext context, WidgetRef ref, String message) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(message, textAlign: TextAlign.center),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () => ref.read(categoryProvider.notifier).loadCategories(),
+            child: const Text('Retry'),
+          ),
+        ],
+      ),
     );
   }
 

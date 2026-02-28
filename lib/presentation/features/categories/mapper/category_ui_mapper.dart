@@ -1,16 +1,21 @@
+import 'package:darkoff/core/config/app_config.dart';
 import 'package:darkoff/data/providers/category_data_provider.dart';
 import 'package:darkoff/domain/entities/category_entity.dart';
 import 'package:darkoff/presentation/features/categories/model/category_ui_model.dart';
 import 'package:darkoff/presentation/features/categories/model/category_ui_section.dart';
+
+const kCategoryKeyGear = 'gear';
+const kCategoryKeyWeaponry = 'weaponry';
+const kCategoryKeyOther = 'other_stuff';
 
 class CategoryUiMapper {
   List<CategoryUiSection> mapToSections(
     Map<String, List<CategoryEntity>> categoriesMap,
   ) {
     final orderedKeys = [
-      (categoryKeyGear, 'Gear'),
-      (categoryKeyWeaponry, 'Weaponry'),
-      (categoryKeyOther, 'Other Stuff'),
+      (kCategoryKeyGear, 'Gear'),
+      (kCategoryKeyWeaponry, 'Weaponry'),
+      (kCategoryKeyOther, 'Other Stuff'),
     ];
 
     return orderedKeys.map((entry) {
@@ -30,8 +35,7 @@ class CategoryUiMapper {
     return CategoryUiModel(
       key: entity.key,
       displayText: entity.displayText,
-      // TODO: env variables
-      imageUrl: 'https://tarkov.dev/images/items/${entity.key}-table_thumb.jpg',
+      imageUrl: '${AppConfig.imagesBaseUrl}/items/${entity.key}-table_thumb.jpg',
       types: entity.types,
     );
   }

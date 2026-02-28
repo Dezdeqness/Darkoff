@@ -12,7 +12,7 @@ extension ThemeExtensions on BuildContext {
 
   SpacingTheme get spacingTheme => theme.appTheme.spacingTheme as SpacingTheme;
 
-  SizingTheme get sizingTheme => theme.appTheme.typographyTheme as SizingTheme;
+  SizingTheme get sizingTheme => theme.appTheme.sizingTheme as SizingTheme;
 }
 
 extension ThemeDataExtension on ThemeData {
