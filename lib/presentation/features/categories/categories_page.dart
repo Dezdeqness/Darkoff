@@ -78,6 +78,6 @@ class CategoriesPage extends ConsumerWidget {
   }
 
   void _onCategoryTap(BuildContext context, CategoryUiModel item) {
-    context.router.push(ItemsRoute(types: item.types));
+    context.router.push(ItemsRoute(categoryNames: item.categoryNames));
   }
 }

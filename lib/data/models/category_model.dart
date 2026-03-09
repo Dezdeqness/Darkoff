@@ -1,19 +1,16 @@
 import 'package:darkoff/domain/entities/category_entity.dart';
-import 'package:darkoff/domain/entities/item_type.dart';
 
 class CategoryModel {
   final String key;
   final String displayText;
   final String icon;
-  final String type;
-  final List<ItemType> types;
+  final List<String> categoryNames;
 
   const CategoryModel({
     required this.key,
     required this.displayText,
     required this.icon,
-    required this.type,
-    required this.types,
+    required this.categoryNames,
   });
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
@@ -21,9 +18,8 @@ class CategoryModel {
       key: json['key'] as String,
       displayText: json['displayText'] as String,
       icon: json['icon'] as String,
-      type: json['type'] as String,
-      types: (json['types'] as List<dynamic>)
-          .map((t) => ItemType.values.byName(t as String))
+      categoryNames: (json['categoryNames'] as List<dynamic>)
+          .map((t) => t as String)
           .toList(),
     );
   }
@@ -33,8 +29,7 @@ class CategoryModel {
       key: key,
       displayText: displayText,
       icon: icon,
-      type: type,
-      types: types,
+      categoryNames: categoryNames,
     );
   }
 }

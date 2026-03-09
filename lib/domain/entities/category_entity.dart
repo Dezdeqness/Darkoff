@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:darkoff/domain/entities/item_type.dart';
 
 part 'category_entity.freezed.dart';
 
@@ -9,7 +8,6 @@ abstract class CategoryEntity with _$CategoryEntity {
     required String key,
     required String displayText,
     required String icon,
-    required String type,
-    required List<ItemType> types,
+    required List<String> categoryNames,
   }) = _CategoryEntity;
 }

@@ -1,5 +1,4 @@
 import 'package:darkoff/core/config/app_config.dart';
-import 'package:darkoff/data/providers/category_data_provider.dart';
 import 'package:darkoff/domain/entities/category_entity.dart';
 import 'package:darkoff/presentation/features/categories/model/category_ui_model.dart';
 import 'package:darkoff/presentation/features/categories/model/category_ui_section.dart';
@@ -36,7 +35,7 @@ class CategoryUiMapper {
       key: entity.key,
       displayText: entity.displayText,
       imageUrl: '${AppConfig.imagesBaseUrl}/items/${entity.key}-table_thumb.jpg',
-      types: entity.types,
+      categoryNames: entity.categoryNames,
     );
   }
 }

@@ -2,45 +2,39 @@
   "gear": [
     {
       "key": "headsets",
-      "displayText": "Headsets",
+      "displayText": "Headphones",
       "icon": "mdiHeadset",
-      "type": "headphones",
-      "types": ["headphones"]
+      "categoryNames": ["headphones"]
     },
     {
       "key": "helmets",
-      "displayText": "Helmets",
+      "displayText": "Headwear",
       "icon": "mdiRacingHelmet",
-      "type": "helmet",
-      "types": ["helmet"]
+      "categoryNames": ["headwear"]
     },
     {
       "key": "glasses",
-      "displayText": "Glasses",
+      "displayText": "Visors",
       "icon": "mdiSunglasses",
-      "type": "glasses",
-      "types": ["glasses"]
+      "categoryNames": ["vis-observ-device", "face-cover"]
     },
     {
       "key": "armors",
       "displayText": "Armors",
       "icon": "mdiTshirtCrew",
-      "type": "armor",
-      "types": ["armor", "armorPlate"]
+      "categoryNames": ["armor", "armor-plate"]
     },
     {
       "key": "rigs",
       "displayText": "Rigs",
       "icon": "mdiTshirtCrewOutline",
-      "type": "rig",
-      "types": ["rig"]
+      "categoryNames": ["chest-rig"]
     },
     {
       "key": "backpacks",
       "displayText": "Backpacks",
       "icon": "mdiBagPersonal",
-      "type": "backpack",
-      "types": ["backpack"]
+      "categoryNames": ["backpack"]
     }
   ],
   "weaponry": [
@@ -48,36 +42,31 @@
       "key": "guns",
       "displayText": "Guns",
       "icon": "mdiPistol",
-      "type": "preset",
-      "types": ["preset"]
+      "categoryNames": ["assault-rifle", "assault-carbine", "sniper-rifle", "shotgun", "smg", "handgun", "machinegun", "marksman-rifle", "grenade-launcher", "revolver", "rocket-launcher"]
     },
     {
       "key": "ammo",
       "displayText": "Ammo",
       "icon": "mdiBullet",
-      "type": "ammo",
-      "types": ["ammo", "ammoBox"]
+      "categoryNames": ["ammo", "ammo-container"]
     },
     {
       "key": "mods",
       "displayText": "Mods",
       "icon": "mdiMagazineRifle",
-      "type": "mods",
-      "types": ["mods"]
+      "categoryNames": ["weapon-mod", "functional-mod", "essential-mod", "gear-mod", "muzzle-device"]
     },
     {
       "key": "pistol-grips",
       "displayText": "Pistol Grips",
       "icon": "mdiHandPointingLeft",
-      "type": "pistolGrip",
-      "types": ["pistolGrip"]
+      "categoryNames": ["pistol-grip"]
     },
     {
       "key": "suppressors",
       "displayText": "Suppressors",
       "icon": "mdiBottleWine",
-      "type": "suppressor",
-      "types": ["suppressor"]
+      "categoryNames": ["silencer"]
     }
   ],
   "other_stuff": [
@@ -85,36 +74,31 @@
       "key": "grenades",
       "displayText": "Grenades",
       "icon": "mdiGasCylinder",
-      "type": "grenade",
-      "types": ["grenade"]
+      "categoryNames": ["throwable-weapon"]
     },
     {
       "key": "containers",
       "displayText": "Containers",
       "icon": "mdiArchive",
-      "type": "container",
-      "types": ["container"]
+      "categoryNames": ["locking-container", "common-container", "port-container"]
     },
     {
       "key": "barter-items",
       "displayText": "Barter Items",
       "icon": "mdiPliers",
-      "type": "barter",
-      "types": ["barter"]
+      "categoryNames": ["barter-item"]
     },
     {
       "key": "keys",
       "displayText": "Keys",
       "icon": "mdiKeyVariant",
-      "type": "keys",
-      "types": ["keys"]
+      "categoryNames": ["key", "mechanical-key", "keycard"]
     },
     {
       "key": "provisions",
       "displayText": "Provisions",
       "icon": "mdiFoodForkDrink",
-      "type": "provisions",
-      "types": ["provisions", "meds", "injectors"]
+      "categoryNames": ["food-and-drink", "food", "drink", "meds", "medikit", "drug", "medical-item", "stimulant"]
     }
   ]
 }
