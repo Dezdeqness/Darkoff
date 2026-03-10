@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
+import 'package:darkoff/core/widgets/app_error_view.dart';
 import 'package:darkoff/presentation/features/categories/model/category_ui_model.dart';
 import 'package:darkoff/presentation/features/categories/model/category_ui_section.dart';
 import 'package:darkoff/presentation/features/categories/notifiers/category_notifier.dart';
@@ -19,14 +20,13 @@ class CategoriesPage extends ConsumerWidget {
     return Scaffold(
       body: SafeArea(
         child: state.when(
-          initial: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
+          initial: () => const Center(child: CircularProgressIndicator()),
+          loading: () => const Center(child: CircularProgressIndicator()),
           loaded: (sections) => _buildCategoriesList(context, sections),
-          error: (message) => _buildError(context, ref, message),
+          error: (message) => AppErrorView(
+            message: message,
+            onRetry: () => ref.read(categoryProvider.notifier).loadCategories(),
+          ),
         ),
       ),
     );
@@ -58,22 +58,6 @@ class CategoriesPage extends ConsumerWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildError(BuildContext context, WidgetRef ref, String message) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(message, textAlign: TextAlign.center),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () => ref.read(categoryProvider.notifier).loadCategories(),
-            child: const Text('Retry'),
-          ),
-        ],
-      ),
     );
   }
 

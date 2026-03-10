@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/navigation/app_router.gr.dart';
+import 'package:darkoff/core/utils/color_utils.dart';
 import 'package:darkoff/core/widgets/app_image.dart';
 import 'package:darkoff/presentation/features/items/model/item_ui_model.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +16,7 @@ class ItemCard extends StatelessWidget {
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: InkWell(
-        onTap: () => _onItemTap(context),
+        onTap: () => context.router.push(ItemDetailRoute(itemId: item.id)),
         borderRadius: BorderRadius.circular(8),
         child: SizedBox(
           height: 80,
@@ -23,7 +26,7 @@ class ItemCard extends StatelessWidget {
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: _parseColor(item.backgroundColor),
+                  color: parseHexColor(item.backgroundColor),
                   borderRadius: const BorderRadius.horizontal(
                     left: Radius.circular(8),
                   ),
@@ -56,28 +59,6 @@ class ItemCard extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Color _parseColor(String colorString) {
-    try {
-      if (colorString.startsWith('#')) {
-        return Color(
-          int.parse(colorString.substring(1), radix: 16) + 0xFF000000,
-        );
-      }
-      return Colors.grey;
-    } catch (e) {
-      return Colors.grey;
-    }
-  }
-
-  void _onItemTap(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Tapped on ${item.displayName}'),
-        duration: const Duration(seconds: 1),
       ),
     );
   }
