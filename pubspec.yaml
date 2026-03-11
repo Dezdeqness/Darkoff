@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 0.0.1+1
 
 environment:
-  sdk: ">=3.8.0 <4.0.0"
+  sdk: ">=3.10.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -23,10 +23,10 @@ dependencies:
   graphql: 5.2.3
   json_annotation: 4.9.0
   cached_network_image: 3.4.1
-  drift: 2.28.0
-  sqlite3_flutter_libs: 0.5.28
+  drift: 2.31.0
+  sqlite3_flutter_libs: 0.5.42
   path_provider: 2.1.4
-  path: 1.9.0
+  path: 1.9.1
 
 dev_dependencies:
   flutter_test:
@@ -34,12 +34,12 @@ dev_dependencies:
 
   freezed: 3.2.3
   riverpod_generator: 3.0.3
-  build_runner: 2.4.0
+  build_runner: 2.10.4
   json_serializable: 6.11.1
   auto_route_generator: 10.4.0
   flutter_lints: 6.0.0
   graphql_codegen: 3.0.1
-  drift_dev: 2.28.0
+  drift_dev: 2.31.0
 
 flutter:
   uses-material-design: true
