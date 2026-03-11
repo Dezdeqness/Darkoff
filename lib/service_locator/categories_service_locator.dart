@@ -8,9 +8,9 @@ final getIt = GetIt.instance;
 
 void setupCategoriesServiceLocator() {
   getIt.registerLazySingleton<CategoryDataProvider>(() => CategoryDataProvider());
-  
+
   getIt.registerLazySingleton<CategoryRepository>(
-    () => CategoryRepositoryImpl(getIt<CategoryDataProvider>()),
+    () => CategoryRepositoryImpl(dataProvider: getIt<CategoryDataProvider>()),
   );
 
   getIt.registerLazySingleton<CategoryUiMapper>(() => CategoryUiMapper());
