@@ -1,7 +1,30 @@
-query DarkoffItems($language: LanguageCode, $gameMode: GameMode, $limit: Int, $offset: Int) {
-  items(lang: $language, gameMode: $gameMode, limit: $limit, offset: $offset) {
+query DarkoffItemDetail($id: ID!, $language: LanguageCode, $gameMode: GameMode) {
+  item(id: $id, lang: $language, gameMode: $gameMode) {
     id
     bsgCategoryId
+    name
+    shortName
+    normalizedName
+    description
+    basePrice
+    avg24hPrice
+    low24hPrice
+    high24hPrice
+    changeLast48h
+    changeLast48hPercent
+    lastLowPrice
+    lastOfferCount
+    width
+    height
+    weight
+    backgroundColor
+    iconLink
+    baseImageLink
+    image512pxLink
+    image8xLink
+    wikiLink
+    updated
+    types
     categories {
       id
       name
@@ -10,28 +33,6 @@ query DarkoffItems($language: LanguageCode, $gameMode: GameMode, $limit: Int, $o
     handbookCategories {
       id
     }
-    name
-    shortName
-    basePrice
-    normalizedName
-    backgroundColor
-    types
-    width
-    height
-    weight
-    avg24hPrice
-    wikiLink
-    changeLast48h
-    changeLast48hPercent
-    low24hPrice
-    high24hPrice
-    lastLowPrice
-    lastOfferCount
-    iconLink
-    baseImageLink
-    image512pxLink
-    image8xLink
-    updated
     sellFor {
       ...ItemPriceFragment
     }
@@ -292,113 +293,4 @@ query DarkoffItems($language: LanguageCode, $gameMode: GameMode, $limit: Int, $o
       }
     }
   }
-}
-
-fragment GridFragment on ItemStorageGrid {
-  width
-  height
-  filters {
-    allowedCategories {
-      id
-    }
-    allowedItems {
-      id
-    }
-    excludedCategories {
-      id
-    }
-    excludedItems {
-      id
-    }
-  }
-}
-
-fragment SlotFragment on ItemSlot {
-  filters {
-    allowedCategories {
-      id
-    }
-    allowedItems {
-      id
-    }
-    excludedCategories {
-      id
-    }
-    excludedItems {
-      id
-    }
-  }
-}
-
-fragment SoftArmorSlotFragment on ItemArmorSlotLocked {
-  nameId
-  name
-  class
-  durability
-  speedPenalty
-  turnPenalty
-  ergoPenalty
-  material {
-    id
-    name
-  }
-  zones
-  armorType
-}
-
-fragment PlateArmorSlotFragment on ItemArmorSlotOpen {
-  nameId
-  name
-  zones
-  allowedPlates {
-    id
-  }
-}
-
-fragment ArmorSlotFragment on ItemArmorSlot {
-  nameId
-  zones
-  ... on ItemArmorSlotLocked {
-    ...SoftArmorSlotFragment
-  }
-  ... on ItemArmorSlotOpen {
-    ...PlateArmorSlotFragment
-  }
-}
-
-fragment ItemPriceFragment on ItemPrice {
-  vendor {
-    name
-    normalizedName
-    __typename
-    ... on TraderOffer {
-      trader {
-        id
-      }
-      minTraderLevel
-      taskUnlock {
-        id
-        tarkovDataId
-        name
-        normalizedName
-      }
-    }
-  }
-  price
-  currency
-  priceRUB
-  requirements {
-    type
-    value
-  }
-}
-
-fragment StimEffectFragment on StimEffect {
-  type
-  chance
-  delay
-  duration
-  value
-  percent
-  skillName
 }

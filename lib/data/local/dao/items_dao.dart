@@ -6,10 +6,14 @@ import 'package:darkoff/domain/entities/item_entity.dart';
 import 'package:drift/drift.dart';
 
 class ItemsDao {
-  final AppDatabase _db;
-  final ItemDbMapper _mapper = ItemDbMapper();
+  ItemsDao({
+    required AppDatabase db,
+    required ItemDbMapper mapper,
+  })  : _db = db,
+        _mapper = mapper;
 
-  ItemsDao(this._db);
+  final AppDatabase _db;
+  final ItemDbMapper _mapper;
 
   Future<void> insertAllItems(List<ItemDetailEntity> items) async {
     await _db.transaction(() async {

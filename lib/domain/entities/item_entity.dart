@@ -1,3 +1,5 @@
+import 'package:darkoff/domain/entities/item_category_info.dart';
+import 'package:darkoff/domain/entities/item_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'item_entity.freezed.dart';
@@ -13,5 +15,7 @@ abstract class ItemEntity with _$ItemEntity {
     required String? iconLink,
     required String? baseImageLink,
     required String? image512pxLink,
+    @Default([]) List<ItemType> types,
+    @Default([]) List<ItemCategoryInfo> categories,
   }) = _ItemEntity;
 }
