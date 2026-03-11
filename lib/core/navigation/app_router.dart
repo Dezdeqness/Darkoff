@@ -8,6 +8,10 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           initial: true,
+          page: SplashRoute.page,
+          path: '/splash',
+        ),
+        AutoRoute(
           page: TarkovShellRoute.page,
           path: '/darkoff',
           children: [
@@ -24,6 +28,10 @@ class AppRouter extends RootStackRouter {
                 AutoRoute(
                   page: ItemsRoute.page,
                   path: 'list',
+                ),
+                AutoRoute(
+                  page: ItemDetailRoute.page,
+                  path: 'detail',
                 ),
               ],
             ),
