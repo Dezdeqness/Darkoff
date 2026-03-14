@@ -31,34 +31,6 @@ class _TarkovShellScreenState extends ConsumerState<TarkovShellScreen> {
     super.dispose();
   }
 
-  void _onRefreshEvent(RefreshEvent event) {
-    final messenger = ScaffoldMessenger.of(context);
-    messenger.hideCurrentSnackBar();
-
-    event.when(
-      started: () {
-        messenger.showSnackBar(
-          const SnackBar(content: Text('Refreshing items...')),
-        );
-      },
-      progress: (loaded) {
-        messenger.showSnackBar(
-          SnackBar(content: Text('Loaded $loaded items...')),
-        );
-      },
-      completed: () {
-        messenger.showSnackBar(
-          const SnackBar(content: Text('Items refreshed successfully')),
-        );
-      },
-      error: (message) {
-        messenger.showSnackBar(
-          SnackBar(content: Text('Failed to refresh: $message')),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final isRefreshing = ref.watch(refreshProvider);
@@ -71,18 +43,15 @@ class _TarkovShellScreenState extends ConsumerState<TarkovShellScreen> {
             IconButton(
               icon: isRefreshing
                   ? const SizedBox(
-                width: 24,
-                height: 24,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              )
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
                   : const Icon(Icons.refresh),
               tooltip: 'Refresh items',
               onPressed: isRefreshing
                   ? null
-                  : () =>
-                  ref
-                      .read(refreshProvider.notifier)
-                      .refresh(),
+                  : () => ref.read(refreshProvider.notifier).refresh(),
             ),
           ],
         );
@@ -125,6 +94,34 @@ class _TarkovShellScreenState extends ConsumerState<TarkovShellScreen> {
               label: 'More',
             ),
           ],
+        );
+      },
+    );
+  }
+
+  void _onRefreshEvent(RefreshEvent event) {
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.hideCurrentSnackBar();
+
+    event.when(
+      started: () {
+        messenger.showSnackBar(
+          const SnackBar(content: Text('Refreshing items...')),
+        );
+      },
+      progress: (loaded) {
+        messenger.showSnackBar(
+          SnackBar(content: Text('Loaded $loaded items...')),
+        );
+      },
+      completed: () {
+        messenger.showSnackBar(
+          const SnackBar(content: Text('Items refreshed successfully')),
+        );
+      },
+      error: (message) {
+        messenger.showSnackBar(
+          SnackBar(content: Text('Failed to refresh: $message')),
         );
       },
     );

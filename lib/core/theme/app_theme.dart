@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'themes/shape_theme.dart';
 import 'themes/sizing_theme.dart';
 import 'themes/spacing_theme.dart';
 import 'themes/typography_theme.dart';
@@ -9,22 +10,26 @@ class AppTheme extends ThemeExtension<AppTheme> {
     required this.typographyTheme,
     required this.spacingTheme,
     required this.sizingTheme,
+    required this.shapeTheme,
   });
 
   final ThemeExtension<TypographyTheme> typographyTheme;
   final ThemeExtension<SpacingTheme> spacingTheme;
   final ThemeExtension<SizingTheme> sizingTheme;
+  final ThemeExtension<ShapeTheme> shapeTheme;
 
   @override
   ThemeExtension<AppTheme> copyWith({
     ThemeExtension<TypographyTheme>? typographyTheme,
     ThemeExtension<SpacingTheme>? spacingTheme,
     ThemeExtension<SizingTheme>? sizingTheme,
+    ThemeExtension<ShapeTheme>? shapeTheme,
   }) {
     return AppTheme(
       typographyTheme: typographyTheme ?? this.typographyTheme,
       spacingTheme: spacingTheme ?? this.spacingTheme,
       sizingTheme: sizingTheme ?? this.sizingTheme,
+      shapeTheme: shapeTheme ?? this.shapeTheme,
     );
   }
 
@@ -38,18 +43,10 @@ class AppTheme extends ThemeExtension<AppTheme> {
     }
 
     return AppTheme(
-      typographyTheme: typographyTheme.lerp(
-        other.typographyTheme,
-        t,
-      ),
-      spacingTheme: spacingTheme.lerp(
-        other.spacingTheme,
-        t,
-      ),
-      sizingTheme: sizingTheme.lerp(
-        other.sizingTheme,
-        t,
-      ),
+      typographyTheme: typographyTheme.lerp(other.typographyTheme, t),
+      spacingTheme: spacingTheme.lerp(other.spacingTheme, t),
+      sizingTheme: sizingTheme.lerp(other.sizingTheme, t),
+      shapeTheme: shapeTheme.lerp(other.shapeTheme, t),
     );
   }
 
@@ -58,6 +55,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
       typographyTheme: TypographyTheme.standard(),
       spacingTheme: SpacingTheme.standard(),
       sizingTheme: SizingTheme.standard(),
+      shapeTheme: ShapeTheme.standard(),
     );
   }
 
@@ -66,6 +64,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
       typographyTheme: TypographyTheme.standard(),
       spacingTheme: SpacingTheme.standard(),
       sizingTheme: SizingTheme.standard(),
+      shapeTheme: ShapeTheme.standard(),
     );
   }
 }

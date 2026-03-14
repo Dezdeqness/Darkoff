@@ -1,4 +1,5 @@
 import 'package:darkoff/core/theme/app_theme.dart';
+import 'package:darkoff/core/theme/themes/shape_theme.dart';
 import 'package:darkoff/core/theme/themes/sizing_theme.dart';
 import 'package:darkoff/core/theme/themes/spacing_theme.dart';
 import 'package:darkoff/core/theme/themes/typography_theme.dart';
@@ -13,6 +14,8 @@ extension ThemeExtensions on BuildContext {
   SpacingTheme get spacingTheme => theme.appTheme.spacingTheme as SpacingTheme;
 
   SizingTheme get sizingTheme => theme.appTheme.sizingTheme as SizingTheme;
+
+  ShapeTheme get shapeTheme => theme.appTheme.shapeTheme as ShapeTheme;
 }
 
 extension ThemeDataExtension on ThemeData {

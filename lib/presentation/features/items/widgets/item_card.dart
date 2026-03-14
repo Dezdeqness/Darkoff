@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
+import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/utils/color_utils.dart';
 import 'package:darkoff/core/widgets/app_image.dart';
 import 'package:darkoff/presentation/features/items/model/item_ui_model.dart';
@@ -12,12 +13,13 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shape = context.shapeTheme;
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: shape.shapeSM,
       child: InkWell(
         onTap: () => context.router.push(ItemDetailRoute(itemId: item.id)),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: shape.radiusSM,
         child: SizedBox(
           height: 80,
           child: Row(
@@ -27,8 +29,8 @@ class ItemCard extends StatelessWidget {
                 height: 80,
                 decoration: BoxDecoration(
                   color: parseHexColor(item.backgroundColor),
-                  borderRadius: const BorderRadius.horizontal(
-                    left: Radius.circular(8),
+                  borderRadius: BorderRadius.horizontal(
+                    left: Radius.circular(shape.sm),
                   ),
                 ),
                 child: AppImage(
