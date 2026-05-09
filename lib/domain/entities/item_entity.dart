@@ -15,6 +15,8 @@ abstract class ItemEntity with _$ItemEntity {
     required String? iconLink,
     required String? baseImageLink,
     required String? image512pxLink,
+    int? width,
+    int? height,
     @Default([]) List<ItemType> types,
     @Default([]) List<ItemCategoryInfo> categories,
   }) = _ItemEntity;

@@ -87,6 +87,8 @@ class ItemDbMapper {
         iconLink: row.iconLink,
         baseImageLink: row.baseImageLink,
         image512pxLink: row.image512pxLink,
+        width: row.width,
+        height: row.height,
         types: parseTypes(row.types),
         categories: [],
       );

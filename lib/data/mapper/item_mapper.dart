@@ -13,6 +13,8 @@ class ItemMapper {
         iconLink: item.iconLink,
         baseImageLink: item.baseImageLink,
         image512pxLink: item.image512pxLink,
+        width: item.width,
+        height: item.height,
         types: item.types
             .whereType()
             .map((t) => ItemTypeUtils.fromGraphqlEnum(t))
