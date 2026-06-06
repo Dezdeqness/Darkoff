@@ -7,6 +7,7 @@ import 'package:darkoff/service_locator/items_service_locator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:darkoff/service_locator/tasks_service_locator.dart';
 import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 
@@ -14,6 +15,9 @@ Future<void> setupServiceLocator() async {
   await AppConfig.initialize();
 
   getIt.registerLazySingleton<Logger>(() => Logger());
+
+  final prefs = await SharedPreferences.getInstance();
+  getIt.registerSingleton<LanguageStore>(LanguageStore(prefs));
 
   await setupGraphQLServiceLocator();
 

@@ -5,6 +5,7 @@ import 'package:darkoff/data/repositories/items_repository_impl.dart';
 import 'package:darkoff/data/service/darkoff_ql_service.dart';
 import 'package:darkoff/domain/repositories/items_repository.dart';
 import 'package:darkoff/domain/usecases/get_item_detail_usecase.dart';
+import 'package:darkoff/presentation/features/home/mapper/market_item_ui_mapper.dart';
 import 'package:darkoff/presentation/features/item_detail/mapper/item_detail_ui_mapper.dart';
 import 'package:darkoff/presentation/features/items/mapper/item_ui_mapper.dart';
 import 'package:get_it/get_it.dart';
@@ -16,6 +17,7 @@ void setupItemsServiceLocator() {
   getIt.registerLazySingleton<ItemDetailMapper>(() => ItemDetailMapper());
   getIt.registerLazySingleton<ItemUiMapper>(() => ItemUiMapper());
   getIt.registerLazySingleton<ItemDetailUiMapper>(() => ItemDetailUiMapper());
+  getIt.registerLazySingleton<MarketItemUiMapper>(() => MarketItemUiMapper());
 
   getIt.registerLazySingleton<ItemsRepository>(
     () => ItemsRepositoryImpl(

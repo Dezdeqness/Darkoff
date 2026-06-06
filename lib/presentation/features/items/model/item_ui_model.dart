@@ -13,5 +13,6 @@ abstract class ItemUiModel with _$ItemUiModel {
     required String? iconUrl,
     required String? imageUrl,
     required String? highResImageUrl,
+    @Default('') String categoryLabel,
   }) = _ItemUiModel;
 }

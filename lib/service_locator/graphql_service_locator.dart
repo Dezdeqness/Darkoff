@@ -1,4 +1,5 @@
 import 'package:darkoff/core/config/app_config.dart';
+import 'package:darkoff/core/localization/language_store.dart';
 import 'package:darkoff/data/service/darkoff_ql_service.dart';
 import 'package:graphql/client.dart';
 import 'package:gql_http_link/gql_http_link.dart';
@@ -21,6 +22,7 @@ Future<void> setupGraphQLServiceLocator() async {
     () => DarkoffQLService(
       client: getIt<GraphQLClient>(),
       logger: getIt<Logger>(),
+      languageStore: getIt<LanguageStore>(),
     ),
   );
 }
