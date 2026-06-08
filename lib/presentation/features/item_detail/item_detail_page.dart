@@ -1,14 +1,16 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/utils/color_utils.dart';
 import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/core/widgets/app_error_view.dart';
 import 'package:darkoff/core/widgets/app_image.dart';
-import 'package:darkoff/core/widgets/app_info_row.dart';
+import 'package:darkoff/core/widgets/app_label.dart';
 import 'package:darkoff/core/widgets/app_section_header.dart';
+import 'package:darkoff/core/widgets/page_header.dart';
+import 'package:darkoff/presentation/features/core/model/property_tile_ui_model.dart';
 import 'package:darkoff/presentation/features/item_detail/model/item_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/item_detail/notifiers/item_detail_notifier.dart';
 import 'package:darkoff/presentation/features/item_detail/state/item_detail_state.dart';
-import 'package:darkoff/presentation/features/item_detail/widgets/properties_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,167 +20,328 @@ class ItemDetailPage extends ConsumerWidget {
 
   final String itemId;
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(itemDetailProvider(itemId));
-
-    return Scaffold(
-      body: state.when(
-        initial: () => const Center(child: CircularProgressIndicator()),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        loaded: (item) => _buildContent(context, item),
-        error: (message) => AppErrorView(
-          message: message,
-          onRetry: () =>
-              ref.read(itemDetailProvider(itemId).notifier).retry(),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildContent(BuildContext context, ItemDetailUiModel item) {
+  Widget buildContent({
+    required BuildContext context,
+    required ItemDetailUiModel item,
+  }) {
     return CustomScrollView(
       slivers: [
-        SliverAppBar(
-          expandedHeight: 250,
-          pinned: true,
-          flexibleSpace: FlexibleSpaceBar(
-            title: Text(
-              item.shortName ?? item.displayName,
-              style: const TextStyle(fontSize: 16),
-            ),
-            background: Container(
-              color: parseHexColor(item.backgroundColor),
-              child: item.imageUrl != null
-                  ? Padding(
-                      padding: const EdgeInsets.all(32),
-                      child: AppImage(
-                        imageUrl: item.imageUrl!,
-                        fit: BoxFit.contain,
-                      ),
-                    )
-                  : null,
-            ),
-          ),
+        SliverToBoxAdapter(child: PageHeader(title: '')),
+        SliverToBoxAdapter(
+          child: buildDetailsHeader(context: context, item: item),
         ),
         SliverToBoxAdapter(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildInfoSection(item),
-              if (item.description != null && item.description!.isNotEmpty)
-                _buildDescriptionSection(context, item.description!),
-              if (item.properties != null)
-                PropertiesSection(properties: item.properties!),
-              if (item.buyFor.isNotEmpty)
-                _buildPriceSection('Buy From', item.buyFor),
-              if (item.sellFor.isNotEmpty)
-                _buildPriceSection('Sell To', item.sellFor),
-              const SizedBox(height: 32),
-            ],
-          ),
+          child: buildPricesSection(context: context, prices: item.prices),
         ),
+        if (item.properties.isNotEmpty)
+          SliverToBoxAdapter(
+            child: buildProperties(
+              context: context,
+              properties: item.properties,
+            ),
+          ),
+        if (item.sellPrices.isNotEmpty)
+          SliverToBoxAdapter(
+            child: buildSellSection(context: context, prices: item.sellPrices),
+          ),
+        const SliverToBoxAdapter(child: SizedBox(height: 32)),
       ],
     );
   }
 
-  Widget _buildInfoSection(ItemDetailUiModel item) {
-    return Card(
-      margin: const EdgeInsets.all(16),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          children: [
-            AppInfoRow(
-              label: 'Name',
-              value: item.displayName,
-            ),
-            if (item.categoryLabel.isNotEmpty)
-              AppInfoRow(
-                label: 'Category',
-                value: item.categoryLabel,
-              ),
-            AppInfoRow(
-              label: 'Base Price',
-              value: '${formatPrice(item.basePrice)} \u20BD',
-            ),
-            if (item.avg24hPrice != null)
-              AppInfoRow(
-                label: 'Avg 24h Price',
-                value: '${formatPrice(item.avg24hPrice!)} \u20BD',
-              ),
-            if (item.low24hPrice != null && item.high24hPrice != null)
-              AppInfoRow(
-                label: '24h Range',
-                value:
-                    '${formatPrice(item.low24hPrice!)} - ${formatPrice(item.high24hPrice!)} \u20BD',
-              ),
-            if (item.changeLast48hPercent != null)
-              AppInfoRow(
-                label: '48h Change',
-                value: '${item.changeLast48hPercent! >= 0 ? '+' : ''}${item.changeLast48hPercent!.toStringAsFixed(1)}%',
-                valueColor: item.changeLast48hPercent! >= 0
-                    ? Colors.green
-                    : Colors.red,
-              ),
-            if (item.width != null && item.height != null)
-              AppInfoRow(
-                label: 'Size',
-                value: '${item.width}x${item.height}',
-              ),
-            if (item.weight != null)
-              AppInfoRow(
-                label: 'Weight',
-                value: '${item.weight!.toStringAsFixed(2)} kg',
-              ),
-          ],
-        ),
-      ),
-    );
-  }
+  Widget buildDetailsHeader({
+    required BuildContext context,
+    required ItemDetailUiModel item,
+  }) {
+    final colors = context.colorTheme;
+    final typo = context.typographyTheme;
+    final shape = context.shapeTheme;
+    final itemBackground = parseHexColor(item.backgroundColor);
+    final imageUrl = item.imageUrl;
 
-  Widget _buildDescriptionSection(BuildContext context, String description) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const AppSectionHeader(title: 'Description'),
-          const SizedBox(height: 8),
+          Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              color: itemBackground,
+              border: Border.all(color: itemBackground.withValues(alpha: 0.6)),
+              borderRadius: shape.radiusXL,
+            ),
+            child: ClipRRect(
+              borderRadius: shape.radiusXL,
+              child: imageUrl != null
+                  ? AppImage(imageUrl: imageUrl, fit: BoxFit.contain)
+                  : const SizedBox(),
+            ),
+          ),
+          const SizedBox(height: 16),
+
           Text(
-            description,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+            item.displayName,
+            textAlign: TextAlign.center,
+            style: typo.titleMedium.copyWith(color: colors.textPrimary),
+          ),
+          const SizedBox(height: 4),
+
+          Text(
+            item.categoryLabel.isNotEmpty ? item.categoryLabel : 'Item',
+            textAlign: TextAlign.center,
+            style: typo.bodySmall.copyWith(color: colors.textSecondary),
+          ),
+          const SizedBox(height: 10),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 8.0,
+            children: item.labels.map((item) => AppLabel(text: item)).toList(),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildPriceSection(String title, List<PriceUiModel> prices) {
+  Widget buildProperties({
+    required BuildContext context,
+    required List<PropertyTileUiModel> properties,
+  }) {
+    if (properties.isEmpty) {
+      return const SizedBox();
+    }
+
+    final colors = context.colorTheme;
+    final typo = context.typographyTheme;
+    final shape = context.shapeTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppSectionHeader(title: title),
-        Card(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              children: prices
-                  .map(
-                    (p) => AppInfoRow(
-                      label: p.sourceName,
-                      value:
-                          '${formatPrice(p.price)} ${currencySymbol(p.currency)}',
+        AppSectionHeader(title: 'Properties'),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: GridView.count(
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 2.5,
+            children: properties.map((item) {
+              return Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: colors.surface,
+                  border: Border.all(color: colors.border),
+                  borderRadius: shape.radiusMD,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.label,
+                      style: typo.paragraphSmall.copyWith(
+                        color: colors.textSecondary,
+                      ),
                     ),
-                  )
-                  .toList(),
+                    const SizedBox(height: 4),
+                    Text(
+                      item.value,
+                      style: typo.labelLarge.copyWith(
+                        color: propertyColor(item.type, colors),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildPricesSection({
+    required BuildContext context,
+    required List<PriceRowUiModel> prices,
+  }) {
+    final colors = context.colorTheme;
+    final shape = context.shapeTheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppSectionHeader(title: 'Prices'),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Container(
+            decoration: BoxDecoration(
+              color: colors.surface,
+              border: Border.all(color: colors.border),
+              borderRadius: shape.radiusMD,
+            ),
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: List.generate(prices.length, (index) {
+                final item = prices[index];
+                return Column(
+                  children: [
+                    buildPriceRow(context: context, item: item),
+                    if (index != prices.length - 1)
+                      Divider(color: colors.border),
+                  ],
+                );
+              }),
             ),
           ),
         ),
       ],
+    );
+  }
+
+  Widget buildPriceRow({
+    required BuildContext context,
+    required final PriceRowUiModel item,
+  }) {
+    final colors = context.colorTheme;
+    final typo = context.typographyTheme;
+    final shape = context.shapeTheme;
+
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                item.label,
+                style: typo.paragraphSmall.copyWith(
+                  color: colors.textSecondary,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                item.price,
+                style: typo.bodyLarge.copyWith(
+                  color: item.highlight ? colors.gold : colors.textPrimary,
+                  fontWeight: item.highlight
+                      ? FontWeight.w700
+                      : FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (item.badge != null)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+            decoration: BoxDecoration(
+              color: item.positiveBadge
+                  ? colors.profitSubtle
+                  : colors.lossSubtle,
+              borderRadius: shape.radiusXS,
+            ),
+            child: Text(
+              item.badge!,
+              style: typo.labelSmall.copyWith(
+                color: item.positiveBadge ? colors.profit : colors.loss,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget buildSellSection({
+    required BuildContext context,
+    required List<SellPriceUiModel> prices,
+  }) {
+    final colors = context.colorTheme;
+    final typo = context.typographyTheme;
+    final shape = context.shapeTheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppSectionHeader(title: 'Sell To'),
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Container(
+            decoration: BoxDecoration(
+              color: colors.surface,
+              border: Border.all(color: colors.border),
+              borderRadius: shape.radiusMD,
+            ),
+            child: Column(
+              children: [
+                for (int index = 0; index < prices.length; index++) ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 10,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            prices[index].vendor,
+                            style: typo.paragraphMedium.copyWith(
+                              color: colors.gold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          prices[index].price,
+                          style: typo.bodyMedium.copyWith(
+                            color: colors.textPrimary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  if (index != prices.length - 1)
+                    Divider(height: 1, color: colors.border),
+                ],
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final colors = context.colorTheme;
+    final state = ref.watch(itemDetailProvider(itemId));
+
+    return Scaffold(
+      backgroundColor: colors.background,
+      body: SafeArea(
+        child: state.when(
+          initial: () =>
+              Center(child: CircularProgressIndicator(color: colors.gold)),
+          loading: () =>
+              Center(child: CircularProgressIndicator(color: colors.gold)),
+          loaded: (item) => buildContent(context: context, item: item),
+          error: (message) => AppErrorView(
+            message: message,
+            onRetry: () =>
+                ref.read(itemDetailProvider(itemId).notifier).retry(),
+          ),
+        ),
+      ),
     );
   }
 }

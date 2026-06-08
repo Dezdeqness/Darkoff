@@ -1,4 +1,5 @@
 import 'package:darkoff/domain/entities/item_detail_entity.dart';
+import 'package:darkoff/presentation/features/core/model/property_tile_ui_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'item_detail_ui_model.freezed.dart';
@@ -10,21 +11,15 @@ abstract class ItemDetailUiModel with _$ItemDetailUiModel {
     required String displayName,
     String? shortName,
     String? description,
-    required int basePrice,
-    int? avg24hPrice,
-    int? low24hPrice,
-    int? high24hPrice,
-    double? changeLast48hPercent,
-    int? width,
-    int? height,
-    double? weight,
+    @Default([]) List<String> labels,
+    @Default([]) List<PriceRowUiModel> prices,
+    @Default([]) List<PropertyTileUiModel> properties,
+    @Default([]) List<SellPriceUiModel> sellPrices,
     required String backgroundColor,
     String? imageUrl,
     String? wikiLink,
     required String categoryLabel,
-    @Default([]) List<PriceUiModel> sellFor,
-    @Default([]) List<PriceUiModel> buyFor,
-    ItemProperties? properties,
+    ItemProperties? itemProperties,
   }) = _ItemDetailUiModel;
 }
 
@@ -35,4 +30,23 @@ abstract class PriceUiModel with _$PriceUiModel {
     required String currency,
     required String sourceName,
   }) = _PriceUiModel;
+}
+
+@freezed
+abstract class SellPriceUiModel with _$SellPriceUiModel {
+  const factory SellPriceUiModel({
+    required String vendor,
+    required String price,
+  }) = _SellPriceUiModel;
+}
+
+@freezed
+abstract class PriceRowUiModel with _$PriceRowUiModel {
+  const factory PriceRowUiModel({
+    required String label,
+    required String price,
+    String? badge,
+    @Default(false) bool positiveBadge,
+    @Default(false) bool highlight,
+  }) = _PriceRowUiModel;
 }

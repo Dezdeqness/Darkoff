@@ -1,5 +1,8 @@
 import 'dart:ui';
 
+import 'package:darkoff/core/theme/themes/color_theme.dart';
+import 'package:darkoff/presentation/features/core/model/property_tile_ui_model.dart';
+
 Color parseHexColor(String colorString, {Color fallback = const Color(0xFF9E9E9E)}) {
   try {
     if (colorString.startsWith('#')) {
@@ -10,5 +13,21 @@ Color parseHexColor(String colorString, {Color fallback = const Color(0xFF9E9E9E
     return fallback;
   } catch (_) {
     return fallback;
+  }
+}
+
+Color propertyColor(PropertyValueType type, ColorTheme colors) {
+  switch (type) {
+    case PropertyValueType.positive:
+      return colors.profit;
+
+    case PropertyValueType.negative:
+      return colors.loss;
+
+    case PropertyValueType.accent:
+      return colors.gold;
+
+    case PropertyValueType.normal:
+      return colors.textPrimary;
   }
 }
