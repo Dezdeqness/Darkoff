@@ -21,8 +21,7 @@ class ItemCard extends StatelessWidget {
     return InkWell(
       onTap: () => context.router.push(ItemDetailRoute(itemId: item.id)),
       child: Container(
-        height: 77,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: colors.surface)),
         ),
