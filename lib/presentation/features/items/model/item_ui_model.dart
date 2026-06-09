@@ -8,7 +8,7 @@ abstract class ItemUiModel with _$ItemUiModel {
     required String id,
     required String displayName,
     required String? shortName,
-    required int basePrice,
+    required String displayPrice,
     required String backgroundColor,
     required String? iconUrl,
     required String? imageUrl,

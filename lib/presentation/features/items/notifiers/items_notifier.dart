@@ -1,5 +1,6 @@
 import 'package:darkoff/domain/repositories/items_repository.dart';
 import 'package:darkoff/presentation/features/items/mapper/item_ui_mapper.dart';
+import 'package:darkoff/presentation/features/items/notifiers/categories_notifier.dart';
 import 'package:darkoff/presentation/features/items/state/items_state.dart';
 import 'package:darkoff/service_locator/items_service_locator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -13,10 +14,16 @@ class ItemsNotifier extends _$ItemsNotifier {
   List<String> _currentCategoryNames = const [];
 
   @override
-  ItemsState build(List<String> categoryNames) {
+  ItemsState build() {
     _repository = getIt<ItemsRepository>();
     _mapper = getIt<ItemUiMapper>();
-    _currentCategoryNames = categoryNames;
+
+    final categoriesState = ref.watch(categoriesProvider);
+
+    _currentCategoryNames = categoriesState.categories[
+      categoriesState.selectedIndex
+    ].names;
+
     loadItems();
     return const ItemsState.initial();
   }
