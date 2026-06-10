@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/utils/color_utils.dart';
-import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/core/widgets/app_image.dart';
 import 'package:darkoff/presentation/features/items/model/item_ui_model.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,5 @@
 import 'package:darkoff/data/local/dao/items_dao.dart';
 import 'package:darkoff/data/mapper/item_detail_mapper.dart';
-import 'package:darkoff/data/mapper/item_mapper.dart';
 import 'package:darkoff/data/service/darkoff_ql_service.dart';
 import 'package:darkoff/data/service/qraphql/queries/item_detail.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/items.graphql.dart';
@@ -14,16 +13,13 @@ import 'package:result_dart/result_dart.dart';
 class ItemsRepositoryImpl implements ItemsRepository {
   const ItemsRepositoryImpl({
     required DarkoffQLService service,
-    required ItemMapper mapper,
     required ItemDetailMapper detailMapper,
     required ItemsDao dao,
   })  : _service = service,
-        _mapper = mapper,
         _detailMapper = detailMapper,
         _dao = dao;
 
   final DarkoffQLService _service;
-  final ItemMapper _mapper;
   final ItemDetailMapper _detailMapper;
   final ItemsDao _dao;
 
@@ -120,6 +116,16 @@ class ItemsRepositoryImpl implements ItemsRepository {
       }
 
       return successOf(_detailMapper.fromDetailQuery(item));
+    } catch (e) {
+      return failureOf(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<List<ItemEntity>>> searchItems({String query = ''}) async {
+    try {
+      final items = await _dao.searchItems(query: query);
+      return successOf(items);
     } catch (e) {
       return failureOf(Exception(e.toString()));
     }

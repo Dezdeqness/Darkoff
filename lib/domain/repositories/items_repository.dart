@@ -15,4 +15,6 @@ abstract interface class ItemsRepository {
   Future<Result<ItemDetailEntity>> getLocalItemDetail(String id);
 
   Future<Result<ItemDetailEntity>> getItemDetail(String id);
+
+  Future<dynamic> searchItems({String query = ''}) async {}
 }

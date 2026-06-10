@@ -6,11 +6,9 @@ import 'package:darkoff/domain/entities/item_entity.dart';
 import 'package:drift/drift.dart';
 
 class ItemsDao {
-  ItemsDao({
-    required AppDatabase db,
-    required ItemDbMapper mapper,
-  })  : _db = db,
-        _mapper = mapper;
+  ItemsDao({required AppDatabase db, required ItemDbMapper mapper})
+    : _db = db,
+      _mapper = mapper;
 
   final AppDatabase _db;
   final ItemDbMapper _mapper;
@@ -28,28 +26,50 @@ class ItemsDao {
   }
 
   Future<List<ItemEntity>> getAllItems() async {
-    final rows = await (_db.select(_db.items)
-          ..orderBy([(t) => OrderingTerm.asc(t.name)]))
-        .get();
+    final rows = await (_db.select(
+      _db.items,
+    )..orderBy([(t) => OrderingTerm.asc(t.name)])).get();
     return rows.map(_mapper.toItemEntity).toList();
   }
 
+  Future<List<ItemEntity>> searchItems({required String query}) async {
+    final normalizedQuery = query.trim().toLowerCase();
+
+    if (normalizedQuery.isEmpty) {
+      return [];
+    }
+
+    final dbItems =
+        await (_db.select(_db.items)
+              ..where(
+                (table) =>
+                    table.name.like('%$normalizedQuery%') |
+                    table.shortName.like('%$normalizedQuery%'),
+              )
+              ..orderBy([(table) => OrderingTerm.asc(table.name)]))
+            .get();
+
+    return dbItems.map(_mapper.toItemEntity).toList();
+  }
+
   Future<List<ItemEntity>> getItemsByCategoryNames(
-      List<String> categoryNames) async {
+    List<String> categoryNames,
+  ) async {
     if (categoryNames.isEmpty) return getAllItems();
 
-    final query = _db.select(_db.items).join([
-      innerJoin(
-        _db.itemCategories,
-        _db.itemCategories.itemId.equalsExp(_db.items.id),
-      ),
-      innerJoin(
-        _db.categories,
-        _db.categories.id.equalsExp(_db.itemCategories.categoryId),
-      ),
-    ])
-      ..where(_db.categories.normalizedName.isIn(categoryNames))
-      ..orderBy([OrderingTerm.asc(_db.items.name)]);
+    final query =
+        _db.select(_db.items).join([
+            innerJoin(
+              _db.itemCategories,
+              _db.itemCategories.itemId.equalsExp(_db.items.id),
+            ),
+            innerJoin(
+              _db.categories,
+              _db.categories.id.equalsExp(_db.itemCategories.categoryId),
+            ),
+          ])
+          ..where(_db.categories.normalizedName.isIn(categoryNames))
+          ..orderBy([OrderingTerm.asc(_db.items.name)]);
 
     final rows = await query.get();
     final seen = <String>{};
@@ -60,9 +80,9 @@ class ItemsDao {
   }
 
   Future<ItemDetailEntity?> getItemDetailById(String id) async {
-    final itemRow = await (_db.select(_db.items)
-          ..where((t) => t.id.equals(id)))
-        .getSingleOrNull();
+    final itemRow = await (_db.select(
+      _db.items,
+    )..where((t) => t.id.equals(id))).getSingleOrNull();
     if (itemRow == null) return null;
 
     final results = await Future.wait([
@@ -110,11 +130,13 @@ class ItemsDao {
       batch.insertAll(
         _db.categories,
         categoryMap.values
-            .map((c) => CategoriesCompanion.insert(
-                  id: c.id,
-                  name: c.name,
-                  normalizedName: c.normalizedName,
-                ))
+            .map(
+              (c) => CategoriesCompanion.insert(
+                id: c.id,
+                name: c.name,
+                normalizedName: c.normalizedName,
+              ),
+            )
             .toList(),
         mode: InsertMode.insertOrReplace,
       );
@@ -144,18 +166,14 @@ class ItemsDao {
       for (final cat in item.categories) {
         b.insert(
           _db.itemCategories,
-          ItemCategoriesCompanion.insert(
-            itemId: item.id,
-            categoryId: cat.id,
-          ),
+          ItemCategoriesCompanion.insert(itemId: item.id, categoryId: cat.id),
           mode: InsertMode.insertOrReplace,
         );
       }
     }
   }
 
-  void _batchInsertHandbookCategories(
-      Batch b, List<ItemDetailEntity> chunk) {
+  void _batchInsertHandbookCategories(Batch b, List<ItemDetailEntity> chunk) {
     for (final item in chunk) {
       for (final catId in item.handbookCategoryIds) {
         b.insert(
@@ -174,11 +192,15 @@ class ItemsDao {
     for (final item in chunk) {
       for (final price in item.sellFor) {
         b.insert(
-            _db.itemPrices, _mapper.toPriceCompanion(item.id, 'sell', price));
+          _db.itemPrices,
+          _mapper.toPriceCompanion(item.id, 'sell', price),
+        );
       }
       for (final price in item.buyFor) {
         b.insert(
-            _db.itemPrices, _mapper.toPriceCompanion(item.id, 'buy', price));
+          _db.itemPrices,
+          _mapper.toPriceCompanion(item.id, 'buy', price),
+        );
       }
     }
   }
@@ -205,17 +227,18 @@ class ItemsDao {
         _db.itemCategories,
         _db.itemCategories.categoryId.equalsExp(_db.categories.id),
       ),
-    ])
-      ..where(_db.itemCategories.itemId.equals(itemId));
+    ])..where(_db.itemCategories.itemId.equals(itemId));
 
     final rows = await query.get();
     return rows
         .map((row) => row.readTable(_db.categories))
-        .map((c) => ItemCategoryInfo(
-              id: c.id,
-              name: c.name,
-              normalizedName: c.normalizedName,
-            ))
+        .map(
+          (c) => ItemCategoryInfo(
+            id: c.id,
+            name: c.name,
+            normalizedName: c.normalizedName,
+          ),
+        )
         .toList();
   }
 
@@ -226,8 +249,7 @@ class ItemsDao {
     return rows.map((r) => r.categoryId).toList();
   }
 
-  Future<Map<String, List<ItemPriceInfo>>> _fetchPrices(
-      String itemId) async {
+  Future<Map<String, List<ItemPriceInfo>>> _fetchPrices(String itemId) async {
     final query = _db.select(_db.itemPrices)
       ..where((t) => t.itemId.equals(itemId));
     final rows = await query.get();
