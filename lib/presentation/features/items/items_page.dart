@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_empty_view.dart';
 import 'package:darkoff/core/widgets/app_error_view.dart';
@@ -26,28 +27,18 @@ class _ItemsPageState extends ConsumerState<ItemsPage> {
   final _searchController = TextEditingController();
 
   Widget buildSearchBar({required BuildContext context}) {
-    return SearchAnchor(
-      isFullScreen: true,
-      builder: (context, controller) {
-        return AppSearchBar(
-          hintText: 'Search items...',
-          onChanged: (v) => setState(() {}),
-          controller: _searchController,
-          onTap: () => controller.openView(),
-          enabled: controller.isOpen,
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-        );
-      },
-      suggestionsBuilder: (context, controller) {
-        return [
-          ListTile(
-            title: Text('Flutter'),
-            onTap: () {
-              controller.closeView('Flutter');
-            },
-          ),
-        ];
-      },
+    return Hero(
+      tag: 'items-search',
+      child: AppSearchBar(
+        hintText: 'Search items...',
+        onChanged: (v) => setState(() {}),
+        controller: _searchController,
+        onTap: () {
+          context.router.push(ItemsSearchRoute());
+        },
+        readOnlyMode: true,
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+      ),
     );
   }
 
@@ -104,12 +95,6 @@ class _ItemsPageState extends ConsumerState<ItemsPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
   }
 
   @override

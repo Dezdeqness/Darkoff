@@ -1,15 +1,17 @@
 import 'dart:async';
 
 import 'package:darkoff/domain/repositories/items_repository.dart';
+import 'package:darkoff/presentation/features/items/mapper/item_ui_mapper.dart';
 import 'package:darkoff/presentation/features/items/state/items_search_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:darkoff/service_locator/items_service_locator.dart';
 
 part 'items_search_notifier.g.dart';
 
-@riverpod
+@Riverpod()
 class ItemsSearchNotifier extends _$ItemsSearchNotifier {
   late ItemsRepository _repository;
+  late ItemUiMapper _mapper;
   Timer? _debounce;
 
   String _lastQuery = '';
@@ -17,6 +19,10 @@ class ItemsSearchNotifier extends _$ItemsSearchNotifier {
   @override
   ItemsSearchState build() {
     _repository = getIt<ItemsRepository>();
+    _mapper = getIt<ItemUiMapper>();
+
+    ref.onDispose(() => clear());
+
     return const ItemsSearchState.initial();
   }
 
@@ -33,7 +39,6 @@ class ItemsSearchNotifier extends _$ItemsSearchNotifier {
     await _search(_lastQuery);
   }
 
-
   Future<void> _search(String query) async {
     if (query.isEmpty) {
       state = const ItemsSearchState.initial();
@@ -44,19 +49,21 @@ class ItemsSearchNotifier extends _$ItemsSearchNotifier {
 
     final result = await _repository.searchItems(query: query);
 
+    if (!ref.mounted) return;
+
     result.fold(
           (items) {
         if (items.isEmpty) {
           state = const ItemsSearchState.empty();
         } else {
           state = ItemsSearchState.loaded(
-            items: items.map((e) => e.toString()).toList(),
+            items: _mapper.fromEntities(items),
             hasMore: false,
             isRefreshing: false,
           );
         }
       },
-          (error) {
+      (error) {
         state = ItemsSearchState.error(error.toString());
       },
     );

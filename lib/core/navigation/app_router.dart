@@ -21,13 +21,13 @@ class AppRouter extends RootStackRouter {
               path: 'items',
               children: [
                 AutoRoute(
-                  page: CategoriesRoute.page,
-                  path: 'categories',
+                  page: ItemsRoute.page,
+                  path: '',
                   initial: true,
                 ),
                 AutoRoute(
-                  page: ItemsRoute.page,
-                  path: 'list',
+                  page: ItemsSearchRoute.page,
+                  path: 'search',
                 ),
                 AutoRoute(
                   page: ItemDetailRoute.page,

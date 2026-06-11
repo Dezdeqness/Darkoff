@@ -10,6 +10,7 @@ class AppSearchBar extends StatelessWidget {
     this.padding = const EdgeInsets.fromLTRB(16, 16, 16, 0),
     this.enabled = true,
     this.onTap,
+    this.autofocus = false,
   });
 
   final TextEditingController controller;
@@ -18,6 +19,7 @@ class AppSearchBar extends StatelessWidget {
   final EdgeInsets padding;
   final bool enabled;
   final VoidCallback? onTap;
+  final bool autofocus;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class AppSearchBar extends StatelessWidget {
                   enabled: enabled,
                   controller: controller,
                   style: typo.bodySmall.copyWith(color: colors.textPrimary),
+                  autofocus: autofocus,
                   decoration: InputDecoration(
                     hintText: hintText,
                     hintStyle: typo.bodySmall.copyWith(
