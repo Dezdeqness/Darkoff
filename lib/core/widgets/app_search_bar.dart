@@ -9,6 +9,7 @@ class AppSearchBar extends StatelessWidget {
     this.hintText = 'Search...',
     this.padding = const EdgeInsets.fromLTRB(16, 16, 16, 0),
     this.enabled = true,
+    this.readOnlyMode = false,
     this.onTap,
     this.autofocus = false,
   });
@@ -18,6 +19,7 @@ class AppSearchBar extends StatelessWidget {
   final String hintText;
   final EdgeInsets padding;
   final bool enabled;
+  final bool readOnlyMode;
   final VoidCallback? onTap;
   final bool autofocus;
 
@@ -50,6 +52,7 @@ class AppSearchBar extends StatelessWidget {
                 child: TextField(
                   onTap: () => onTap?.call(),
                   enabled: enabled,
+                  canRequestFocus: !readOnlyMode,
                   controller: controller,
                   style: typo.bodySmall.copyWith(color: colors.textPrimary),
                   autofocus: autofocus,

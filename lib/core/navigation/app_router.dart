@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 
 import 'app_router.gr.dart';
 
@@ -25,9 +26,22 @@ class AppRouter extends RootStackRouter {
                   path: '',
                   initial: true,
                 ),
-                AutoRoute(
+                CustomRoute(
                   page: ItemsSearchRoute.page,
-                  path: 'search',
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    return SlideTransition(
+                      position: Tween(
+                        begin: const Offset(0, 0.05),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(
+                          parent: animation,
+                          curve: Curves.easeOutCubic,
+                        ),
+                      ),
+                      child: child,
+                    );
+                  },
                 ),
                 AutoRoute(
                   page: ItemDetailRoute.page,
