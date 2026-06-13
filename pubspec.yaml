@@ -33,6 +33,7 @@ dependencies:
   path_provider: 2.1.4
   path: 1.9.1
   flutter_native_splash: 2.4.7
+  flutter_launcher_icons: 0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -55,3 +56,4 @@ flutter:
     - assets/i18n/en.json
     - assets/i18n/ru.json
     - assets/images/splash/
+    - assets/images/launcher/
