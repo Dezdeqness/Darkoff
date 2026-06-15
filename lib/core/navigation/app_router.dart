@@ -16,10 +16,11 @@ class AppRouter extends RootStackRouter {
           page: TarkovShellRoute.page,
           path: '/darkoff',
           children: [
-            AutoRoute(page: HomeRoute.page, path: '', initial: true),
+            // AutoRoute(page: HomeRoute.page, path: '', initial: true),
             AutoRoute(
               page: ItemsShellRoute.page,
               path: 'items',
+              initial: true,
               children: [
                 AutoRoute(
                   page: ItemsRoute.page,
@@ -49,9 +50,37 @@ class AppRouter extends RootStackRouter {
                 ),
               ],
             ),
-            AutoRoute(page: MapsRoute.page, path: 'maps'),
-            AutoRoute(page: TasksRoute.page, path: 'tasks'),
-            AutoRoute(page: MoreRoute.page, path: 'more'),
+            // AutoRoute(page: MapsRoute.page, path: 'maps'),
+            AutoRoute(
+              page: TasksShellRoute.page,
+              path: 'tasks',
+              children: [
+                AutoRoute(page: TasksRoute.page, path: '', initial: true),
+                CustomRoute(
+                  page: TasksSearchRoute.page,
+                  path: 'search',
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return SlideTransition(
+                      position: Tween(
+                        begin: const Offset(0, 0.05),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(
+                          parent: animation,
+                          curve: Curves.easeOutCubic,
+                        ),
+                      ),
+                      child: child,
+                    );
+                  },
+                ),
+                AutoRoute(
+                  page: TaskDetailRoute.page,
+                  path: ':taskId',
+                ),
+              ],
+            ),
           ],
         ),
       ];

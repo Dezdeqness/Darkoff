@@ -94,6 +94,57 @@ class ItemContainedItems extends Table {
   Set<Column> get primaryKey => {itemId, containedItemId};
 }
 
+class Tasks extends Table {
+  TextColumn get id => text()();
+  TextColumn get name => text()();
+  TextColumn get traderName => text()();
+  TextColumn get traderNormalizedName => text()();
+  TextColumn get traderImageLink => text().nullable()();
+  TextColumn get mapName => text().nullable()();
+  BoolColumn get kappaRequired =>
+      boolean().withDefault(const Constant(false))();
+  IntColumn get experience => integer().withDefault(const Constant(0))();
+  IntColumn get minPlayerLevel => integer().nullable()();
+  TextColumn get taskImageLink => text().nullable()();
+  TextColumn get wikiLink => text().nullable()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+class TaskObjectives extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get taskId => text().references(Tasks, #id)();
+  TextColumn get description => text()();
+  TextColumn get type => text()();
+  BoolColumn get optional => boolean().withDefault(const Constant(false))();
+}
+
+class TaskPrerequisites extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get taskId => text().references(Tasks, #id)();
+  TextColumn get prerequisiteTaskId => text()();
+  TextColumn get prerequisiteTaskName => text()();
+}
+
+class TaskRewardItems extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get taskId => text().references(Tasks, #id)();
+  TextColumn get itemId => text()();
+  TextColumn get name => text()();
+  TextColumn get shortName => text()();
+  TextColumn get iconLink => text().nullable()();
+  IntColumn get price => integer().nullable()();
+  IntColumn get count => integer().withDefault(const Constant(1))();
+}
+
+class TaskRewardStandings extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get taskId => text().references(Tasks, #id)();
+  TextColumn get traderName => text()();
+  RealColumn get standing => real()();
+}
+
 @DriftDatabase(tables: [
   Items,
   Categories,
@@ -101,6 +152,11 @@ class ItemContainedItems extends Table {
   ItemHandbookCategories,
   ItemPrices,
   ItemContainedItems,
+  Tasks,
+  TaskObjectives,
+  TaskPrerequisites,
+  TaskRewardItems,
+  TaskRewardStandings,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());

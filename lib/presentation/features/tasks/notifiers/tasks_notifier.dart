@@ -34,7 +34,6 @@ class TasksNotifier extends _$TasksNotifier {
     try {
       final result = await _repository.getTasks(
         traderNormalizedName: _selectedTrader,
-        forceRefresh: isRefresh,
       );
 
       result.fold(

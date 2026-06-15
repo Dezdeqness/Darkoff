@@ -4,6 +4,7 @@ import 'package:graphql/client.dart';
 import 'package:darkoff/data/service/qraphql/queries/items.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/item_detail.graphql.dart';
 import 'package:darkoff/data/service/qraphql/schema.graphql.dart';
+import 'package:darkoff/data/service/qraphql/queries/tasks.graphql.dart';
 import 'package:logger/logger.dart';
 
 const _maxRetries = 3;
@@ -38,6 +39,22 @@ class DarkoffQLService {
     );
 
     return _queryWithRetry(options, label: 'getItems(offset=$offset)');
+  }
+
+  Future<QueryResult> getTasks({
+    Enum$LanguageCode language = Enum$LanguageCode.ru,
+    Enum$GameMode gameMode = Enum$GameMode.regular,
+  }) async {
+    final options = QueryOptions(
+      document: documentNodeQueryDarkoffTasks,
+      variables: Variables$Query$DarkoffTasks(
+        language: _lang(language),
+        gameMode: gameMode,
+      ).toJson(),
+      fetchPolicy: FetchPolicy.networkOnly,
+    );
+
+    return _queryWithRetry(options, label: 'getTasks()');
   }
 
   Future<QueryResult> getItemDetail({

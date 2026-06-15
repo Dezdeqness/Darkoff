@@ -1,3 +1,4 @@
+import 'package:darkoff/data/local/dao/tasks_dao.dart';
 import 'package:darkoff/data/mapper/status_mapper.dart';
 import 'package:darkoff/data/mapper/task_mapper.dart';
 import 'package:darkoff/data/repositories/server_status_repository_impl.dart';
@@ -19,6 +20,7 @@ void setupTasksServiceLocator() {
     () => TasksRepositoryImpl(
       service: getIt<DarkoffQLService>(),
       mapper: getIt<TaskMapper>(),
+      dao: getIt<TasksDao>(),
     ),
   );
 

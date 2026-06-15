@@ -26,5 +26,5 @@ Future<void> setupServiceLocator() async {
   setupItemsServiceLocator();
   setupPreloadServiceLocator();
   setupTasksServiceLocator();
-  
+
 }

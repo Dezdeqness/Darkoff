@@ -1,3 +1,4 @@
+import 'package:darkoff/data/local/dao/tasks_dao.dart';
 import 'package:darkoff/data/mapper/task_mapper.dart';
 import 'package:darkoff/data/service/darkoff_ql_service.dart';
 import 'package:darkoff/data/service/qraphql/queries/tasks.graphql.dart';
@@ -11,41 +12,60 @@ class TasksRepositoryImpl implements TasksRepository {
   const TasksRepositoryImpl({
     required DarkoffQLService service,
     required TaskMapper mapper,
+    required TasksDao dao,
   })  : _service = service,
-        _mapper = mapper;
+        _mapper = mapper,
+        _dao = dao;
 
   final DarkoffQLService _service;
   final TaskMapper _mapper;
+  final TasksDao _dao;
 
   @override
-  Future<Result<List<TaskEntity>>> getTasks() async {
+  Future<Result<List<TaskEntity>>> getRemoteTasks() async {
     try {
       final result = await _service.getTasks(
         gameMode: Enum$GameMode.pve,
       );
 
       if (result.hasException) {
-        return failureOf(
-          Exception(result.exception.toString()),
-        );
+        return failureOf(Exception(result.exception.toString()));
       }
 
       final data = result.data;
-
       if (data == null) {
-        return failureOf(
-          Exception('Empty response'),
-        );
+        return failureOf(Exception('Empty response'));
       }
 
-      final parsed = Query$DarkoffTasks.fromJson(data);
-
       return successOf(
-        parsed.tasks
+        Query$DarkoffTasks.fromJson(data)
+            .tasks
             .whereType<Query$DarkoffTasks$tasks>()
             .map((t) => _mapper.fromGraphql(t))
             .toList(),
       );
+    } catch (e) {
+      return failureOf(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<List<TaskEntity>>> getTasks({
+    String traderNormalizedName = '',
+  }) async {
+    try {
+      final tasks = await _dao.getTasksByTrader(traderNormalizedName);
+      return successOf(tasks);
+    } catch (e) {
+      return failureOf(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<List<TaskEntity>>> searchTasks({String query = ''}) async {
+    try {
+      final tasks = await _dao.searchTasks(query: query);
+      return successOf(tasks);
     } catch (e) {
       return failureOf(Exception(e.toString()));
     }

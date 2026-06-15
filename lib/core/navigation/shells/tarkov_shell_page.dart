@@ -37,11 +37,11 @@ class _TarkovShellScreenState extends ConsumerState<TarkovShellScreen> {
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
       routes: const [
-        HomeRoute(),
+        // HomeRoute(),
         ItemsShellRoute(),
-        MapsRoute(),
+        // MapsRoute(),
         TasksShellRoute(),
-        MoreShellRoute(),
+        // MoreShellRoute(),
       ],
       bottomNavigationBuilder: (ctx, tabsRouter) =>
           _BottomNav(tabsRouter: tabsRouter),
