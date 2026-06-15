@@ -2,33 +2,32 @@ import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_search_bar.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
-import 'package:darkoff/presentation/features/items/notifiers/items_search_notifier.dart';
-import 'package:darkoff/presentation/features/items/state/items_search_state.dart';
-import 'package:darkoff/presentation/features/items/widgets/item_card.dart';
+import 'package:darkoff/presentation/features/tasks/notifiers/tasks_search_notifier.dart';
+import 'package:darkoff/presentation/features/tasks/state/tasks_search_state.dart';
+import 'package:darkoff/presentation/features/tasks/widgets/task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class ItemsSearchPage extends ConsumerStatefulWidget {
-  const ItemsSearchPage({super.key});
+class TasksSearchPage extends ConsumerStatefulWidget {
+  const TasksSearchPage({super.key});
 
   @override
-  ConsumerState<ItemsSearchPage> createState() => _ItemsSearchPageState();
+  ConsumerState<TasksSearchPage> createState() => _TasksSearchPageState();
 }
 
-class _ItemsSearchPageState extends ConsumerState<ItemsSearchPage> {
+class _TasksSearchPageState extends ConsumerState<TasksSearchPage> {
   final _textController = TextEditingController();
 
   @override
   void dispose() {
     _textController.dispose();
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(itemsSearchProvider);
+    final state = ref.watch(tasksSearchProvider);
     final colors = context.colorTheme;
 
     return Scaffold(
@@ -38,42 +37,41 @@ class _ItemsSearchPageState extends ConsumerState<ItemsSearchPage> {
           slivers: [
             SliverToBoxAdapter(
               child: Hero(
-                tag: 'items-search',
+                tag: 'tasks-search',
                 child: AppSearchBar(
-                  hintText: 'Search items...',
+                  hintText: 'Search tasks...',
                   controller: _textController,
+                  autofocus: true,
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                   onChanged: (query) {
-                    ref.read(itemsSearchProvider.notifier).onQueryChanged(query);
+                    ref
+                        .read(tasksSearchProvider.notifier)
+                        .onQueryChanged(query);
                   },
-                  autofocus: true,
                 ),
               ),
             ),
-            buildItemsContent(context: context, state: state),
+            buildContent(context, state),
           ],
         ),
       ),
     );
   }
 
-  Widget buildItemsContent({
-    required BuildContext context,
-    required ItemsSearchState state,
-  }) {
+  Widget buildContent(BuildContext context, TasksSearchState state) {
     return state.when(
       initial: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
       loading: () => const SliverLoadingIndicator(),
-      empty: () => const SliverEmptyMessage(message: 'No items found'),
-      loaded: (items, hasMore, isLoadingMore, isRefreshing) => SliverList(
+      empty: () => const SliverEmptyMessage(message: 'No tasks found'),
+      loaded: (tasks) => SliverList(
         delegate: SliverChildBuilderDelegate(
-          (_, i) => ItemCard(item: items[i]),
-          childCount: items.length,
+          (ctx, i) => TaskCard(task: tasks[i]),
+          childCount: tasks.length,
         ),
       ),
-      error: (msg) => SliverErrorMessage(
-        message: msg,
-        onRetry: () => ref.read(itemsSearchProvider.notifier).refresh(),
+      error: (message) => SliverErrorMessage(
+        message: 'Failed to search tasks',
+        onRetry: () => ref.read(tasksSearchProvider.notifier).refresh(),
       ),
     );
   }

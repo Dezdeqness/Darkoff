@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_empty_view.dart';
-import 'package:darkoff/core/widgets/app_error_view.dart';
 import 'package:darkoff/core/widgets/app_filter_chip.dart';
 import 'package:darkoff/core/widgets/app_search_bar.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
+import 'package:darkoff/core/widgets/sliver_states.dart';
 import 'package:darkoff/presentation/features/items/notifiers/categories_notifier.dart';
 import 'package:darkoff/presentation/features/items/notifiers/items_notifier.dart';
 import 'package:darkoff/presentation/features/items/state/items_state.dart';
@@ -61,38 +60,19 @@ class _ItemsPageState extends ConsumerState<ItemsPage> {
     required BuildContext context,
     required ItemsState state,
   }) {
-    final colors = context.colorTheme;
-
     return state.when(
-      initial: () => SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Center(child: CircularProgressIndicator(color: colors.gold)),
-        ),
-      ),
-      loading: () => SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Center(child: CircularProgressIndicator(color: colors.gold)),
-        ),
-      ),
-      empty: () => const SliverToBoxAdapter(
-        child: AppEmptyView(
-          message: 'No items found',
-          icon: Icons.inventory_2_outlined,
-        ),
-      ),
+      initial: () => const SliverLoadingIndicator(),
+      loading: () => const SliverLoadingIndicator(),
+      empty: () => const SliverEmptyMessage(message: 'No items found'),
       loaded: (items, hasMore, isLoadingMore, isRefreshing) => SliverList(
         delegate: SliverChildBuilderDelegate(
           (_, i) => ItemCard(item: items[i]),
           childCount: items.length,
         ),
       ),
-      error: (msg) => SliverToBoxAdapter(
-        child: AppErrorView(
-          message: msg,
-          onRetry: () => ref.read(itemsProvider.notifier).refresh(),
-        ),
+      error: (msg) => SliverErrorMessage(
+        message: msg,
+        onRetry: () => ref.read(itemsProvider.notifier).refresh(),
       ),
     );
   }
