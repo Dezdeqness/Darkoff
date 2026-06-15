@@ -70,4 +70,17 @@ class TasksRepositoryImpl implements TasksRepository {
       return failureOf(Exception(e.toString()));
     }
   }
+
+  @override
+  Future<Result<TaskEntity>> getTask(String id) async {
+    try {
+      final task = await _dao.getTaskById(id);
+      if (task == null) {
+        return failureOf(Exception('Task not found'));
+      }
+      return successOf(task);
+    } catch (e) {
+      return failureOf(Exception(e.toString()));
+    }
+  }
 }

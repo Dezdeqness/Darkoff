@@ -48,7 +48,7 @@ class DarkoffQLService {
     final options = QueryOptions(
       document: documentNodeQueryDarkoffTasks,
       variables: Variables$Query$DarkoffTasks(
-        language: _lang(language),
+        language: language,
         gameMode: gameMode,
       ).toJson(),
       fetchPolicy: FetchPolicy.networkOnly,
@@ -126,21 +126,4 @@ class DarkoffQLService {
     // Should not reach here, but just in case
     return _client.query(options);
   }
-
-  Future<QueryResult> getTasks({
-    Enum$LanguageCode language = Enum$LanguageCode.ru,
-    Enum$GameMode gameMode = Enum$GameMode.regular,
-  }) async {
-    final options = QueryOptions(
-      document: documentNodeQueryDarkoffTasks,
-      variables: Variables$Query$DarkoffTasks(
-        language: language,
-        gameMode: gameMode,
-      ).toJson(),
-      fetchPolicy: FetchPolicy.networkOnly,
-    );
-
-    return _queryWithRetry(options, label: 'getTasks()');
-  }
-
 }

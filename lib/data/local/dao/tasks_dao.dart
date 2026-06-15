@@ -73,6 +73,15 @@ class TasksDao {
     return _hydrate(rows);
   }
 
+  Future<TaskEntity?> getTaskById(String id) async {
+    final row = await (_db.select(_db.tasks)..where((t) => t.id.equals(id)))
+        .getSingleOrNull();
+    if (row == null) return null;
+
+    final hydrated = await _hydrate([row]);
+    return hydrated.first;
+  }
+
   Future<List<TaskEntity>> searchTasks({required String query}) async {
     final normalizedQuery = query.trim().toLowerCase();
     if (normalizedQuery.isEmpty) return [];

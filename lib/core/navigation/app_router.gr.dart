@@ -22,7 +22,7 @@ import 'package:darkoff/presentation/features/items/items_search_page.dart'
 import 'package:darkoff/presentation/features/items/items_shell_route.dart'
     as _i5;
 import 'package:darkoff/presentation/features/splash/splash_page.dart' as _i6;
-import 'package:darkoff/presentation/features/tasks/task_detail_page.dart'
+import 'package:darkoff/presentation/features/task_detail/task_detail_page.dart'
     as _i8;
 import 'package:darkoff/presentation/features/tasks/tasks_page.dart' as _i9;
 import 'package:darkoff/presentation/features/tasks/tasks_search_page.dart'

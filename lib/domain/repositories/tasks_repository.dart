@@ -9,4 +9,6 @@ abstract interface class TasksRepository {
   });
 
   Future<Result<List<TaskEntity>>> searchTasks({String query = ''});
+
+  Future<Result<TaskEntity>> getTask(String id);
 }
