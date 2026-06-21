@@ -12,9 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 final getIt = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
-  await AppConfig.initialize();
-
-  getIt.registerLazySingleton<Logger>(() => Logger());
+  getIt.registerLazySingleton<Logger>(() => Logger(filter: ProductionFilter()));
 
   final prefs = await SharedPreferences.getInstance();
   getIt.registerSingleton<LanguageStore>(LanguageStore(prefs));
