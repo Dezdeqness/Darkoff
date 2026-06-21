@@ -52,3 +52,22 @@ app.*.map.json
 **.graphql.dart
 
 .env
+
+# Firebase
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Fastlane
+android/Gemfile.lock
+android/vendor/
+android/fastlane/.env.secret
+android/fastlane/report.xml
+android/fastlane/README.md
+android/fastlane/firebase-service-account.json
+
+# Android signing
+android/key.properties
+android/upload-keystore.jks
+*.jks
+*.keystore
+
