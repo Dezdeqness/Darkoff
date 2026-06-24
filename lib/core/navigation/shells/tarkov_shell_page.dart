@@ -41,7 +41,7 @@ class _TarkovShellScreenState extends ConsumerState<TarkovShellScreen> {
         ItemsShellRoute(),
         // MapsRoute(),
         TasksShellRoute(),
-        // MoreShellRoute(),
+        MoreShellRoute(),
       ],
       bottomNavigationBuilder: (ctx, tabsRouter) =>
           _BottomNav(tabsRouter: tabsRouter),
@@ -74,9 +74,9 @@ class _BottomNav extends StatelessWidget {
   final TabsRouter tabsRouter;
 
   static const _items = [
-    _NavItemData(icon: Icons.home_outlined, label: 'Home'),
+    // _NavItemData(icon: Icons.home_outlined, label: 'Home'),
     _NavItemData(icon: Icons.grid_view_rounded, label: 'Items'),
-    _NavItemData(icon: Icons.map_outlined, label: 'Maps'),
+    // _NavItemData(icon: Icons.map_outlined, label: 'Maps'),
     _NavItemData(icon: Icons.checklist_outlined, label: 'Tasks'),
     _NavItemData(icon: Icons.more_horiz, label: 'More'),
   ];

@@ -81,6 +81,13 @@ class AppRouter extends RootStackRouter {
                 ),
               ],
             ),
+            AutoRoute(
+              page: MoreShellRoute.page,
+              path: 'more',
+              children: [
+                AutoRoute(page: MoreRoute.page, path: '', initial: true),
+              ],
+            ),
           ],
         ),
       ];

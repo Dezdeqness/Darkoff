@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -7,9 +8,17 @@ class MorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colorTheme;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('More')),
-      body: const Center(child: Text('More content')),
+      backgroundColor: colors.background,
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(child: SizedBox(height: 32)),
+          ],
+        ),
+      ),
     );
   }
 }
