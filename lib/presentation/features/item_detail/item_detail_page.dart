@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/utils/color_utils.dart';
-import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/core/widgets/app_error_view.dart';
 import 'package:darkoff/core/widgets/app_image.dart';
 import 'package:darkoff/core/widgets/app_label.dart';
 import 'package:darkoff/core/widgets/app_section_header.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
+import 'package:darkoff/domain/entities/item_detail_entity.dart';
+import 'package:darkoff/presentation/features/ammo/widgets/ammo_chart.dart';
 import 'package:darkoff/presentation/features/core/model/property_tile_ui_model.dart';
 import 'package:darkoff/presentation/features/item_detail/model/item_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/item_detail/notifiers/item_detail_notifier.dart';
@@ -39,6 +40,10 @@ class ItemDetailPage extends ConsumerWidget {
               context: context,
               properties: item.properties,
             ),
+          ),
+        if (item.itemProperties case AmmoProperties(:final caliber?))
+          SliverToBoxAdapter(
+            child: AmmoChart(caliber: caliber, currentItemId: item.id),
           ),
         if (item.sellPrices.isNotEmpty)
           SliverToBoxAdapter(
