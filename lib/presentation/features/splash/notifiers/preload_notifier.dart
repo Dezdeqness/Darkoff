@@ -12,11 +12,10 @@ class PreloadNotifier extends _$PreloadNotifier {
   @override
   PreloadState build() {
     _preloadService = GetIt.instance<PreloadService>();
-    _startPreload();
     return const PreloadState.initial();
   }
 
-  Future<void> _startPreload() async {
+  Future<void> startPreload() async {
     final hasData = await _preloadService.hasLocalData();
     if (hasData) {
       state = const PreloadState.completed();

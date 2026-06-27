@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
+import 'package:darkoff/core/theme/extension/theme_extensions.dart';
+import 'package:darkoff/core/widgets/slide_fade_widget.dart';
 import 'package:darkoff/presentation/features/splash/notifiers/preload_notifier.dart';
 import 'package:darkoff/presentation/features/splash/state/preload_state.dart';
+import 'package:darkoff/presentation/features/splash/widgets/splash_status_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,8 +12,47 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SplashPage extends ConsumerWidget {
   const SplashPage({super.key});
 
+  Widget buildAppLogo(BuildContext context) {
+    return Image.asset(
+      'assets/images/splash/splash_icon_12_v2.png',
+      width: 150.0,
+      height: 150.0,
+      fit: BoxFit.contain,
+    );
+  }
+
+  Widget buildBrandTitle(BuildContext context) {
+    final colors = context.colorTheme;
+    final typo = context.typographyTheme;
+
+    return Text(
+      'DARKOFF',
+      style: typo.titleLarge.copyWith(
+        color: colors.gold,
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 6,
+      ),
+    );
+  }
+
+  Widget buildBrandSubTitle(BuildContext context) {
+    final colors = context.colorTheme;
+    final typo = context.typographyTheme;
+
+    return Text(
+      'TARKOV COMPANION',
+      style: typo.labelSmall.copyWith(
+        color: colors.textTertiary,
+        letterSpacing: 4,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colors = context.colorTheme;
+
     ref.listen<PreloadState>(preloadProvider, (_, state) {
       state.whenOrNull(
         completed: () {
@@ -22,55 +64,46 @@ class SplashPage extends ConsumerWidget {
     final state = ref.watch(preloadProvider);
 
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: state.when(
-            initial: () => const CircularProgressIndicator(),
-            loading: (loadedCount) => Column(
+      backgroundColor: colors.background,
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const CircularProgressIndicator(),
-                const SizedBox(height: 24),
-                Text(
-                  'Loading items...',
-                  style: Theme.of(context).textTheme.titleMedium,
+                SlideFadeWidget(
+                  delay: Duration.zero,
+                  offset: 40,
+                  child: buildAppLogo(context),
                 ),
-                if (loadedCount > 0) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    '$loadedCount items loaded',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              ],
-            ),
-            completed: () => const SizedBox.shrink(),
-            error: (message) => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 48,
-                  color: Theme.of(context).colorScheme.error,
+                SlideFadeWidget(
+                  delay: Duration(milliseconds: 500),
+                  direction: SlideDirection.left,
+                  child: buildBrandTitle(context),
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  'Failed to load data',
-                  style: Theme.of(context).textTheme.titleMedium,
+                const SizedBox(height: 10),
+                SlideFadeWidget(
+                  delay: Duration(milliseconds: 500),
+                  direction: SlideDirection.right,
+                  child: buildBrandSubTitle(context),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  message,
-                  style: Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                FilledButton(
-                  onPressed: () {
-                    ref.read(preloadProvider.notifier).retry();
+                const SizedBox(height: 42),
+                SlideFadeWidget(
+                  direction: SlideDirection.none,
+                  delay: const Duration(milliseconds: 1000),
+                  onCompleted: () {
+                    ref.read(preloadProvider.notifier).startPreload();
                   },
-                  child: const Text('Retry'),
+                  child: SplashStatusWidget(
+                    mode: state.when(
+                      initial: () => StatusMode.loading,
+                      loading: (_) => StatusMode.loading,
+                      completed: () => StatusMode.done,
+                      error: (_) => StatusMode.error,
+                    ),
+                    onRetry: () => ref.read(preloadProvider.notifier).retry(),
+                  ),
                 ),
               ],
             ),
