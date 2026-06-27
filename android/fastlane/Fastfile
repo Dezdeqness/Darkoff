@@ -1,6 +1,7 @@
 default_platform(:android)
 
 require "dotenv"
+require "yaml"
 Dotenv.load(File.expand_path(".env.secret", __dir__))
 
 PROJECT_ROOT = File.expand_path("../..", __dir__)
@@ -10,16 +11,66 @@ platform :android do
   desc "Build release APK and upload to Firebase App Distribution"
   lane :distribute do |options|
     build_number = Time.now.to_i / 60
+    tag = "#{pubspec_version_name}+#{build_number}"
 
     sh("cd #{PROJECT_ROOT.shellescape} && fvm flutter build apk --release --build-number=#{build_number}")
 
-    firebase_app_distribution(
-      app: ENV.fetch("FIREBASE_APP_ID"),
-      service_credentials_file: ENV.fetch("FIREBASE_SERVICE_CREDENTIALS_FILE"),
-      groups: ENV["FIREBASE_TESTER_GROUPS"],
-      android_artifact_type: "APK",
-      android_artifact_path: APK_PATH,
-      release_notes: options[:notes] || ENV["RELEASE_NOTES"] || "Latest build",
-    )
+    notes = options[:notes] || ENV["RELEASE_NOTES"] || release_notes_from_tags
+    create_local_tag(tag)
+
+    begin
+      firebase_app_distribution(
+        app: ENV.fetch("FIREBASE_APP_ID"),
+        service_credentials_file: ENV.fetch("FIREBASE_SERVICE_CREDENTIALS_FILE"),
+        groups: ENV["FIREBASE_TESTER_GROUPS"],
+        android_artifact_type: "APK",
+        android_artifact_path: APK_PATH,
+        release_notes: notes,
+      )
+    rescue StandardError => e
+      delete_local_tag(tag)
+      raise e
+    end
+
+    push_tag(tag) unless ENV["SKIP_TAG_PUSH"]
+  end
+
+  def pubspec_version_name
+    version = YAML.load_file(File.join(PROJECT_ROOT, "pubspec.yaml"))["version"].to_s
+    version.split("+").first
+  end
+
+  def release_notes_from_tags
+    no_tags = false
+    last_tag = sh(
+      "git -C #{PROJECT_ROOT.shellescape} describe --tags --abbrev=0",
+      log: false,
+      error_callback: ->(_) { no_tags = true },
+    ).strip
+
+    return "Initial" if no_tags || last_tag.empty?
+
+    log = sh(
+      "git -C #{PROJECT_ROOT.shellescape} log #{last_tag}..HEAD --no-merges --pretty=format:%s",
+      log: false,
+    ).strip
+
+    return "Initial" if log.empty?
+
+    log.lines.map { |line| "- #{line.strip}" }.join("\n")
+  end
+
+  def create_local_tag(tag)
+    sh("git -C #{PROJECT_ROOT.shellescape} tag -a #{tag.shellescape} -m #{tag.shellescape}")
+  end
+
+  def push_tag(tag)
+    sh("git -C #{PROJECT_ROOT.shellescape} push origin #{tag.shellescape}")
+  end
+
+  def delete_local_tag(tag)
+    sh("git -C #{PROJECT_ROOT.shellescape} tag -d #{tag.shellescape}")
+  rescue StandardError => e
+    UI.important("Could not delete local tag #{tag}: #{e.message}")
   end
 end
