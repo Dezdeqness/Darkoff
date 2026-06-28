@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:darkoff/core/localization/language_store.dart';
 import 'package:graphql/client.dart';
 import 'package:darkoff/data/service/qraphql/queries/items.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/item_detail.graphql.dart';
+import 'package:darkoff/data/service/qraphql/queries/market_snapshot.graphql.dart';
+import 'package:darkoff/data/service/qraphql/queries/server_status.graphql.dart';
 import 'package:darkoff/data/service/qraphql/schema.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/tasks.graphql.dart';
 import 'package:logger/logger.dart';
@@ -15,22 +18,28 @@ class DarkoffQLService {
   DarkoffQLService({
     required GraphQLClient client,
     required Logger logger,
+    required LanguageStore languageStore,
   })  : _client = client,
-        _logger = logger;
+        _logger = logger,
+        _languageStore = languageStore;
 
   final GraphQLClient _client;
   final Logger _logger;
+  final LanguageStore _languageStore;
+
+  Enum$LanguageCode _resolveLanguage(Enum$LanguageCode? language) =>
+      language ?? _languageStore.language;
 
   Future<QueryResult> getItems({
-    Enum$LanguageCode language = Enum$LanguageCode.ru,
-    Enum$GameMode gameMode = Enum$GameMode.regular,
+    Enum$LanguageCode? language,
+    Enum$GameMode gameMode = Enum$GameMode.pve,
     int limit = 100,
     int offset = 0,
   }) async {
     final options = QueryOptions(
       document: documentNodeQueryDarkoffItems,
       variables: Variables$Query$DarkoffItems(
-        language: language,
+        language: _resolveLanguage(language),
         gameMode: gameMode,
         limit: limit,
         offset: offset,
@@ -42,13 +51,13 @@ class DarkoffQLService {
   }
 
   Future<QueryResult> getTasks({
-    Enum$LanguageCode language = Enum$LanguageCode.ru,
-    Enum$GameMode gameMode = Enum$GameMode.regular,
+    Enum$LanguageCode? language,
+    Enum$GameMode gameMode = Enum$GameMode.pve,
   }) async {
     final options = QueryOptions(
       document: documentNodeQueryDarkoffTasks,
       variables: Variables$Query$DarkoffTasks(
-        language: language,
+        language: _resolveLanguage(language),
         gameMode: gameMode,
       ).toJson(),
       fetchPolicy: FetchPolicy.networkOnly,
@@ -57,16 +66,47 @@ class DarkoffQLService {
     return _queryWithRetry(options, label: 'getTasks()');
   }
 
+  Future<QueryResult> getMarketSnapshot({
+    Enum$LanguageCode? language,
+    Enum$GameMode gameMode = Enum$GameMode.pve,
+  }) async {
+    final options = QueryOptions(
+      document: documentNodeQueryDarkoffMarketSnapshot,
+      variables: Variables$Query$DarkoffMarketSnapshot(
+        ids: [
+          '5780cf7f2459777de4559322', // Dorm room 314 marked key (меченка)
+          '57347ca924597744596b4e71', // Graphics card (GPU)
+          '5c0530ee86f774697952d952', // LEDX Skin Transilluminator
+          '5c052e6986f7746b207bc3c9', // Defibrillator
+        ],
+        language: _resolveLanguage(language),
+        gameMode: gameMode,
+      ).toJson(),
+      fetchPolicy: FetchPolicy.networkOnly,
+    );
+
+    return _queryWithRetry(options, label: 'getMarketSnapshot()');
+  }
+
+  Future<QueryResult> getServerStatus() async {
+    final options = QueryOptions(
+      document: documentNodeQueryDarkoffServerStatus,
+      fetchPolicy: FetchPolicy.networkOnly,
+    );
+
+    return _queryWithRetry(options, label: 'getServerStatus()');
+  }
+
   Future<QueryResult> getItemDetail({
     required String id,
-    Enum$LanguageCode language = Enum$LanguageCode.ru,
+    Enum$LanguageCode? language,
     Enum$GameMode gameMode = Enum$GameMode.pve,
   }) async {
     final options = QueryOptions(
       document: documentNodeQueryDarkoffItemDetail,
       variables: Variables$Query$DarkoffItemDetail(
         id: id,
-        language: language,
+        language: _resolveLanguage(language),
         gameMode: gameMode,
       ).toJson(),
       fetchPolicy: FetchPolicy.networkOnly,

@@ -1,0 +1,11 @@
+query DarkoffMarketSnapshot($ids: [ID]!, $language: LanguageCode, $gameMode: GameMode) {
+  items(ids: $ids, lang: $language, gameMode: $gameMode) {
+    id
+    name
+    shortName
+    avg24hPrice
+    lastLowPrice
+    changeLast48hPercent
+    changeLast48h
+  }
+}
