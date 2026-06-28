@@ -16,11 +16,10 @@ class AppRouter extends RootStackRouter {
           page: TarkovShellRoute.page,
           path: '/darkoff',
           children: [
-            // AutoRoute(page: HomeRoute.page, path: '', initial: true),
+            AutoRoute(page: HomeRoute.page, path: '', initial: true),
             AutoRoute(
               page: ItemsShellRoute.page,
               path: 'items',
-              initial: true,
               children: [
                 AutoRoute(
                   page: ItemsRoute.page,
@@ -89,6 +88,10 @@ class AppRouter extends RootStackRouter {
               ],
             ),
           ],
+        ),
+        AutoRoute(
+          page: ItemDetailRoute.page,
+          path: '/item/:id',
         ),
       ];
 }

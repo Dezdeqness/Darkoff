@@ -36,8 +36,9 @@ class _TarkovShellScreenState extends ConsumerState<TarkovShellScreen> {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
+      homeIndex: 0,
       routes: const [
-        // HomeRoute(),
+        HomeRoute(),
         ItemsShellRoute(),
         // MapsRoute(),
         TasksShellRoute(),
@@ -74,7 +75,7 @@ class _BottomNav extends StatelessWidget {
   final TabsRouter tabsRouter;
 
   static const _items = [
-    // _NavItemData(icon: Icons.home_outlined, label: 'Home'),
+    _NavItemData(icon: Icons.home_outlined, label: 'Home'),
     _NavItemData(icon: Icons.grid_view_rounded, label: 'Items'),
     // _NavItemData(icon: Icons.map_outlined, label: 'Maps'),
     _NavItemData(icon: Icons.checklist_outlined, label: 'Tasks'),

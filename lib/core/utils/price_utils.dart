@@ -8,6 +8,17 @@ String formatPrice(int price) {
   return buffer.toString();
 }
 
+String formatCompactPrice(int price) {
+  if (price >= 1000000) {
+    final m = price / 1000000;
+    return '${m.toStringAsFixed(m % 1 == 0 ? 0 : 1)}M';
+  }
+  if (price >= 1000) {
+    return '${(price / 1000).round()}K';
+  }
+  return price.toString();
+}
+
 String currencySymbol(String currency) {
   return switch (currency) {
     'RUB' => '\u20BD',
