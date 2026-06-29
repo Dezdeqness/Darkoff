@@ -33,8 +33,8 @@ abstract class BaseCacheManager<T> {
     }
   }
 
-  Future<void> updateData() async {
-    if (value is! CacheData) emitLoading();
+  Future<void> updateData({bool force = false}) async {
+    if (force || value is! CacheData) emitLoading();
     await performUpdate();
   }
 
