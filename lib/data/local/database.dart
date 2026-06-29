@@ -145,6 +145,35 @@ class TaskRewardStandings extends Table {
   RealColumn get standing => real()();
 }
 
+class MarketSnapshotItems extends Table {
+  TextColumn get id => text()();
+  TextColumn get name => text()();
+  TextColumn get shortName => text()();
+  IntColumn get avg24hPrice => integer().nullable()();
+  IntColumn get lastLowPrice => integer().nullable()();
+  RealColumn get changeLast48hPercent => real().nullable()();
+  IntColumn get position => integer().withDefault(const Constant(0))();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+class FleaCacheItems extends Table {
+  TextColumn get id => text()();
+  TextColumn get name => text()();
+  TextColumn get shortName => text()();
+  TextColumn get iconLink => text().nullable()();
+  IntColumn get avgPrice => integer().nullable()();
+  IntColumn get low24hPrice => integer().nullable()();
+  IntColumn get high24hPrice => integer().nullable()();
+  RealColumn get changeLast48h => real().nullable()();
+  RealColumn get changeLast48hPercent => real().nullable()();
+  TextColumn get categoryName => text().nullable()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   Items,
   Categories,
@@ -157,12 +186,25 @@ class TaskRewardStandings extends Table {
   TaskPrerequisites,
   TaskRewardItems,
   TaskRewardStandings,
+  MarketSnapshotItems,
+  FleaCacheItems,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (migrator) => migrator.createAll(),
+        onUpgrade: (migrator, from, to) async {
+          if (from < 2) {
+            await migrator.createTable(marketSnapshotItems);
+            await migrator.createTable(fleaCacheItems);
+          }
+        },
+      );
 
   static LazyDatabase _openConnection() {
     return LazyDatabase(() async {
