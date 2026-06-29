@@ -1,5 +1,7 @@
+import 'package:darkoff/data/local/dao/flea_cache_dao.dart';
 import 'package:darkoff/data/local/dao/item_db_mapper.dart';
 import 'package:darkoff/data/local/dao/items_dao.dart';
+import 'package:darkoff/data/local/dao/market_snapshot_dao.dart';
 import 'package:darkoff/data/local/dao/task_db_mapper.dart';
 import 'package:darkoff/data/local/dao/tasks_dao.dart';
 import 'package:darkoff/data/local/database.dart';
@@ -26,6 +28,12 @@ void setupDatabaseServiceLocator() {
       db: getIt<AppDatabase>(),
       mapper: getIt<TaskDbMapper>(),
     ),
+  );
+  getIt.registerLazySingleton<MarketSnapshotDao>(
+    () => MarketSnapshotDao(db: getIt<AppDatabase>()),
+  );
+  getIt.registerLazySingleton<FleaCacheDao>(
+    () => FleaCacheDao(db: getIt<AppDatabase>()),
   );
 }
 

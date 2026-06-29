@@ -3,6 +3,7 @@ import 'package:darkoff/service_locator/categories_service_locator.dart';
 import 'package:darkoff/service_locator/database_service_locator.dart'
     show setupDatabaseServiceLocator, setupPreloadServiceLocator;
 import 'package:darkoff/service_locator/graphql_service_locator.dart';
+import 'package:darkoff/service_locator/home_service_locator.dart';
 import 'package:darkoff/service_locator/items_service_locator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:darkoff/service_locator/tasks_service_locator.dart';
@@ -22,6 +23,8 @@ Future<void> setupServiceLocator() async {
   setupDatabaseServiceLocator();
   setupCategoriesServiceLocator();
   setupItemsServiceLocator();
+  setupHomeServiceLocator();
+
   setupPreloadServiceLocator();
   setupTasksServiceLocator();
 

@@ -1,4 +1,8 @@
-import 'package:darkoff/domain/repositories/flea_repository.dart';
+import 'dart:async';
+
+import 'package:darkoff/data/cache/cache_value.dart';
+import 'package:darkoff/data/cache/flea_cache_manager.dart';
+import 'package:darkoff/domain/entities/flea_item_entity.dart';
 import 'package:darkoff/presentation/features/home/mapper/price_change_ui_mapper.dart';
 import 'package:darkoff/presentation/features/home/state/price_changes_state.dart';
 import 'package:darkoff/service_locator/service_locator.dart';
@@ -8,30 +12,31 @@ part 'price_changes_notifier.g.dart';
 
 @riverpod
 class PriceChangesNotifier extends _$PriceChangesNotifier {
-  late FleaRepository _repository;
-  late PriceChangeUiMapper _mapper;
+  late final FleaCacheManager _manager;
+  late final PriceChangeUiMapper _mapper;
+  StreamSubscription<CacheValue<List<FleaItemEntity>>>? _subscription;
 
   @override
   PriceChangesState build() {
-    _repository = getIt<FleaRepository>();
+    _manager = getIt<FleaCacheManager>();
     _mapper = getIt<PriceChangeUiMapper>();
-    load();
+    ref.onDispose(() => _subscription?.cancel());
+    _subscription = _manager.observe(_onChange);
     return const PriceChangesState.initial();
   }
 
-  Future<void> load() async {
-    state = const PriceChangesState.loading();
-    final result = await _repository.getFleaItems();
-    result.fold(
-      (items) {
+  void _onChange(CacheValue<List<FleaItemEntity>> value) {
+    state = value.when(
+      loading: () => const PriceChangesState.loading(),
+      data: (items) {
         final movers = _mapper.fromEntityList(items);
-        state = movers.isEmpty
+        return movers.isEmpty
             ? const PriceChangesState.empty()
             : PriceChangesState.loaded(movers);
       },
-      (error) => state = PriceChangesState.error(error.toString()),
+      error: (error, _) => PriceChangesState.error(error.toString()),
     );
   }
 
-  Future<void> refresh() => load();
+  Future<void> refresh() => _manager.updateData();
 }
