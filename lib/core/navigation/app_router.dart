@@ -86,6 +86,10 @@ class AppRouter extends RootStackRouter {
               children: [
                 AutoRoute(page: MoreRoute.page, path: '', initial: true),
                 AutoRoute(page: HideoutRoute.page, path: 'hideout'),
+                AutoRoute(
+                  page: HideoutDetailRoute.page,
+                  path: 'hideout/:detailId',
+                ),
               ],
             ),
           ],

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:darkoff/core/localization/language_store.dart';
 import 'package:graphql/client.dart';
 import 'package:darkoff/data/service/qraphql/queries/items.graphql.dart';
+import 'package:darkoff/data/service/qraphql/queries/hideout.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/item_detail.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/market_snapshot.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/server_status.graphql.dart';
@@ -95,6 +96,22 @@ class DarkoffQLService {
     );
 
     return _queryWithRetry(options, label: 'getServerStatus()');
+  }
+
+  Future<QueryResult> getHideout({
+    Enum$LanguageCode? language,
+    Enum$GameMode gameMode = Enum$GameMode.pve,
+  }) async {
+    final options = QueryOptions(
+      document: documentNodeQueryDarkoffHideout,
+      variables: Variables$Query$DarkoffHideout(
+        language: _resolveLanguage(language),
+        gameMode: gameMode,
+      ).toJson(),
+      fetchPolicy: FetchPolicy.networkOnly,
+    );
+
+    return _queryWithRetry(options, label: 'getHideout()');
   }
 
   Future<QueryResult> getItemDetail({

@@ -2,6 +2,7 @@ import 'package:darkoff/core/config/app_config.dart';
 import 'package:darkoff/service_locator/categories_service_locator.dart';
 import 'package:darkoff/service_locator/database_service_locator.dart'
     show setupDatabaseServiceLocator, setupPreloadServiceLocator;
+import 'package:darkoff/service_locator/hideout_service_locator.dart';
 import 'package:darkoff/service_locator/graphql_service_locator.dart';
 import 'package:darkoff/service_locator/home_service_locator.dart';
 import 'package:darkoff/service_locator/items_service_locator.dart';
@@ -23,6 +24,7 @@ Future<void> setupServiceLocator() async {
   setupDatabaseServiceLocator();
   setupCategoriesServiceLocator();
   setupItemsServiceLocator();
+  setupHideoutServiceLocator();
   setupHomeServiceLocator();
 
   setupPreloadServiceLocator();
