@@ -21,7 +21,13 @@ class HideoutNotifier extends _$HideoutNotifier {
     try {
       final result = await _repository.getStations();
       result.fold(
-        (stations) => state = HideoutState.loaded(stations),
+        (stations) {
+          if (stations.isEmpty) {
+            state = const HideoutState.empty();
+          } else {
+            state = HideoutState.loaded(stations);
+          }
+        },
         (error) => state = HideoutState.error(error.toString()),
       );
     } catch (e) {
