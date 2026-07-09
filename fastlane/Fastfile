@@ -1,0 +1,162 @@
+require "bundler"
+require "dotenv"
+require "yaml"
+require "tmpdir"
+
+Dotenv.load(File.expand_path(".env.secret", __dir__))
+
+PROJECT_ROOT = File.expand_path("..", __dir__)
+APK_PATH = File.join(PROJECT_ROOT, "build", "app", "outputs", "flutter-apk", "app-release.apk")
+IPA_DIR = File.join(PROJECT_ROOT, "build", "ios", "ipa")
+
+platform :ios do
+  desc "Build release IPA and upload to TestFlight"
+  lane :distribute do |options|
+    build_number = Time.now.to_i / 60
+
+    export_options = write_export_options
+
+    flutter_build("build ipa --release --build-number=#{build_number} --export-options-plist=#{export_options.shellescape}")
+
+    ipa_path = Dir.glob(File.join(IPA_DIR, "*.ipa")).max_by { |file| File.mtime(file) }
+    UI.user_error!("No IPA found in #{IPA_DIR}") if ipa_path.nil?
+
+    if truthy(ENV["NO_UPLOAD"])
+      UI.success("IPA built, upload skipped: #{ipa_path}")
+      next
+    end
+
+    api_key = app_store_connect_api_key(
+      key_id: ENV.fetch("ASC_KEY_ID"),
+      issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+      key_filepath: File.expand_path(ENV.fetch("ASC_KEY_FILEPATH"), PROJECT_ROOT),
+      duration: 1200,
+      in_house: false,
+    )
+
+    notes = options[:notes] || ENV["RELEASE_NOTES"] || release_notes_from_tags
+    wait = !truthy(ENV["SKIP_WAIT"])
+
+    upload_to_testflight(
+      api_key: api_key,
+      ipa: ipa_path,
+      app_identifier: ENV["IOS_BUNDLE_ID"] || "com.dezdeqness.darkoff",
+      skip_waiting_for_build_processing: !wait,
+      changelog: wait ? notes : nil,
+    )
+  end
+end
+
+platform :android do
+  desc "Build release APK and upload to Firebase App Distribution"
+  lane :distribute do |options|
+    build_number = Time.now.to_i / 60
+
+    flutter_build("build apk --release --build-number=#{build_number}")
+
+    if truthy(ENV["NO_UPLOAD"])
+      UI.success("APK built, upload skipped: #{APK_PATH}")
+      next
+    end
+
+    tag = "#{pubspec_version_name}+#{build_number}"
+    notes = options[:notes] || ENV["RELEASE_NOTES"] || release_notes_from_tags
+    create_local_tag(tag)
+
+    begin
+      firebase_app_distribution(
+        app: ENV.fetch("FIREBASE_APP_ID"),
+        service_credentials_file: File.expand_path(ENV.fetch("FIREBASE_SERVICE_CREDENTIALS_FILE"), PROJECT_ROOT),
+        groups: ENV["FIREBASE_TESTER_GROUPS"],
+        android_artifact_type: "APK",
+        android_artifact_path: APK_PATH,
+        release_notes: notes,
+      )
+    rescue StandardError => e
+      delete_local_tag(tag)
+      raise e
+    end
+
+    push_tag(tag) unless ENV["SKIP_TAG_PUSH"]
+  end
+end
+
+# --- shared helpers ---
+
+# Flutter shells out to CocoaPods during the iOS build. fastlane runs under Bundler,
+# so without this the `pod` invocation inherits BUNDLE_GEMFILE/GEM_HOME and reports
+# itself as "installed but broken". Running the build in an unbundled env fixes it.
+def flutter_build(args)
+  Bundler.with_unbundled_env do
+    sh("cd #{PROJECT_ROOT.shellescape} && fvm flutter #{args}")
+  end
+end
+
+def write_export_options
+  team_id = ENV.fetch("APPLE_TEAM_ID")
+  path = File.join(Dir.tmpdir, "darkoff_export_options.plist")
+  File.write(path, <<~PLIST)
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+      <key>method</key>
+      <string>app-store</string>
+      <key>signingStyle</key>
+      <string>automatic</string>
+      <key>teamID</key>
+      <string>#{team_id}</string>
+      <key>uploadSymbols</key>
+      <true/>
+      <key>uploadBitcode</key>
+      <false/>
+      <key>manageAppVersionAndBuildNumber</key>
+      <false/>
+    </dict>
+    </plist>
+  PLIST
+  path
+end
+
+def truthy(value)
+  %w[1 true yes on].include?(value.to_s.strip.downcase)
+end
+
+def pubspec_version_name
+  version = YAML.load_file(File.join(PROJECT_ROOT, "pubspec.yaml"))["version"].to_s
+  version.split("+").first
+end
+
+def release_notes_from_tags
+  no_tags = false
+  last_tag = sh(
+    "git -C #{PROJECT_ROOT.shellescape} describe --tags --abbrev=0",
+    log: false,
+    error_callback: ->(_) { no_tags = true },
+  ).strip
+
+  return "Initial" if no_tags || last_tag.empty?
+
+  log = sh(
+    "git -C #{PROJECT_ROOT.shellescape} log #{last_tag}..HEAD --no-merges --pretty=format:%s",
+    log: false,
+  ).strip
+
+  return "Initial" if log.empty?
+
+  log.lines.map { |line| "- #{line.strip}" }.join("\n")
+end
+
+def create_local_tag(tag)
+  sh("git -C #{PROJECT_ROOT.shellescape} tag -a #{tag.shellescape} -m #{tag.shellescape}")
+end
+
+def push_tag(tag)
+  sh("git -C #{PROJECT_ROOT.shellescape} push origin #{tag.shellescape}")
+end
+
+def delete_local_tag(tag)
+  sh("git -C #{PROJECT_ROOT.shellescape} tag -d #{tag.shellescape}")
+rescue StandardError => e
+  UI.important("Could not delete local tag #{tag}: #{e.message}")
+end

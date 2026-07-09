@@ -1,0 +1,8 @@
+for_platform :ios do
+  app_identifier(ENV["IOS_BUNDLE_ID"] || "com.dezdeqness.darkoff")
+  team_id(ENV["APPLE_TEAM_ID"]) if ENV["APPLE_TEAM_ID"]
+end
+
+for_platform :android do
+  package_name(ENV["ANDROID_PACKAGE_NAME"] || "com.dezdeqness.darkoff")
+end
