@@ -1,13 +1,17 @@
 import 'package:darkoff/core/config/app_config.dart';
+import 'package:darkoff/service_locator/ammo_service_locator.dart';
 import 'package:darkoff/service_locator/categories_service_locator.dart';
 import 'package:darkoff/service_locator/database_service_locator.dart'
     show setupDatabaseServiceLocator, setupPreloadServiceLocator;
 import 'package:darkoff/service_locator/hideout_service_locator.dart';
+import 'package:darkoff/service_locator/ammo_service_locator.dart';
+import 'package:darkoff/service_locator/flea_service_locator.dart';
 import 'package:darkoff/service_locator/graphql_service_locator.dart';
 import 'package:darkoff/service_locator/home_service_locator.dart';
 import 'package:darkoff/service_locator/items_service_locator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:darkoff/service_locator/tasks_service_locator.dart';
+import 'package:darkoff/core/localization/language_store.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,7 +28,9 @@ Future<void> setupServiceLocator() async {
   setupDatabaseServiceLocator();
   setupCategoriesServiceLocator();
   setupItemsServiceLocator();
+  setupAmmoServiceLocator();
   setupHideoutServiceLocator();
+  setupFleaServiceLocator();
   setupHomeServiceLocator();
 
   setupPreloadServiceLocator();

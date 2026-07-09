@@ -1,0 +1,16 @@
+query DarkoffFleaMarket($language: LanguageCode, $gameMode: GameMode) {
+  items(lang: $language, gameMode: $gameMode, limit: 400) {
+    id
+    name
+    shortName
+    iconLink
+    avg24hPrice
+    low24hPrice
+    high24hPrice
+    changeLast48h
+    changeLast48hPercent
+    category {
+      name
+    }
+  }
+}

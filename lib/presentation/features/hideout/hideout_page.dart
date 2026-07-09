@@ -33,8 +33,13 @@ class HideoutPage extends ConsumerWidget {
   Widget buildList(HideoutListUiModel model) {
     return SliverMainAxisGroup(
       slivers: [
-        SliverToBoxAdapter(child: HideoutSummaryCard(model: model.summary)),
-
+        // SliverToBoxAdapter(child: HideoutSummaryCard(model: model.summary)),
+        // SliverToBoxAdapter(
+        //   child: ShoppingEntryCard(
+        //     model: model.shoppingEntry,
+        //     onTap: null,
+        //   ),
+        // ),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           sliver: SliverList(
@@ -74,4 +79,5 @@ class HideoutPage extends ConsumerWidget {
       ),
     );
   }
+
 }
