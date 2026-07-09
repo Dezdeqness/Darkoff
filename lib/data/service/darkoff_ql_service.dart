@@ -64,6 +64,7 @@ class DarkoffQLService {
         gameMode: gameMode,
       ).toJson(),
       fetchPolicy: FetchPolicy.networkOnly,
+      errorPolicy: ErrorPolicy.all,
     );
 
     return _queryWithRetry(options, label: 'getTasks()');

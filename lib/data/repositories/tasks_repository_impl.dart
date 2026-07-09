@@ -28,13 +28,11 @@ class TasksRepositoryImpl implements TasksRepository {
         gameMode: Enum$GameMode.pve,
       );
 
-      if (result.hasException) {
-        return failureOf(Exception(result.exception.toString()));
-      }
-
       final data = result.data;
       if (data == null) {
-        return failureOf(Exception('Empty response'));
+        return failureOf(
+          Exception(result.exception?.toString() ?? 'Empty response'),
+        );
       }
 
       return successOf(
