@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_card.dart';
 import 'package:darkoff/core/widgets/item_icon.dart';
@@ -15,7 +17,8 @@ class StationCard extends StatelessWidget {
     final typo = context.typographyTheme;
 
     return AppCard(
-      onTap: () {},
+      onTap: () =>
+          context.router.push(HideoutDetailRoute(stationId: model.id)),
       child: Row(
         children: [
           ItemIcon(

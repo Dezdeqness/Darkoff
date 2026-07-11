@@ -86,10 +86,10 @@ class AppRouter extends RootStackRouter {
               children: [
                 AutoRoute(page: MoreRoute.page, path: '', initial: true),
                 AutoRoute(page: HideoutRoute.page, path: 'hideout'),
-                // AutoRoute(
-                //   page: HideoutDetailRoute.page,
-                //   path: 'hideout/:detailId',
-                // ),
+                AutoRoute(
+                  page: HideoutDetailRoute.page,
+                  path: 'hideout/:detailId',
+                ),
                 //   AutoRoute(page: AmmoRoute.page, path: 'ammo'),
                 //   AutoRoute(page: TradersRoute.page, path: 'traders'),
                 //   AutoRoute(page: BartersRoute.page, path: 'barters'),
