@@ -1,7 +1,6 @@
-import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
 import 'package:darkoff/presentation/features/hideout/mapper/hideout_ui_mapper.dart';
 import 'package:darkoff/presentation/features/hideout/notifiers/hideout_notifier.dart';
-// import 'package:darkoff/presentation/features/hideout/notifiers/hideout_progress_notifier.dart';
+import 'package:darkoff/presentation/features/hideout/notifiers/hideout_progress_notifier.dart';
 import 'package:darkoff/presentation/features/hideout/state/hideout_list_state.dart';
 import 'package:darkoff/presentation/features/hideout/state/hideout_state.dart';
 import 'package:darkoff/service_locator/hideout_service_locator.dart';
@@ -18,14 +17,14 @@ class HideoutListNotifier extends _$HideoutListNotifier {
     _mapper = getIt<HideoutUiMapper>();
 
     final state = ref.watch(hideoutProvider);
-    // final progress = ref.watch(hideoutProgressProvider);
+    final progress = ref.watch(hideoutProgressProvider);
 
     return state.when(
       initial: () => const HideoutListState.loading(),
       loading: () => const HideoutListState.loading(),
       empty: () => const HideoutListState.empty(),
       loaded: (stations) =>
-          HideoutListState.loaded(_mapper.toListModel(stations, HideoutProgressEntity())),
+          HideoutListState.loaded(_mapper.toListModel(stations, progress)),
       error: HideoutListState.error,
     );
   }

@@ -174,6 +174,31 @@ class FleaCacheItems extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+class HideoutOwnedItems extends Table {
+  TextColumn get stationId => text()();
+  IntColumn get level => integer()();
+  TextColumn get itemId => text()();
+  IntColumn get ownedCount => integer().withDefault(const Constant(0))();
+
+  @override
+  Set<Column> get primaryKey => {stationId, level, itemId};
+}
+
+class HideoutBuiltLevels extends Table {
+  TextColumn get stationId => text()();
+  IntColumn get level => integer()();
+
+  @override
+  Set<Column> get primaryKey => {stationId, level};
+}
+
+class HideoutTrackedStations extends Table {
+  TextColumn get stationId => text()();
+
+  @override
+  Set<Column> get primaryKey => {stationId};
+}
+
 @DriftDatabase(tables: [
   Items,
   Categories,
@@ -188,12 +213,15 @@ class FleaCacheItems extends Table {
   TaskRewardStandings,
   MarketSnapshotItems,
   FleaCacheItems,
+  HideoutOwnedItems,
+  HideoutBuiltLevels,
+  HideoutTrackedStations,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -202,6 +230,11 @@ class AppDatabase extends _$AppDatabase {
           if (from < 2) {
             await migrator.createTable(marketSnapshotItems);
             await migrator.createTable(fleaCacheItems);
+          }
+          if (from < 3) {
+            await migrator.createTable(hideoutOwnedItems);
+            await migrator.createTable(hideoutBuiltLevels);
+            await migrator.createTable(hideoutTrackedStations);
           }
         },
       );

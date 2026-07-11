@@ -33,7 +33,7 @@ class HideoutPage extends ConsumerWidget {
   Widget buildList(HideoutListUiModel model) {
     return SliverMainAxisGroup(
       slivers: [
-        // SliverToBoxAdapter(child: HideoutSummaryCard(model: model.summary)),
+        SliverToBoxAdapter(child: HideoutSummaryCard(model: model.summary)),
         // SliverToBoxAdapter(
         //   child: ShoppingEntryCard(
         //     model: model.shoppingEntry,
