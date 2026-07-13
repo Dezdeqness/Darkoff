@@ -78,7 +78,11 @@ class AppRouter extends RootStackRouter {
             AutoRoute(page: HideoutDetailRoute.page, path: 'hideout/:detailId'),
             AutoRoute(page: ShoppingListRoute.page, path: 'hideout-shopping'),
             //   AutoRoute(page: AmmoRoute.page, path: 'ammo'),
-            //   AutoRoute(page: TradersRoute.page, path: 'traders'),
+            AutoRoute(page: TradersRoute.page, path: 'traders'),
+            AutoRoute(
+              page: TradersDetailRoute.page,
+              path: 'traders/:traderId',
+            ),
             //   AutoRoute(page: BartersRoute.page, path: 'barters'),
             //   AutoRoute(page: CraftsRoute.page, path: 'crafts'),
             //

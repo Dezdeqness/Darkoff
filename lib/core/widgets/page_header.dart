@@ -9,10 +9,21 @@ class PageHeader extends StatelessWidget {
     this.subtitle,
     this.showBack = true,
     this.trailing,
-  });
+  }) : subtitleWidget = null;
+
+  const PageHeader.subtitleContent({
+    super.key,
+    required this.title,
+    required Widget subtitle,
+    this.showBack = true,
+    this.trailing,
+  })  : subtitleWidget = subtitle,
+        subtitle = null;
 
   final String title;
   final String? subtitle;
+
+  final Widget? subtitleWidget;
   final bool showBack;
 
   final Widget? trailing;
@@ -21,6 +32,14 @@ class PageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
     final typo = context.typographyTheme;
+
+    final subtitleChild = subtitleWidget ??
+        (subtitle != null
+            ? Text(
+                subtitle!,
+                style: typo.bodySmall.copyWith(color: colors.textSecondary),
+              )
+            : null);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
@@ -39,7 +58,7 @@ class PageHeader extends StatelessWidget {
             const SizedBox(width: 12),
           ],
           Expanded(
-            child: subtitle != null
+            child: subtitleChild != null
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -51,11 +70,7 @@ class PageHeader extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      Text(
-                        subtitle!,
-                        style:
-                            typo.bodySmall.copyWith(color: colors.textSecondary),
-                      ),
+                      subtitleChild,
                     ],
                   )
                 : Text(

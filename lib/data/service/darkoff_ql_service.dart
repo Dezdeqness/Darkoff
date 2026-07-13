@@ -8,6 +8,7 @@ import 'package:darkoff/data/service/qraphql/queries/ammo.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/flea_market.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/item_detail.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/market_snapshot.graphql.dart';
+import 'package:darkoff/data/service/qraphql/queries/traders.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/server_status.graphql.dart';
 import 'package:darkoff/data/service/qraphql/schema.graphql.dart';
 import 'package:darkoff/data/service/qraphql/queries/tasks.graphql.dart';
@@ -149,6 +150,21 @@ class DarkoffQLService {
     return _queryWithRetry(options, label: 'getAmmo()');
   }
 
+  Future<QueryResult> getTraders({
+    Enum$LanguageCode? language,
+    Enum$GameMode gameMode = Enum$GameMode.pve,
+  }) async {
+    final options = QueryOptions(
+      document: documentNodeQueryDarkoffTraders,
+      variables: Variables$Query$DarkoffTraders(
+        language: _resolveLanguage(language),
+        gameMode: gameMode,
+      ).toJson(),
+      fetchPolicy: FetchPolicy.networkOnly,
+    );
+
+    return _queryWithRetry(options, label: 'getTraders()');
+  }
 
   Future<QueryResult> getItemDetail({
     required String id,

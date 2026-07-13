@@ -9,6 +9,7 @@ import 'package:darkoff/service_locator/flea_service_locator.dart';
 import 'package:darkoff/service_locator/graphql_service_locator.dart';
 import 'package:darkoff/service_locator/home_service_locator.dart';
 import 'package:darkoff/service_locator/items_service_locator.dart';
+import 'package:darkoff/service_locator/traders_service_locator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:darkoff/service_locator/tasks_service_locator.dart';
 import 'package:darkoff/core/localization/language_store.dart';
@@ -31,6 +32,7 @@ Future<void> setupServiceLocator() async {
   setupAmmoServiceLocator();
   setupHideoutServiceLocator();
   setupFleaServiceLocator();
+  setupTradersServiceLocator();
   setupHomeServiceLocator();
 
   setupPreloadServiceLocator();

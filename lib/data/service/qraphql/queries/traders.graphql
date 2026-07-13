@@ -1,0 +1,56 @@
+query DarkoffTraders($language: LanguageCode, $gameMode: GameMode) {
+  traders(lang: $language, gameMode: $gameMode) {
+    id
+    name
+    normalizedName
+    imageLink
+    resetTime
+    description
+    currency {
+      name
+    }
+    levels {
+      level
+      requiredPlayerLevel
+      requiredReputation
+      requiredCommerce
+    }
+    cashOffers {
+      item {
+        id
+        name
+        shortName
+        iconLink
+        avg24hPrice
+      }
+      minTraderLevel
+      price
+      currency
+      priceRUB
+    }
+    barters {
+      id
+      level
+      requiredItems {
+        item {
+          id
+          name
+          shortName
+          iconLink
+          avg24hPrice
+        }
+        count
+      }
+      rewardItems {
+        item {
+          id
+          name
+          shortName
+          iconLink
+          avg24hPrice
+        }
+        count
+      }
+    }
+  }
+}
