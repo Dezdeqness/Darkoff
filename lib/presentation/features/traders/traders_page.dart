@@ -1,8 +1,8 @@
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
-import 'package:darkoff/presentation/features/traders/notifiers/traders_notifier.dart';
-import 'package:darkoff/presentation/features/traders/state/traders_state.dart';
+import 'package:darkoff/presentation/features/traders/notifiers/traders_list_notifier.dart';
+import 'package:darkoff/presentation/features/traders/state/traders_list_state.dart';
 import 'package:darkoff/presentation/features/traders/widgets/trader_card.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class TradersPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.colorTheme;
-    final state = ref.watch(tradersProvider);
+    final state = ref.watch(tradersListProvider);
 
     return Scaffold(
       backgroundColor: colors.background,
@@ -37,25 +37,25 @@ class TradersPage extends ConsumerWidget {
   }
 
   List<Widget> buildContent(
-      BuildContext context, WidgetRef ref, TradersState state) {
+      BuildContext context, WidgetRef ref, TradersListState state) {
     return switch (state) {
-      TradersInitial() || TradersLoading() => [
+      TradersListLoading() => [
           const SliverLoadingIndicator(),
         ],
-      TradersError() => [
+      TradersListError() => [
           SliverErrorMessage(
             message: 'Failed to load traders',
-            onRetry: () => ref.read(tradersProvider.notifier).refresh(),
+            onRetry: () => ref.read(tradersListProvider.notifier).refresh(),
           ),
         ],
-      TradersLoaded(:final traders) => [
+      TradersListLoaded(:final traders) => [
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (ctx, i) => Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: TraderCard(trader: traders[i]),
+                  child: TraderCard(model: traders[i]),
                 ),
                 childCount: traders.length,
               ),

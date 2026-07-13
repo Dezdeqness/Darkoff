@@ -17,6 +17,7 @@ class MorePage extends ConsumerWidget {
   VoidCallback? onTapFor(BuildContext context, MoreMenuEntry entry) {
     return switch (entry) {
       MoreMenuEntry.hideout => () => context.router.push(const HideoutRoute()),
+      MoreMenuEntry.traders => () => context.router.push(const TradersRoute()),
       _ => null,
     };
   }
