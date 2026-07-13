@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
@@ -6,6 +7,7 @@ import 'package:darkoff/presentation/features/hideout/model/hideout_list_ui_mode
 import 'package:darkoff/presentation/features/hideout/notifiers/hideout_list_notifier.dart';
 import 'package:darkoff/presentation/features/hideout/state/hideout_list_state.dart';
 import 'package:darkoff/presentation/features/hideout/widgets/hideout_summary_card.dart';
+import 'package:darkoff/presentation/features/hideout/widgets/shopping_entry_card.dart';
 import 'package:darkoff/presentation/features/hideout/widgets/station_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,7 +24,7 @@ class HideoutPage extends ConsumerWidget {
     return state.when(
       loading: () => const SliverLoadingIndicator(),
       empty: () => const SliverEmptyMessage(message: 'No stations available'),
-      loaded: (model) => buildList(model),
+      loaded: (model) => buildList(context, model),
       error: (_) => SliverErrorMessage(
         message: 'Failed to load hideout data',
         onRetry: () => ref.read(hideoutListProvider.notifier).refresh(),
@@ -30,16 +32,16 @@ class HideoutPage extends ConsumerWidget {
     );
   }
 
-  Widget buildList(HideoutListUiModel model) {
+  Widget buildList(BuildContext context, HideoutListUiModel model) {
     return SliverMainAxisGroup(
       slivers: [
         SliverToBoxAdapter(child: HideoutSummaryCard(model: model.summary)),
-        // SliverToBoxAdapter(
-        //   child: ShoppingEntryCard(
-        //     model: model.shoppingEntry,
-        //     onTap: null,
-        //   ),
-        // ),
+        SliverToBoxAdapter(
+          child: ShoppingEntryCard(
+            model: model.shoppingEntry,
+            onTap: () => context.router.push(ShoppingListRoute()),
+          ),
+        ),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           sliver: SliverList(
