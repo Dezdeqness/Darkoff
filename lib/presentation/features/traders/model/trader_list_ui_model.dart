@@ -9,7 +9,6 @@ abstract class TraderListItemUiModel with _$TraderListItemUiModel {
     required String name,
     String? imageLink,
     String? resetTime,
-    required int offersCount,
-    required int bartersCount,
+    required String tradesText,
   }) = _TraderListItemUiModel;
 }

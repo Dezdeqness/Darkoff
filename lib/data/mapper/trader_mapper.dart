@@ -35,6 +35,7 @@ class TraderMapper {
                   count: 1,
                 ),
                 minTraderLevel: offer.minTraderLevel,
+                price: offer.price,
                 priceRUB: offer.priceRUB,
                 currency: offer.currency,
               ),

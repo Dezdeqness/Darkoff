@@ -47,8 +47,7 @@ class TraderCard extends StatelessWidget {
                         size: 13, color: colors.gold),
                     const SizedBox(width: 4),
                     Text(
-                      '${model.offersCount} offers · '
-                      '${model.bartersCount} barters',
+                      model.tradesText,
                       style: typo.paragraphSmall
                           .copyWith(color: colors.textSecondary),
                     ),

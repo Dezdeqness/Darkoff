@@ -20,6 +20,7 @@ abstract class TraderOfferEntity with _$TraderOfferEntity {
   const factory TraderOfferEntity({
     required ContainedItemEntity item,
     int? minTraderLevel,
+    int? price,
     int? priceRUB,
     String? currency,
   }) = _TraderOfferEntity;

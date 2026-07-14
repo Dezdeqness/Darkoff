@@ -12,9 +12,16 @@ class TraderListUiMapper {
           name: trader.name,
           imageLink: trader.imageLink,
           resetTime: trader.resetTime,
-          offersCount: trader.cashOffers.length,
-          bartersCount: trader.barters.length,
+          tradesText: _tradesText(trader),
         ),
       )
       .toList();
+
+  String _tradesText(TraderEntity trader) {
+    final parts = <String>[
+      if (trader.cashOffers.isNotEmpty) '${trader.cashOffers.length} offers',
+      if (trader.barters.isNotEmpty) '${trader.barters.length} barters',
+    ];
+    return parts.join(' · ');
+  }
 }
