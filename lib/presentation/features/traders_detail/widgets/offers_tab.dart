@@ -1,56 +1,39 @@
-import 'package:darkoff/presentation/features/traders_detail/model/trader_detail_ui_model.dart';
+import 'package:darkoff/presentation/features/traders_detail/notifiers/trader_offers_notifier.dart';
+import 'package:darkoff/presentation/features/traders_detail/state/trader_offers_state.dart';
 import 'package:darkoff/presentation/features/traders_detail/widgets/offer_card.dart';
 import 'package:darkoff/presentation/features/traders_detail/widgets/trade_scroll_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OffersTab extends StatefulWidget {
+class OffersTab extends ConsumerWidget {
   const OffersTab({
     super.key,
-    required this.model,
-    required this.showTabBar,
+    required this.traderId,
     required this.onOpenItem,
   });
 
-  final TraderDetailUiModel model;
-  final bool showTabBar;
+  final String traderId;
   final void Function(String itemId) onOpenItem;
 
   @override
-  State<OffersTab> createState() => _OffersTabState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(traderOffersProvider(traderId));
 
-class _OffersTabState extends State<OffersTab> {
-  int? _level;
-
-  List<int> get _levels {
-    final set = <int>{};
-    for (final o in widget.model.offers) {
-      if (o.minTraderLevel != null) set.add(o.minTraderLevel!);
-    }
-    return set.toList()..sort();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final filtered = _level == null
-        ? widget.model.offers
-        : widget.model.offers
-            .where((o) => o.minTraderLevel == _level)
-            .toList();
-
-    return TradeScrollView(
-      offersCount: widget.model.offers.length,
-      bartersCount: widget.model.barters.length,
-      showTabBar: widget.showTabBar,
-      levels: _levels,
-      selectedLevel: _level,
-      onSelectLevel: (l) => setState(() => _level = l),
-      emptyLabel: 'No offers for this level',
-      itemCount: filtered.length,
-      itemBuilder: (i) => OfferCard(
-        offer: filtered[i],
-        onTap: () => widget.onOpenItem(filtered[i].itemId),
-      ),
-    );
+    return switch (state) {
+      TraderOffersLoaded(:final offers, :final levels, :final selectedLevel) =>
+        TradeScrollView(
+          levels: levels,
+          selectedLevel: selectedLevel,
+          onSelectLevel: (l) =>
+              ref.read(traderOffersProvider(traderId).notifier).selectLevel(l),
+          emptyLabel: 'No offers for this level',
+          itemCount: offers.length,
+          itemBuilder: (i) => OfferCard(
+            offer: offers[i],
+            onTap: () => onOpenItem(offers[i].itemId),
+          ),
+        ),
+      _ => const SizedBox.shrink(),
+    };
   }
 }
