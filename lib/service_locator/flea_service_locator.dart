@@ -4,12 +4,14 @@ import 'package:darkoff/data/mapper/flea_mapper.dart';
 import 'package:darkoff/data/repositories/flea_repository_impl.dart';
 import 'package:darkoff/data/service/darkoff_ql_service.dart';
 import 'package:darkoff/domain/repositories/flea_repository.dart';
+import 'package:darkoff/presentation/features/flea_market/mapper/flea_item_ui_mapper.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
 
 void setupFleaServiceLocator() {
   getIt.registerLazySingleton<FleaMapper>(() => FleaMapper());
+  getIt.registerLazySingleton<FleaItemUiMapper>(() => FleaItemUiMapper());
 
   getIt.registerLazySingleton<FleaRepository>(
     () => FleaRepositoryImpl(
@@ -18,7 +20,6 @@ void setupFleaServiceLocator() {
     ),
   );
 
-  // Cache manager for the home "Price Changes" section.
   getIt.registerLazySingleton<FleaCacheManager>(
     () => FleaCacheManager(
       repository: getIt<FleaRepository>(),

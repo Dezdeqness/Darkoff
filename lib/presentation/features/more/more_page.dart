@@ -18,6 +18,7 @@ class MorePage extends ConsumerWidget {
     return switch (entry) {
       MoreMenuEntry.hideout => () => context.router.push(const HideoutRoute()),
       MoreMenuEntry.traders => () => context.router.push(const TradersRoute()),
+      MoreMenuEntry.fleaMarket => () => context.router.push(const FleaMarketRoute()),
       _ => null,
     };
   }
