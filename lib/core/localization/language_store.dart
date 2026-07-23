@@ -1,5 +1,5 @@
 import 'package:darkoff/core/localization/app_language.dart';
-import 'package:darkoff/data/service/qraphql/schema.graphql.dart';
+import 'package:darkoff/core/localization/language_code.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageStore {
@@ -9,8 +9,8 @@ class LanguageStore {
 
   static const _key = 'app_language';
 
-  Enum$LanguageCode get language => AppLanguage.resolve(_prefs.getString(_key));
+  LanguageCode get language => AppLanguage.resolve(_prefs.getString(_key));
 
-  Future<void> setLanguage(Enum$LanguageCode language) =>
-      _prefs.setString(_key, language.toJson());
+  Future<void> setLanguage(LanguageCode language) =>
+      _prefs.setString(_key, language.code);
 }

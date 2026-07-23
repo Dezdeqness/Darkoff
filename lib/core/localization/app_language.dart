@@ -1,31 +1,29 @@
-import 'package:darkoff/data/service/qraphql/schema.graphql.dart';
+import 'package:darkoff/core/localization/language_code.dart';
 import 'package:flutter/widgets.dart';
 
 class AppLanguage {
   const AppLanguage._();
 
-  static const List<Enum$LanguageCode> supported = [
-    Enum$LanguageCode.en,
-    Enum$LanguageCode.ru,
-    Enum$LanguageCode.de,
-    Enum$LanguageCode.fr,
-    Enum$LanguageCode.es,
-    Enum$LanguageCode.zh,
+  static const List<LanguageCode> supported = [
+    LanguageCode.en,
+    LanguageCode.ru,
+    LanguageCode.de,
+    LanguageCode.fr,
+    LanguageCode.es,
+    LanguageCode.zh,
   ];
 
-  static const Enum$LanguageCode fallback = Enum$LanguageCode.en;
+  static const LanguageCode fallback = LanguageCode.en;
 
   static const List<Locale> supportedUiLocales = [
     Locale('en'),
     Locale('ru'),
   ];
 
-  static Locale toLocale(Enum$LanguageCode language) =>
-      Locale(language.toJson());
+  static Locale toLocale(LanguageCode language) => Locale(language.code);
 
-  static Enum$LanguageCode resolve(String? code) {
-    if (code == null) return fallback;
-    final parsed = Enum$LanguageCode.fromJson(code);
-    return supported.contains(parsed) ? parsed : fallback;
+  static LanguageCode resolve(String? code) {
+    final parsed = LanguageCode.tryParse(code);
+    return (parsed != null && supported.contains(parsed)) ? parsed : fallback;
   }
 }

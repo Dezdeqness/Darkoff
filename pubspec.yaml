@@ -25,7 +25,7 @@ dependencies:
   logger: 2.6.2
   cupertino_icons: 1.0.8
   riverpod_annotation: 3.0.3
-  graphql: 5.2.3
+  http: 1.5.0
   json_annotation: 4.9.0
   cached_network_image: 3.4.1
   drift: 2.31.0
@@ -48,7 +48,6 @@ dev_dependencies:
   json_serializable: 6.11.1
   auto_route_generator: 10.4.0
   flutter_lints: 6.0.0
-  graphql_codegen: 3.0.1
   drift_dev: 2.31.0
 
 flutter:
