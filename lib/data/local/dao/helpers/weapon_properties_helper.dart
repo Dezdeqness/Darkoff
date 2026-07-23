@@ -12,6 +12,7 @@ class WeaponPropertiesHelper {
           'projectileCount': p.projectileCount,
           'fragmentationChance': p.fragmentationChance,
           'ammoType': p.ammoType,
+          'tracer': p.tracer,
         },
       WeaponProperties p => {
           'type': 'weapon',
@@ -96,6 +97,7 @@ class WeaponPropertiesHelper {
           fragmentationChance:
               (json['fragmentationChance'] as num?)?.toDouble(),
           ammoType: json['ammoType'] as String?,
+          tracer: json['tracer'] as bool?,
         ),
       'weapon' => WeaponProperties(
           caliber: json['caliber'] as String?,

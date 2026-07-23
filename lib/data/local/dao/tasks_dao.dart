@@ -1,15 +1,16 @@
-import 'package:darkoff/data/local/dao/task_db_mapper.dart';
+import 'package:darkoff/data/mapper/task_mapper.dart';
 import 'package:darkoff/data/local/database.dart';
+import 'package:darkoff/domain/entities/item_mini_info.dart';
 import 'package:darkoff/domain/entities/task_entity.dart';
 import 'package:drift/drift.dart';
 
 class TasksDao {
-  TasksDao({required AppDatabase db, required TaskDbMapper mapper})
+  TasksDao({required AppDatabase db, required TaskMapper mapper})
       : _db = db,
         _mapper = mapper;
 
   final AppDatabase _db;
-  final TaskDbMapper _mapper;
+  final TaskMapper _mapper;
 
   Future<int> getTaskCount() async {
     final count = _db.tasks.id.count();
@@ -66,11 +67,13 @@ class TasksDao {
   ) async {
     if (traderNormalizedName.isEmpty) return getAllTasks();
 
-    final rows = await (_db.select(_db.tasks)
-          ..where((t) => t.traderNormalizedName.equals(traderNormalizedName))
-          ..orderBy([(t) => OrderingTerm.asc(t.name)]))
-        .get();
-    return _hydrate(rows);
+    final query = _db.select(_db.tasks).join([
+      innerJoin(_db.traders, _db.traders.id.equalsExp(_db.tasks.traderId)),
+    ])
+      ..where(_db.traders.normalizedName.equals(traderNormalizedName))
+      ..orderBy([OrderingTerm.asc(_db.tasks.name)]);
+    final rows = await query.get();
+    return _hydrate(rows.map((r) => r.readTable(_db.tasks)).toList());
   }
 
   Future<TaskEntity?> getTaskById(String id) async {
@@ -150,6 +153,21 @@ class TasksDao {
       (stByTask[s.taskId] ??= []).add(s);
     }
 
+    final traderIds = <String>{
+      ...taskRows.map((t) => t.traderId).whereType<String>(),
+      ...standings.map((s) => s.traderId).whereType<String>(),
+    };
+    final traders = await _tradersByIds(traderIds);
+    final mapNames = await _mapNamesByIds(
+      taskRows.map((t) => t.mapId).whereType<String>().toSet(),
+    );
+    final itemInfo = await _itemMiniByIds(
+      rewardItems.map((r) => r.itemId).toSet(),
+    );
+    final taskNames = await _taskNamesByIds(
+      prerequisites.map((p) => p.prerequisiteTaskId).toSet(),
+    );
+
     return taskRows
         .map(
           (row) => _mapper.toTaskEntity(
@@ -158,8 +176,50 @@ class TasksDao {
             prerequisites: preByTask[row.id] ?? const [],
             rewardItems: riByTask[row.id] ?? const [],
             rewardStanding: stByTask[row.id] ?? const [],
+            trader: row.traderId == null ? null : traders[row.traderId],
+            mapName: row.mapId == null ? null : mapNames[row.mapId],
+            itemInfo: itemInfo,
+            taskNames: taskNames,
+            traders: traders,
           ),
         )
         .toList();
+  }
+
+  Future<Map<String, Trader>> _tradersByIds(Set<String> ids) async {
+    if (ids.isEmpty) return const {};
+    final rows =
+        await (_db.select(_db.traders)..where((t) => t.id.isIn(ids))).get();
+    return {for (final r in rows) r.id: r};
+  }
+
+  Future<Map<String, String>> _mapNamesByIds(Set<String> ids) async {
+    if (ids.isEmpty) return const {};
+    final rows =
+        await (_db.select(_db.maps)..where((t) => t.id.isIn(ids))).get();
+    return {for (final r in rows) r.id: r.name};
+  }
+
+  Future<Map<String, String>> _taskNamesByIds(Set<String> ids) async {
+    if (ids.isEmpty) return const {};
+    final rows =
+        await (_db.select(_db.tasks)..where((t) => t.id.isIn(ids))).get();
+    return {for (final r in rows) r.id: r.name};
+  }
+
+  Future<Map<String, ItemMiniInfo>> _itemMiniByIds(Set<String> ids) async {
+    if (ids.isEmpty) return const {};
+    final rows =
+        await (_db.select(_db.items)..where((t) => t.id.isIn(ids))).get();
+    return {
+      for (final r in rows)
+        r.id: ItemMiniInfo(
+          id: r.id,
+          name: r.name,
+          shortName: r.shortName,
+          iconLink: r.iconLink,
+          price: r.avg24hPrice,
+        ),
+    };
   }
 }

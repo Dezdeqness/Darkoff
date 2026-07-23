@@ -8,10 +8,25 @@ class MarketSnapshotDao {
   final AppDatabase _db;
 
   Future<List<MarketItemEntity>> getAll() async {
-    final rows = await (_db.select(_db.marketSnapshotItems)
-          ..orderBy([(t) => OrderingTerm.asc(t.position)]))
-        .get();
-    return rows.map(_toEntity).toList();
+    final query = _db.select(_db.marketSnapshotItems).join([
+      leftOuterJoin(
+        _db.items,
+        _db.items.id.equalsExp(_db.marketSnapshotItems.id),
+      ),
+    ])..orderBy([OrderingTerm.asc(_db.marketSnapshotItems.position)]);
+    final rows = await query.get();
+    return rows.map((row) {
+      final snap = row.readTable(_db.marketSnapshotItems);
+      final item = row.readTableOrNull(_db.items);
+      return MarketItemEntity(
+        id: snap.id,
+        name: item?.name ?? item?.shortName ?? snap.id,
+        shortName: item?.shortName ?? item?.name ?? snap.id,
+        avg24hPrice: snap.avg24hPrice,
+        lastLowPrice: snap.lastLowPrice,
+        changeLast48hPercent: snap.changeLast48hPercent,
+      );
+    }).toList();
   }
 
   Future<void> upsertAll(List<MarketItemEntity> items) async {
@@ -28,25 +43,12 @@ class MarketSnapshotDao {
 
   Future<void> deleteByIds(List<String> ids) async {
     if (ids.isEmpty) return;
-    await (_db.delete(_db.marketSnapshotItems)
-          ..where((t) => t.id.isIn(ids)))
-        .go();
+    await (_db.delete(_db.marketSnapshotItems)..where((t) => t.id.isIn(ids))).go();
   }
-
-  MarketItemEntity _toEntity(MarketSnapshotItem row) => MarketItemEntity(
-        id: row.id,
-        name: row.name,
-        shortName: row.shortName,
-        avg24hPrice: row.avg24hPrice,
-        lastLowPrice: row.lastLowPrice,
-        changeLast48hPercent: row.changeLast48hPercent,
-      );
 
   MarketSnapshotItemsCompanion _toCompanion(MarketItemEntity e, int position) =>
       MarketSnapshotItemsCompanion.insert(
         id: e.id,
-        name: e.name,
-        shortName: e.shortName,
         avg24hPrice: Value(e.avg24hPrice),
         lastLowPrice: Value(e.lastLowPrice),
         changeLast48hPercent: Value(e.changeLast48hPercent),

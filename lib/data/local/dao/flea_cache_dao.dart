@@ -7,14 +7,31 @@ class FleaCacheDao {
 
   final AppDatabase _db;
 
-  Future<List<FleaItemEntity>> getAll({String? category}) async {
-    final query = _db.select(_db.fleaCacheItems)
-      ..orderBy([(t) => OrderingTerm.asc(t.name)]);
-    if (category != null && category.isNotEmpty) {
-      query.where((t) => t.categoryName.equals(category));
-    }
+  Future<List<FleaItemEntity>> getAll() async {
+    final query = _db.select(_db.fleaCacheItems).join([
+      leftOuterJoin(
+        _db.items,
+        _db.items.id.equalsExp(_db.fleaCacheItems.id),
+      ),
+    ])..orderBy([OrderingTerm.asc(_db.items.name)]);
+
     final rows = await query.get();
-    return rows.map(_toEntity).toList();
+    return rows.map((row) {
+      final cache = row.readTable(_db.fleaCacheItems);
+      final item = row.readTableOrNull(_db.items);
+      return FleaItemEntity(
+        id: cache.id,
+        name: item?.name ?? item?.shortName ?? cache.id,
+        shortName: item?.shortName ?? item?.name ?? cache.id,
+        iconLink: item?.iconLink,
+        avgPrice: cache.avgPrice,
+        low24hPrice: cache.low24hPrice,
+        high24hPrice: cache.high24hPrice,
+        changeLast48h: cache.changeLast48h,
+        changeLast48hPercent: cache.changeLast48hPercent,
+        categoryName: cache.categoryName,
+      );
+    }).toList();
   }
 
   Future<void> upsertAll(List<FleaItemEntity> items) async {
@@ -32,25 +49,9 @@ class FleaCacheDao {
     await (_db.delete(_db.fleaCacheItems)..where((t) => t.id.isIn(ids))).go();
   }
 
-  FleaItemEntity _toEntity(FleaCacheItem row) => FleaItemEntity(
-        id: row.id,
-        name: row.name,
-        shortName: row.shortName,
-        iconLink: row.iconLink,
-        avgPrice: row.avgPrice,
-        low24hPrice: row.low24hPrice,
-        high24hPrice: row.high24hPrice,
-        changeLast48h: row.changeLast48h,
-        changeLast48hPercent: row.changeLast48hPercent,
-        categoryName: row.categoryName,
-      );
-
   FleaCacheItemsCompanion _toCompanion(FleaItemEntity e) =>
       FleaCacheItemsCompanion.insert(
         id: e.id,
-        name: e.name,
-        shortName: e.shortName,
-        iconLink: Value(e.iconLink),
         avgPrice: Value(e.avgPrice),
         low24hPrice: Value(e.low24hPrice),
         high24hPrice: Value(e.high24hPrice),

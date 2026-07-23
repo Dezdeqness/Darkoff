@@ -1,17 +1,24 @@
-import 'package:darkoff/data/local/dao/item_db_mapper.dart';
+import 'package:darkoff/data/mapper/item_mapper.dart';
 import 'package:darkoff/data/local/database.dart';
+import 'package:darkoff/domain/entities/ammo_entity.dart';
+import 'package:darkoff/domain/entities/contained_item_entity.dart';
+import 'package:darkoff/domain/entities/flea_item_entity.dart';
 import 'package:darkoff/domain/entities/item_category_info.dart';
 import 'package:darkoff/domain/entities/item_detail_entity.dart';
 import 'package:darkoff/domain/entities/item_entity.dart';
+import 'package:darkoff/domain/entities/item_mini_info.dart';
+import 'package:darkoff/domain/entities/key_entity.dart';
+import 'package:darkoff/domain/entities/market_item_entity.dart';
+import 'package:darkoff/domain/entities/trader_entity.dart';
 import 'package:drift/drift.dart';
 
 class ItemsDao {
-  ItemsDao({required AppDatabase db, required ItemDbMapper mapper})
+  ItemsDao({required AppDatabase db, required ItemMapper mapper})
     : _db = db,
       _mapper = mapper;
 
   final AppDatabase _db;
-  final ItemDbMapper _mapper;
+  final ItemMapper _mapper;
 
   Future<void> insertAllItems(List<ItemDetailEntity> items) async {
     await _db.transaction(() async {
@@ -100,6 +107,115 @@ class ItemsDao {
       buyFor: (results[2] as Map<String, List<ItemPriceInfo>>)['buy']!,
       containsItems: results[3] as List<ContainedItem>,
     );
+  }
+
+  Future<Map<String, ItemMiniInfo>> getMiniInfoByIds(Set<String> ids) async {
+    if (ids.isEmpty) return const {};
+    final rows = await (_db.select(
+      _db.items,
+    )..where((t) => t.id.isIn(ids))).get();
+    return {
+      for (final row in rows)
+        row.id: ItemMiniInfo(
+          id: row.id,
+          name: row.name,
+          shortName: row.shortName,
+          iconLink: row.iconLink,
+          price: row.avg24hPrice,
+        ),
+    };
+  }
+
+  Future<List<AmmoEntity>> getAmmo() async {
+    final rows = await (_db.select(_db.items)
+          ..where((t) => t.propertiesType.equals('ItemPropertiesAmmo'))
+          ..orderBy([(t) => OrderingTerm.asc(t.name)]))
+        .get();
+    return rows
+        .map(_mapper.toAmmoEntity)
+        .whereType<AmmoEntity>()
+        .toList();
+  }
+
+  Future<List<KeyEntity>> getKeys() async {
+    final query = _db.select(_db.items).join([
+      leftOuterJoin(
+        _db.categories,
+        _db.categories.id.equalsExp(_db.items.bsgCategoryId),
+      ),
+    ])
+      ..where(_db.items.types.like('%keys%'))
+      ..orderBy([OrderingTerm.asc(_db.items.name)]);
+    final rows = await query.get();
+    return rows
+        .map((r) => _mapper.toKeyEntity(
+              r.readTable(_db.items),
+              r.readTableOrNull(_db.categories)?.name,
+            ))
+        .toList();
+  }
+
+  Future<List<FleaItemEntity>> getFleaItems({int limit = 400}) async {
+    final query = _db.select(_db.items).join([
+      leftOuterJoin(
+        _db.categories,
+        _db.categories.id.equalsExp(_db.items.bsgCategoryId),
+      ),
+    ])
+      ..where(_db.items.avg24hPrice.isBiggerThanValue(0))
+      ..orderBy([OrderingTerm.asc(_db.items.name)])
+      ..limit(limit);
+    final rows = await query.get();
+    return rows
+        .map((r) => _mapper.toFleaEntity(
+              r.readTable(_db.items),
+              r.readTableOrNull(_db.categories)?.name,
+            ))
+        .toList();
+  }
+
+  Future<List<MarketItemEntity>> getMarketItems(List<String> ids) async {
+    if (ids.isEmpty) return const [];
+    final rows = await (_db.select(
+      _db.items,
+    )..where((t) => t.id.isIn(ids))).get();
+    final byId = {for (final r in rows) r.id: r};
+    return [
+      for (final id in ids)
+        if (byId[id] != null) _mapper.toMarketEntity(byId[id]!),
+    ];
+  }
+
+  Future<Map<String, List<TraderOfferEntity>>> getTraderCashOffers() async {
+    final query = _db.select(_db.itemPrices).join([
+      innerJoin(_db.items, _db.items.id.equalsExp(_db.itemPrices.itemId)),
+    ])
+      ..where(_db.itemPrices.priceDirection.equals('buy') &
+          _db.itemPrices.traderId.isNotNull());
+    final rows = await query.get();
+
+    final result = <String, List<TraderOfferEntity>>{};
+    for (final r in rows) {
+      final price = r.readTable(_db.itemPrices);
+      final item = r.readTable(_db.items);
+      (result[price.traderId!] ??= []).add(
+        TraderOfferEntity(
+          item: ContainedItemEntity(
+            id: item.id,
+            name: item.name ?? item.shortName ?? '',
+            shortName: item.shortName ?? '',
+            iconLink: item.iconLink,
+            price: item.avg24hPrice,
+            count: 1,
+          ),
+          minTraderLevel: price.minTraderLevel,
+          price: price.price,
+          priceRUB: price.priceRUB,
+          currency: price.currency,
+        ),
+      );
+    }
+    return result;
   }
 
   Future<int> getItemCount() async {
@@ -250,20 +366,42 @@ class ItemsDao {
   }
 
   Future<Map<String, List<ItemPriceInfo>>> _fetchPrices(String itemId) async {
-    final query = _db.select(_db.itemPrices)
-      ..where((t) => t.itemId.equals(itemId));
-    final rows = await query.get();
+    final rows = await (_db.select(_db.itemPrices)
+          ..where((t) => t.itemId.equals(itemId)))
+        .get();
+
+    final traders = await _tradersByIds(
+      rows.map((r) => r.traderId).whereType<String>().toSet(),
+    );
+    final taskNames = await _taskNamesByIds(
+      rows.map((r) => r.taskUnlockId).whereType<String>().toSet(),
+    );
+
+    ItemPriceInfo toInfo(ItemPrice r) => _mapper.toPriceInfo(
+          r,
+          trader: traders[r.traderId],
+          taskUnlockName: taskNames[r.taskUnlockId],
+        );
 
     return {
-      'sell': rows
-          .where((r) => r.priceDirection == 'sell')
-          .map(_mapper.toPriceInfo)
-          .toList(),
-      'buy': rows
-          .where((r) => r.priceDirection == 'buy')
-          .map(_mapper.toPriceInfo)
-          .toList(),
+      'sell':
+          rows.where((r) => r.priceDirection == 'sell').map(toInfo).toList(),
+      'buy': rows.where((r) => r.priceDirection == 'buy').map(toInfo).toList(),
     };
+  }
+
+  Future<Map<String, Trader>> _tradersByIds(Set<String> ids) async {
+    if (ids.isEmpty) return const {};
+    final rows =
+        await (_db.select(_db.traders)..where((t) => t.id.isIn(ids))).get();
+    return {for (final r in rows) r.id: r};
+  }
+
+  Future<Map<String, String>> _taskNamesByIds(Set<String> ids) async {
+    if (ids.isEmpty) return const {};
+    final rows =
+        await (_db.select(_db.tasks)..where((t) => t.id.isIn(ids))).get();
+    return {for (final r in rows) r.id: r.name};
   }
 
   Future<List<ContainedItem>> _fetchContainedItems(String itemId) async {

@@ -51,6 +51,25 @@ class Categories extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+class Traders extends Table {
+  TextColumn get id => text()();
+  TextColumn get name => text()();
+  TextColumn get normalizedName => text()();
+  TextColumn get imageLink => text().nullable()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+@DataClassName('MapRef')
+class Maps extends Table {
+  TextColumn get id => text()();
+  TextColumn get name => text()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 class ItemCategories extends Table {
   TextColumn get itemId => text().references(Items, #id)();
   TextColumn get categoryId => text().references(Categories, #id)();
@@ -74,14 +93,9 @@ class ItemPrices extends Table {
   IntColumn get price => integer()();
   TextColumn get currency => text()();
   IntColumn get priceRUB => integer().nullable()();
-  TextColumn get vendorName => text()();
-  TextColumn get vendorNormalizedName => text().nullable()();
-  TextColumn get vendorTypename => text().nullable()();
   TextColumn get traderId => text().nullable()();
   IntColumn get minTraderLevel => integer().nullable()();
   TextColumn get taskUnlockId => text().nullable()();
-  TextColumn get taskUnlockName => text().nullable()();
-  TextColumn get taskUnlockNormalizedName => text().nullable()();
   TextColumn get requirementsJson => text().nullable()();
 }
 
@@ -97,10 +111,8 @@ class ItemContainedItems extends Table {
 class Tasks extends Table {
   TextColumn get id => text()();
   TextColumn get name => text()();
-  TextColumn get traderName => text()();
-  TextColumn get traderNormalizedName => text()();
-  TextColumn get traderImageLink => text().nullable()();
-  TextColumn get mapName => text().nullable()();
+  TextColumn get traderId => text().nullable()();
+  TextColumn get mapId => text().nullable()();
   BoolColumn get kappaRequired =>
       boolean().withDefault(const Constant(false))();
   IntColumn get experience => integer().withDefault(const Constant(0))();
@@ -124,31 +136,24 @@ class TaskPrerequisites extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get taskId => text().references(Tasks, #id)();
   TextColumn get prerequisiteTaskId => text()();
-  TextColumn get prerequisiteTaskName => text()();
 }
 
 class TaskRewardItems extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get taskId => text().references(Tasks, #id)();
   TextColumn get itemId => text()();
-  TextColumn get name => text()();
-  TextColumn get shortName => text()();
-  TextColumn get iconLink => text().nullable()();
-  IntColumn get price => integer().nullable()();
   IntColumn get count => integer().withDefault(const Constant(1))();
 }
 
 class TaskRewardStandings extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get taskId => text().references(Tasks, #id)();
-  TextColumn get traderName => text()();
+  TextColumn get traderId => text().nullable()();
   RealColumn get standing => real()();
 }
 
 class MarketSnapshotItems extends Table {
   TextColumn get id => text()();
-  TextColumn get name => text()();
-  TextColumn get shortName => text()();
   IntColumn get avg24hPrice => integer().nullable()();
   IntColumn get lastLowPrice => integer().nullable()();
   RealColumn get changeLast48hPercent => real().nullable()();
@@ -160,9 +165,6 @@ class MarketSnapshotItems extends Table {
 
 class FleaCacheItems extends Table {
   TextColumn get id => text()();
-  TextColumn get name => text()();
-  TextColumn get shortName => text()();
-  TextColumn get iconLink => text().nullable()();
   IntColumn get avgPrice => integer().nullable()();
   IntColumn get low24hPrice => integer().nullable()();
   IntColumn get high24hPrice => integer().nullable()();
@@ -202,6 +204,8 @@ class HideoutTrackedStations extends Table {
 @DriftDatabase(tables: [
   Items,
   Categories,
+  Traders,
+  Maps,
   ItemCategories,
   ItemHandbookCategories,
   ItemPrices,
@@ -220,8 +224,10 @@ class HideoutTrackedStations extends Table {
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
+  AppDatabase.forTesting(super.executor);
+
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -235,6 +241,24 @@ class AppDatabase extends _$AppDatabase {
             await migrator.createTable(hideoutOwnedItems);
             await migrator.createTable(hideoutBuiltLevels);
             await migrator.createTable(hideoutTrackedStations);
+          }
+          if (from < 4) {
+            await migrator.createTable(traders);
+            await migrator.createTable(maps);
+            await migrator.deleteTable(tasks.actualTableName);
+            await migrator.createTable(tasks);
+            await migrator.deleteTable(taskPrerequisites.actualTableName);
+            await migrator.createTable(taskPrerequisites);
+            await migrator.deleteTable(taskRewardItems.actualTableName);
+            await migrator.createTable(taskRewardItems);
+            await migrator.deleteTable(taskRewardStandings.actualTableName);
+            await migrator.createTable(taskRewardStandings);
+            await migrator.deleteTable(itemPrices.actualTableName);
+            await migrator.createTable(itemPrices);
+            await migrator.deleteTable(marketSnapshotItems.actualTableName);
+            await migrator.createTable(marketSnapshotItems);
+            await migrator.deleteTable(fleaCacheItems.actualTableName);
+            await migrator.createTable(fleaCacheItems);
           }
         },
       );
