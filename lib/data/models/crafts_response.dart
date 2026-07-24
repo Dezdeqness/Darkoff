@@ -5,10 +5,10 @@ part 'crafts_response.g.dart';
 
 @JsonSerializable(createToJson: false)
 class CraftsResponse {
-  const CraftsResponse({this.data = const {}});
+  const CraftsResponse({this.data = const []});
 
   factory CraftsResponse.fromJson(Map<String, dynamic> json) =>
       _$CraftsResponseFromJson(json);
 
-  final Map<String, CraftApi> data;
+  final List<CraftApi> data;
 }

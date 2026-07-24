@@ -1,48 +1,14 @@
-import 'package:darkoff/data/mapper/trader_mapper.dart';
-import 'package:darkoff/data/service/darkoff_ql_service.dart';
-import 'package:darkoff/data/service/qraphql/queries/traders.graphql.dart';
-import 'package:darkoff/data/service/qraphql/schema.graphql.dart';
+import 'package:darkoff/data/datasources/traders/traders_data_source.dart';
 import 'package:darkoff/domain/entities/trader_entity.dart';
 import 'package:darkoff/domain/repositories/traders_repository.dart';
-import 'package:result_dart/functions.dart';
 import 'package:result_dart/result_dart.dart';
 
 class TradersRepositoryImpl implements TradersRepository {
-  const TradersRepositoryImpl({
-    required DarkoffQLService service,
-    required TraderMapper mapper,
-  })  : _service = service,
-        _mapper = mapper;
+  const TradersRepositoryImpl({required TradersDataSource dataSource})
+    : _dataSource = dataSource;
 
-  final DarkoffQLService _service;
-  final TraderMapper _mapper;
+  final TradersDataSource _dataSource;
 
   @override
-  Future<Result<List<TraderEntity>>> getTraders() async {
-    try {
-      final result = await _service.getTraders(
-        gameMode: Enum$GameMode.pve,
-      );
-
-      if (result.hasException) {
-        return failureOf(Exception(result.exception.toString()));
-      }
-
-      final data = result.data;
-      if (data == null) {
-        return failureOf(Exception('Empty response'));
-      }
-
-      final parsed = Query$DarkoffTraders.fromJson(data);
-
-      return successOf(
-        parsed.traders
-            .whereType<Query$DarkoffTraders$traders>()
-            .map((t) => _mapper.fromGraphql(t))
-            .toList(),
-      );
-    } catch (e) {
-      return failureOf(Exception(e.toString()));
-    }
-  }
+  Future<Result<List<TraderEntity>>> getTraders() => _dataSource.getTraders();
 }

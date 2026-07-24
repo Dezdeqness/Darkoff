@@ -102,6 +102,7 @@ class AmmoProperties extends ItemProperties {
   final int? projectileCount;
   final double? fragmentationChance;
   final String? ammoType;
+  final bool? tracer;
 
   const AmmoProperties({
     this.caliber,
@@ -111,6 +112,7 @@ class AmmoProperties extends ItemProperties {
     this.projectileCount,
     this.fragmentationChance,
     this.ammoType,
+    this.tracer,
   });
 }
 
@@ -124,7 +126,6 @@ class ArmorProperties extends ItemProperties {
   final double? speedPenalty;
   final double? turnPenalty;
   final String? armorType;
-  // armorSlots stored as JSON — deeply nested polymorphic data
   final String? armorSlotsJson;
 
   const ArmorProperties({

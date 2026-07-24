@@ -31,9 +31,7 @@ class HideoutProgressDao {
     required bool tracked,
   }) async {
     if (tracked) {
-      await _db.into(_db.hideoutTrackedStations).insertOnConflictUpdate(
-            HideoutTrackedStationsCompanion.insert(stationId: stationId),
-          );
+      await _db.into(_db.hideoutTrackedStations).insertOnConflictUpdate(HideoutTrackedStationsCompanion.insert(stationId: stationId));
     } else {
       await (_db.delete(_db.hideoutTrackedStations)
             ..where((t) => t.stationId.equals(stationId)))

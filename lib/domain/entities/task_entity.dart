@@ -9,7 +9,9 @@ abstract class TaskEntity with _$TaskEntity {
     required String name,
     required String traderName,
     required String traderNormalizedName,
+    String? traderId,
     String? traderImageLink,
+    String? mapId,
     String? mapName,
     @Default(false) bool kappaRequired,
     required int experience,
@@ -56,6 +58,7 @@ abstract class TaskRewardItemEntity with _$TaskRewardItemEntity {
 abstract class TaskRewardStandingEntity with _$TaskRewardStandingEntity {
   const factory TaskRewardStandingEntity({
     required String traderName,
+    String? traderId,
     required double standing,
   }) = _TaskRewardStandingEntity;
 }

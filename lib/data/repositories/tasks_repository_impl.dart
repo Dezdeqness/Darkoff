@@ -1,8 +1,5 @@
+import 'package:darkoff/data/datasources/tasks/tasks_data_source.dart';
 import 'package:darkoff/data/local/dao/tasks_dao.dart';
-import 'package:darkoff/data/mapper/task_mapper.dart';
-import 'package:darkoff/data/service/darkoff_ql_service.dart';
-import 'package:darkoff/data/service/qraphql/queries/tasks.graphql.dart';
-import 'package:darkoff/data/service/qraphql/schema.graphql.dart';
 import 'package:darkoff/domain/entities/task_entity.dart';
 import 'package:darkoff/domain/repositories/tasks_repository.dart';
 import 'package:result_dart/functions.dart';
@@ -10,50 +7,24 @@ import 'package:result_dart/result_dart.dart';
 
 class TasksRepositoryImpl implements TasksRepository {
   const TasksRepositoryImpl({
-    required DarkoffQLService service,
-    required TaskMapper mapper,
+    required TasksDataSource dataSource,
     required TasksDao dao,
-  })  : _service = service,
-        _mapper = mapper,
-        _dao = dao;
+  }) : _dataSource = dataSource,
+       _dao = dao;
 
-  final DarkoffQLService _service;
-  final TaskMapper _mapper;
+  final TasksDataSource _dataSource;
   final TasksDao _dao;
 
   @override
-  Future<Result<List<TaskEntity>>> getRemoteTasks() async {
-    try {
-      final result = await _service.getTasks(
-        gameMode: Enum$GameMode.pve,
-      );
-
-      final data = result.data;
-      if (data == null) {
-        return failureOf(
-          Exception(result.exception?.toString() ?? 'Empty response'),
-        );
-      }
-
-      return successOf(
-        Query$DarkoffTasks.fromJson(data)
-            .tasks
-            .whereType<Query$DarkoffTasks$tasks>()
-            .map((t) => _mapper.fromGraphql(t))
-            .toList(),
-      );
-    } catch (e) {
-      return failureOf(Exception(e.toString()));
-    }
-  }
+  Future<Result<List<TaskEntity>>> getRemoteTasks() =>
+      _dataSource.getRemoteTasks();
 
   @override
   Future<Result<List<TaskEntity>>> getTasks({
     String traderNormalizedName = '',
   }) async {
     try {
-      final tasks = await _dao.getTasksByTrader(traderNormalizedName);
-      return successOf(tasks);
+      return successOf(await _dao.getTasksByTrader(traderNormalizedName));
     } catch (e) {
       return failureOf(Exception(e.toString()));
     }
@@ -62,8 +33,7 @@ class TasksRepositoryImpl implements TasksRepository {
   @override
   Future<Result<List<TaskEntity>>> searchTasks({String query = ''}) async {
     try {
-      final tasks = await _dao.searchTasks(query: query);
-      return successOf(tasks);
+      return successOf(await _dao.searchTasks(query: query));
     } catch (e) {
       return failureOf(Exception(e.toString()));
     }
@@ -73,9 +43,7 @@ class TasksRepositoryImpl implements TasksRepository {
   Future<Result<TaskEntity>> getTask(String id) async {
     try {
       final task = await _dao.getTaskById(id);
-      if (task == null) {
-        return failureOf(Exception('Task not found'));
-      }
+      if (task == null) return failureOf(Exception('Task not found'));
       return successOf(task);
     } catch (e) {
       return failureOf(Exception(e.toString()));

@@ -121,6 +121,8 @@ class StimEffectApi {
   factory StimEffectApi.fromJson(Map<String, dynamic> json) =>
       _$StimEffectApiFromJson(json);
 
+  Map<String, dynamic> toJson() => _$StimEffectApiToJson(this);
+
   final String? type;
   final num? chance;
   final num? delay;

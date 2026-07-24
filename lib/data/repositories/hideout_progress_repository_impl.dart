@@ -3,8 +3,7 @@ import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
 import 'package:darkoff/domain/repositories/hideout_progress_repository.dart';
 
 class HideoutProgressRepositoryImpl implements HideoutProgressRepository {
-  HideoutProgressRepositoryImpl({required HideoutProgressDao dao})
-      : _dao = dao;
+  HideoutProgressRepositoryImpl({required HideoutProgressDao dao}) : _dao = dao;
 
   final HideoutProgressDao _dao;
 
@@ -17,26 +16,21 @@ class HideoutProgressRepositoryImpl implements HideoutProgressRepository {
     required int level,
     required String itemId,
     required int count,
-  }) =>
-      _dao.setOwnedCount(
-        stationId: stationId,
-        level: level,
-        itemId: itemId,
-        count: count,
-      );
+  }) => _dao.setOwnedCount(
+    stationId: stationId,
+    level: level,
+    itemId: itemId,
+    count: count,
+  );
 
   @override
   Future<void> setLevelBuilt({
     required String stationId,
     required int level,
     required bool built,
-  }) =>
-      _dao.setLevelBuilt(stationId: stationId, level: level, built: built);
+  }) => _dao.setLevelBuilt(stationId: stationId, level: level, built: built);
 
   @override
-  Future<void> setTracked({
-    required String stationId,
-    required bool tracked,
-  }) =>
+  Future<void> setTracked({required String stationId, required bool tracked}) =>
       _dao.setTracked(stationId: stationId, tracked: tracked);
 }
