@@ -1,9 +1,12 @@
+import 'package:darkoff/domain/entities/boss_loot_item_entity.dart';
 import 'package:darkoff/domain/entities/item_detail_entity.dart';
 import 'package:darkoff/domain/entities/item_entity.dart';
 import 'package:result_dart/result_dart.dart';
 
 abstract interface class ItemsRepository {
   Future<Result<List<ItemDetailEntity>>> getItems();
+
+  Future<Result<List<BossLootItemEntity>>> getBossLoot(List<String> ids);
 
   Future<Result<List<ItemEntity>>> getLocalItems({
     List<String> categoryNames = const [],

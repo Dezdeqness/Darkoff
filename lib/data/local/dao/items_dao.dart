@@ -1,6 +1,7 @@
 import 'package:darkoff/data/mapper/item_mapper.dart';
 import 'package:darkoff/data/local/database.dart';
 import 'package:darkoff/domain/entities/ammo_entity.dart';
+import 'package:darkoff/domain/entities/boss_loot_item_entity.dart';
 import 'package:darkoff/domain/entities/contained_item_entity.dart';
 import 'package:darkoff/domain/entities/flea_item_entity.dart';
 import 'package:darkoff/domain/entities/item_category_info.dart';
@@ -172,6 +173,43 @@ class ItemsDao {
               r.readTableOrNull(_db.categories)?.name,
             ))
         .toList();
+  }
+
+  Future<List<BossLootItemEntity>> getBossLootItems(List<String> ids) async {
+    if (ids.isEmpty) return const [];
+
+    final itemRows = await (_db.select(
+      _db.items,
+    )..where((t) => t.id.isIn(ids))).get();
+
+    // Best "sell to trader" offer per item (player→trader = 'buy' direction).
+    final priceRows =
+        await (_db.select(_db.itemPrices)..where(
+              (t) =>
+                  t.itemId.isIn(ids) &
+                  t.priceDirection.equals('buy') &
+                  t.traderId.isNotNull(),
+            ))
+            .get();
+
+    final bestTrader = <String, int>{};
+    for (final p in priceRows) {
+      final rub = p.priceRUB ?? 0;
+      if (rub > (bestTrader[p.itemId] ?? 0)) bestTrader[p.itemId] = rub;
+    }
+
+    final byId = {for (final r in itemRows) r.id: r};
+    return [
+      for (final id in ids)
+        if (byId[id] case final row?)
+          BossLootItemEntity(
+            id: row.id,
+            name: row.name ?? row.shortName ?? '',
+            iconLink: row.iconLink,
+            fleaPrice: row.avg24hPrice,
+            traderPrice: bestTrader[row.id],
+          ),
+    ];
   }
 
   Future<List<MarketItemEntity>> getMarketItems(List<String> ids) async {

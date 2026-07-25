@@ -91,6 +91,7 @@ class MobApi {
     this.imagePortraitLink,
     this.imagePosterLink,
     this.health = const [],
+    this.items = const [],
   });
 
   factory MobApi.fromJson(Map<String, dynamic> json) => _$MobApiFromJson(json);
@@ -101,15 +102,38 @@ class MobApi {
   final String? imagePortraitLink;
   final String? imagePosterLink;
   final List<MobHealthApi> health;
+  final List<MobLootApi> items;
+}
+
+@JsonSerializable(createToJson: false)
+class MobLootApi {
+  const MobLootApi({this.id, this.attributes});
+
+  factory MobLootApi.fromJson(Map<String, dynamic> json) =>
+      _$MobLootApiFromJson(json);
+
+  final String? id;
+  final MobLootAttributesApi? attributes;
+}
+
+@JsonSerializable(createToJson: false)
+class MobLootAttributesApi {
+  const MobLootAttributesApi({this.prevalence});
+
+  factory MobLootAttributesApi.fromJson(Map<String, dynamic> json) =>
+      _$MobLootAttributesApiFromJson(json);
+
+  final num? prevalence;
 }
 
 @JsonSerializable(createToJson: false)
 class MobHealthApi {
-  const MobHealthApi({this.max, this.bodyPart});
+  const MobHealthApi({this.id, this.max, this.bodyPart});
 
   factory MobHealthApi.fromJson(Map<String, dynamic> json) =>
       _$MobHealthApiFromJson(json);
 
+  final String? id;
   final int? max;
   final String? bodyPart;
 }

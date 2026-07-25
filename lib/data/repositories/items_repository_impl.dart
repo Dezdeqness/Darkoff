@@ -1,5 +1,6 @@
 import 'package:darkoff/data/datasources/items/items_data_source.dart';
 import 'package:darkoff/data/local/dao/items_dao.dart';
+import 'package:darkoff/domain/entities/boss_loot_item_entity.dart';
 import 'package:darkoff/domain/entities/item_detail_entity.dart';
 import 'package:darkoff/domain/entities/item_entity.dart';
 import 'package:darkoff/domain/repositories/items_repository.dart';
@@ -18,6 +19,17 @@ class ItemsRepositoryImpl implements ItemsRepository {
 
   @override
   Future<Result<List<ItemDetailEntity>>> getItems() => _dataSource.getItems();
+
+  @override
+  Future<Result<List<BossLootItemEntity>>> getBossLoot(
+    List<String> ids,
+  ) async {
+    try {
+      return successOf(await _dao.getBossLootItems(ids));
+    } catch (e) {
+      return failureOf(Exception(e.toString()));
+    }
+  }
 
   @override
   Future<Result<ItemDetailEntity>> getItemDetail(String id) =>
