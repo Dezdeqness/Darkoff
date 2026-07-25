@@ -7,6 +7,19 @@ import 'package:darkoff/domain/entities/item_mini_info.dart';
 import 'package:darkoff/domain/entities/trader_entity.dart';
 
 class TraderMapper {
+  List<TraderEntity> toReferences(
+    Map<String, TraderDumpApi> traders,
+    Map<String, String> traderLoc,
+  ) => [
+    for (final t in traders.values)
+      TraderEntity(
+        id: t.id,
+        name: traderLoc[t.name] ?? t.name ?? t.id,
+        normalizedName: t.normalizedName ?? '',
+        imageLink: t.imageLink,
+      ),
+  ];
+
   TraderEntity map(
     TraderDumpApi trader, {
     required Map<String, String> traderLoc,

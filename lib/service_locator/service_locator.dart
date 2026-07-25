@@ -1,14 +1,18 @@
-import 'package:darkoff/core/config/app_config.dart';
+import 'package:darkoff/service_locator/boss_service_locator.dart';
+import 'package:darkoff/service_locator/barters_service_locator.dart';
 import 'package:darkoff/service_locator/ammo_service_locator.dart';
 import 'package:darkoff/service_locator/categories_service_locator.dart';
-import 'package:darkoff/service_locator/database_service_locator.dart'
-    show setupDatabaseServiceLocator, setupPreloadServiceLocator;
+import 'package:darkoff/service_locator/crafts_service_locator.dart';
+import 'package:darkoff/service_locator/keys_service_locator.dart';
+import 'package:darkoff/service_locator/database_service_locator.dart';
 import 'package:darkoff/service_locator/hideout_service_locator.dart';
-import 'package:darkoff/service_locator/ammo_service_locator.dart';
 import 'package:darkoff/service_locator/flea_service_locator.dart';
-import 'package:darkoff/service_locator/graphql_service_locator.dart';
+import 'package:darkoff/service_locator/localization_service_locator.dart';
+import 'package:darkoff/service_locator/network_service_locator.dart';
 import 'package:darkoff/service_locator/home_service_locator.dart';
+import 'package:darkoff/service_locator/maps_service_locator.dart';
 import 'package:darkoff/service_locator/items_service_locator.dart';
+import 'package:darkoff/service_locator/preload_service_locator.dart';
 import 'package:darkoff/service_locator/traders_service_locator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:darkoff/service_locator/tasks_service_locator.dart';
@@ -24,7 +28,7 @@ Future<void> setupServiceLocator() async {
   final prefs = await SharedPreferences.getInstance();
   getIt.registerSingleton<LanguageStore>(LanguageStore(prefs));
 
-  await setupGraphQLServiceLocator();
+  await setupNetworkServiceLocator();
 
   setupDatabaseServiceLocator();
   setupCategoriesServiceLocator();
@@ -34,8 +38,12 @@ Future<void> setupServiceLocator() async {
   setupFleaServiceLocator();
   setupTradersServiceLocator();
   setupHomeServiceLocator();
-
+  setupMapsServiceLocator();
+  setupBartersServiceLocator();
+  setupCraftsServiceLocator();
+  setupBossServiceLocator();
+  setupKeysServiceLocator();
   setupPreloadServiceLocator();
+  setupLocalizationServiceLocator();
   setupTasksServiceLocator();
-
 }

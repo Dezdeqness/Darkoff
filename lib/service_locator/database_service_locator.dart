@@ -1,33 +1,24 @@
 import 'package:darkoff/data/local/dao/flea_cache_dao.dart';
-import 'package:darkoff/data/local/dao/item_db_mapper.dart';
+import 'package:darkoff/data/mapper/item_mapper.dart';
 import 'package:darkoff/data/local/dao/items_dao.dart';
 import 'package:darkoff/data/local/dao/market_snapshot_dao.dart';
-import 'package:darkoff/data/local/dao/task_db_mapper.dart';
+import 'package:darkoff/data/local/dao/reference_dao.dart';
+import 'package:darkoff/data/mapper/task_mapper.dart';
 import 'package:darkoff/data/local/dao/tasks_dao.dart';
 import 'package:darkoff/data/local/database.dart';
-import 'package:darkoff/data/service/preload_service.dart';
-import 'package:darkoff/domain/repositories/items_repository.dart';
-import 'package:darkoff/domain/repositories/tasks_repository.dart';
 import 'package:get_it/get_it.dart';
-import 'package:logger/logger.dart';
 
 final getIt = GetIt.instance;
 
 void setupDatabaseServiceLocator() {
   getIt.registerLazySingleton<AppDatabase>(() => AppDatabase());
-  getIt.registerLazySingleton<ItemDbMapper>(() => ItemDbMapper());
+  getIt.registerLazySingleton<ItemMapper>(() => ItemMapper());
   getIt.registerLazySingleton<ItemsDao>(
-    () => ItemsDao(
-      db: getIt<AppDatabase>(),
-      mapper: getIt<ItemDbMapper>(),
-    ),
+    () => ItemsDao(db: getIt<AppDatabase>(), mapper: getIt<ItemMapper>()),
   );
-  getIt.registerLazySingleton<TaskDbMapper>(() => TaskDbMapper());
+  getIt.registerLazySingleton<TaskMapper>(() => TaskMapper());
   getIt.registerLazySingleton<TasksDao>(
-    () => TasksDao(
-      db: getIt<AppDatabase>(),
-      mapper: getIt<TaskDbMapper>(),
-    ),
+    () => TasksDao(db: getIt<AppDatabase>(), mapper: getIt<TaskMapper>()),
   );
   getIt.registerLazySingleton<MarketSnapshotDao>(
     () => MarketSnapshotDao(db: getIt<AppDatabase>()),
@@ -35,16 +26,7 @@ void setupDatabaseServiceLocator() {
   getIt.registerLazySingleton<FleaCacheDao>(
     () => FleaCacheDao(db: getIt<AppDatabase>()),
   );
-}
-
-void setupPreloadServiceLocator() {
-  getIt.registerLazySingleton<PreloadService>(
-    () => PreloadService(
-      repository: getIt<ItemsRepository>(),
-      dao: getIt<ItemsDao>(),
-      tasksRepository: getIt<TasksRepository>(),
-      tasksDao: getIt<TasksDao>(),
-      logger: getIt<Logger>(),
-    ),
+  getIt.registerLazySingleton<ReferenceDao>(
+    () => ReferenceDao(db: getIt<AppDatabase>()),
   );
 }

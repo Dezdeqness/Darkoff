@@ -1,17 +1,15 @@
-import 'dart:async';
-
+import 'package:darkoff/core/config/game_mode.dart';
+import 'package:darkoff/data/datasources/localization/localization_data_source.dart';
 import 'package:darkoff/data/local/dao/items_dao.dart';
+import 'package:darkoff/data/local/dao/reference_dao.dart';
 import 'package:darkoff/data/local/dao/tasks_dao.dart';
-import 'package:darkoff/domain/entities/item_detail_entity.dart';
+import 'package:darkoff/data/mapper/trader_mapper.dart';
+import 'package:darkoff/data/service/http/api/traders_service.dart';
 import 'package:darkoff/domain/entities/task_entity.dart';
 import 'package:darkoff/domain/repositories/items_repository.dart';
 import 'package:darkoff/domain/repositories/tasks_repository.dart';
 import 'package:logger/logger.dart';
-
-const int _batchSize = 3000;
-const int _maxRetries = 3;
-const Duration _retryDelay = Duration(seconds: 2);
-const Duration _requestTimeout = Duration(seconds: 60);
+import 'package:result_dart/result_dart.dart';
 
 class PreloadService {
   PreloadService({
@@ -19,17 +17,29 @@ class PreloadService {
     required ItemsDao dao,
     required TasksRepository tasksRepository,
     required TasksDao tasksDao,
+    required ReferenceDao referenceDao,
+    required TradersService tradersService,
+    required TraderMapper traderMapper,
+    required LocalizationDataSource localization,
     required Logger logger,
-  })  : _repository = repository,
-        _dao = dao,
-        _tasksRepository = tasksRepository,
-        _tasksDao = tasksDao,
-        _logger = logger;
+  }) : _repository = repository,
+       _dao = dao,
+       _tasksRepository = tasksRepository,
+       _tasksDao = tasksDao,
+       _referenceDao = referenceDao,
+       _tradersService = tradersService,
+       _traderMapper = traderMapper,
+       _localization = localization,
+       _logger = logger;
 
   final ItemsRepository _repository;
   final ItemsDao _dao;
   final TasksRepository _tasksRepository;
   final TasksDao _tasksDao;
+  final ReferenceDao _referenceDao;
+  final TradersService _tradersService;
+  final TraderMapper _traderMapper;
+  final LocalizationDataSource _localization;
   final Logger _logger;
 
   Future<bool> hasLocalData() async {
@@ -40,122 +50,57 @@ class PreloadService {
   }
 
   Stream<int> preloadItems() async* {
-    int offset = 0;
-    int totalLoaded = 0;
-    final allItems = <ItemDetailEntity>[];
+    await _loadTraders();
+    yield await _loadItems();
+    final tasks = await _loadTasks();
+    await _loadMapReferences(tasks);
+  }
 
-    while (true) {
-      _logger.i('Fetching batch: offset=$offset, limit=$_batchSize');
-      final items = await _fetchWithRetry(offset: offset);
-
-      if (items == null) {
-        throw Exception('Failed to fetch items after $_maxRetries retries');
-      }
-
-      _logger.i('Received ${items.length} items');
-
-      if (items.isNotEmpty) {
-        allItems.addAll(items);
-        totalLoaded += items.length;
-        _logger.i('Fetched batch, total: $totalLoaded');
-        yield totalLoaded;
-      }
-
-      if (items.length < _batchSize) {
-        break;
-      }
-
-      offset += items.length;
+  Future<void> _loadTraders() async {
+    try {
+      final response = await _tradersService.getTraders(GameMode.pve.apiValue);
+      final traderLoc = await _localization.localize(GameMode.pve, 'traders');
+      await _referenceDao.insertTraders(
+        _traderMapper.toReferences(response.data, traderLoc),
+      );
+    } catch (e) {
+      _logger.w('Failed to preload traders: $e');
     }
+  }
 
-    _logger.i('Inserting $totalLoaded items into database...');
-    await _dao.insertAllItems(allItems);
-    _logger.i('Preload complete: $totalLoaded items loaded');
+  Future<int> _loadItems() async {
+    _logger.i('Fetching items...');
+    final items = _fetch(await _repository.getItems(), 'items');
+    if (items == null) throw Exception('Failed to fetch items');
+    await _dao.insertAllItems(items);
+    _logger.i('Preload complete: ${items.length} items loaded');
+    return items.length;
+  }
 
+  Future<List<TaskEntity>> _loadTasks() async {
     _logger.i('Fetching tasks...');
-    final tasks = await _fetchTasksWithRetry();
-    if (tasks == null) {
-      throw Exception('Failed to fetch tasks after $_maxRetries retries');
-    }
-    _logger.i('Inserting ${tasks.length} tasks into database...');
+    final tasks = _fetch(await _tasksRepository.getRemoteTasks(), 'tasks');
+    if (tasks == null) throw Exception('Failed to fetch tasks');
     await _tasksDao.insertAllTasks(tasks);
     _logger.i('Preload complete: ${tasks.length} tasks loaded');
+    return tasks;
   }
 
-  Future<List<ItemDetailEntity>?> _fetchWithRetry({required int offset}) async {
-    for (int attempt = 1; attempt <= _maxRetries; attempt++) {
-      try {
-        _logger.i('Attempt $attempt: fetching offset=$offset');
-
-        final result = await _repository
-            .getItems(limit: _batchSize, offset: offset)
-            .timeout(_requestTimeout);
-
-        final items = result.fold(
-          (items) => items,
-          (error) {
-            _logger.w('Attempt $attempt: API error: $error');
-            return null;
-          },
-        );
-
-        if (items != null) {
-          return items;
-        }
-
-        if (attempt < _maxRetries) {
-          await Future.delayed(_retryDelay);
-        }
-      } on TimeoutException {
-        _logger.w('Attempt $attempt timed out (offset: $offset)');
-        if (attempt < _maxRetries) {
-          await Future.delayed(_retryDelay);
-        }
-      } catch (e) {
-        _logger.w('Attempt $attempt error: $e');
-        if (attempt < _maxRetries) {
-          await Future.delayed(_retryDelay);
-        }
-      }
+  Future<void> _loadMapReferences(List<TaskEntity> tasks) async {
+    final maps = <String, String>{};
+    for (final task in tasks) {
+      final id = task.mapId;
+      final name = task.mapName;
+      if (id != null && name != null) maps[id] = name;
     }
-    return null;
+    await _referenceDao.insertMaps(maps);
   }
 
-  Future<List<TaskEntity>?> _fetchTasksWithRetry() async {
-    for (int attempt = 1; attempt <= _maxRetries; attempt++) {
-      try {
-        _logger.i('Attempt $attempt: fetching tasks');
-
-        final result =
-            await _tasksRepository.getRemoteTasks().timeout(_requestTimeout);
-
-        final tasks = result.fold(
-          (tasks) => tasks,
-          (error) {
-            _logger.w('Attempt $attempt: tasks API error: $error');
-            return null;
-          },
-        );
-
-        if (tasks != null) {
-          return tasks;
-        }
-
-        if (attempt < _maxRetries) {
-          await Future.delayed(_retryDelay);
-        }
-      } on TimeoutException {
-        _logger.w('Attempt $attempt: tasks fetch timed out');
-        if (attempt < _maxRetries) {
-          await Future.delayed(_retryDelay);
-        }
-      } catch (e) {
-        _logger.w('Attempt $attempt: tasks error: $e');
-        if (attempt < _maxRetries) {
-          await Future.delayed(_retryDelay);
-        }
-      }
-    }
-    return null;
-  }
+  T? _fetch<T extends Object>(Result<T> result, String what) => result.fold(
+    (value) => value,
+    (error) {
+      _logger.w('Failed to fetch $what: $error');
+      return null;
+    },
+  );
 }

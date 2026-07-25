@@ -1,5 +1,5 @@
 import 'package:darkoff/data/local/database.dart';
-import 'package:darkoff/data/models/trader_dump_api.dart';
+import 'package:darkoff/domain/entities/trader_entity.dart';
 import 'package:drift/drift.dart';
 
 class ReferenceDao {
@@ -7,20 +7,17 @@ class ReferenceDao {
 
   final AppDatabase _db;
 
-  Future<void> insertTraders(
-    Map<String, TraderDumpApi> traders,
-    Map<String, String> traderLoc,
-  ) async {
+  Future<void> insertTraders(List<TraderEntity> traders) async {
     await _db.transaction(() async {
       await _db.delete(_db.traders).go();
       await _db.batch((b) {
-        for (final t in traders.values) {
+        for (final t in traders) {
           b.insert(
             _db.traders,
             TradersCompanion.insert(
               id: t.id,
-              name: traderLoc[t.name] ?? t.name ?? t.id,
-              normalizedName: t.normalizedName ?? '',
+              name: t.name,
+              normalizedName: t.normalizedName,
               imageLink: Value(t.imageLink),
             ),
             mode: InsertMode.insertOrReplace,
