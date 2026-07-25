@@ -178,11 +178,12 @@ class ItemsDao {
   Future<List<BossLootItemEntity>> getBossLootItems(List<String> ids) async {
     if (ids.isEmpty) return const [];
 
-    final itemRows = await (_db.select(
-      _db.items,
-    )..where((t) => t.id.isIn(ids))).get();
+    final itemRows =
+        await (_db.select(_db.items)..where(
+              (t) => t.id.isIn(ids) & t.types.like('%mods%').not(),
+            ))
+            .get();
 
-    // Best "sell to trader" offer per item (player→trader = 'buy' direction).
     final priceRows =
         await (_db.select(_db.itemPrices)..where(
               (t) =>

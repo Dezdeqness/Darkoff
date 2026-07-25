@@ -92,6 +92,7 @@ class MobApi {
     this.imagePosterLink,
     this.health = const [],
     this.items = const [],
+    this.equipment = const [],
   });
 
   factory MobApi.fromJson(Map<String, dynamic> json) => _$MobApiFromJson(json);
@@ -103,6 +104,18 @@ class MobApi {
   final String? imagePosterLink;
   final List<MobHealthApi> health;
   final List<MobLootApi> items;
+  final List<MobEquipmentApi> equipment;
+}
+
+@JsonSerializable(createToJson: false)
+class MobEquipmentApi {
+  const MobEquipmentApi({this.item, this.contains = const []});
+
+  factory MobEquipmentApi.fromJson(Map<String, dynamic> json) =>
+      _$MobEquipmentApiFromJson(json);
+
+  final String? item;
+  final List<MobEquipmentApi> contains;
 }
 
 @JsonSerializable(createToJson: false)
