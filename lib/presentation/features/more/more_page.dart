@@ -20,6 +20,7 @@ class MorePage extends ConsumerWidget {
       MoreMenuEntry.traders => () => context.router.push(const TradersRoute()),
       MoreMenuEntry.fleaMarket => () => context.router.push(const FleaMarketRoute()),
       MoreMenuEntry.bosses => () => context.router.push(const BossesRoute()),
+      MoreMenuEntry.ammoChart => () => context.router.push(const AmmoRoute()),
       _ => null,
     };
   }

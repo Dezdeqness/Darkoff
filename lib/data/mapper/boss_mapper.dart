@@ -81,17 +81,38 @@ class BossMapper {
 
   List<BossLootEntity> _loot(MobApi? mob) {
     if (mob == null) return const [];
+
     final byId = <String, double>{};
+
+    for (final id in _flattenEquipment(mob.equipment)) {
+      byId.putIfAbsent(id, () => 0);
+    }
+
     for (final loot in mob.items) {
       final id = loot.id;
       if (id == null) continue;
       final prevalence = loot.attributes?.prevalence?.toDouble() ?? 0;
+      if (prevalence < 1.0) continue;
       byId[id] = prevalence > (byId[id] ?? 0) ? prevalence : byId[id] ?? 0;
     }
+
     return [
       for (final entry in byId.entries)
         BossLootEntity(itemId: entry.key, prevalence: entry.value),
     ];
+  }
+
+  Set<String> _flattenEquipment(List<MobEquipmentApi> nodes) {
+    final ids = <String>{};
+    void walk(List<MobEquipmentApi> ns) {
+      for (final n in ns) {
+        if (n.item != null) ids.add(n.item!);
+        walk(n.contains);
+      }
+    }
+
+    walk(nodes);
+    return ids;
   }
 
   int _totalHealth(MobApi? mob) {

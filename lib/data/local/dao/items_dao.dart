@@ -129,7 +129,7 @@ class ItemsDao {
 
   Future<List<AmmoEntity>> getAmmo() async {
     final rows = await (_db.select(_db.items)
-          ..where((t) => t.propertiesType.equals('ItemPropertiesAmmo'))
+          ..where((t) => t.propertiesType.equals('ammo'))
           ..orderBy([(t) => OrderingTerm.asc(t.name)]))
         .get();
     return rows
