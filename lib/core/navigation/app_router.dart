@@ -40,7 +40,7 @@ class AppRouter extends RootStackRouter {
             AutoRoute(page: ItemDetailRoute.page, path: 'detail'),
           ],
         ),
-        // AutoRoute(page: MapsRoute.page, path: 'maps'),
+        AutoRoute(page: MapsRoute.page, path: 'maps'),
         AutoRoute(
           page: TasksShellRoute.page,
           path: 'tasks',
@@ -95,5 +95,7 @@ class AppRouter extends RootStackRouter {
       ],
     ),
     AutoRoute(page: ItemDetailRoute.page, path: '/item/:id'),
+    AutoRoute(page: MapDetailRoute.page, path: '/map/:mapId'),
+    AutoRoute(page: BossDetailRoute.page, path: '/boss/:bossId'),
   ];
 }
