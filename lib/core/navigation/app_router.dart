@@ -84,9 +84,8 @@ class AppRouter extends RootStackRouter {
               path: 'traders/:traderId',
             ),
             AutoRoute(page: FleaMarketRoute.page, path: 'flea'),
-            //   AutoRoute(page: BartersRoute.page, path: 'barters'),
-            //   AutoRoute(page: CraftsRoute.page, path: 'crafts'),
-            //
+            AutoRoute(page: BartersRoute.page, path: 'barters'),
+            AutoRoute(page: CraftsRoute.page, path: 'crafts'),
             AutoRoute(page: BossesRoute.page, path: 'bosses'),
             AutoRoute(page: BossDetailRoute.page, path: 'bosses/:bossId'),
             AutoRoute(page: KeysRoute.page, path: 'keys'),
