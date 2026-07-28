@@ -1,6 +1,7 @@
 import 'package:darkoff/core/config/app_config.dart';
 import 'package:darkoff/core/localization/app_language.dart';
 import 'package:darkoff/core/localization/app_translations.dart';
+import 'package:darkoff/core/localization/language_code.dart';
 import 'package:darkoff/core/navigation/app_router.dart';
 import 'package:darkoff/core/theme/app_theme.dart';
 import 'package:darkoff/core/theme/app_theme_provider.dart';
@@ -61,7 +62,8 @@ class _DarkoffAppState extends ConsumerState<DarkoffApp> {
       appTheme: AppTheme.dark(),
       child: I18n(
         initialLocale: locale,
-        child: MaterialApp.router(
+        child: _LocaleSync(
+          child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: _appRouter.config(),
           locale: locale,
@@ -93,7 +95,22 @@ class _DarkoffAppState extends ConsumerState<DarkoffApp> {
             extensions: [AppTheme.dark()],
           ),
         ),
+        ),
       ),
     );
+  }
+}
+
+class _LocaleSync extends ConsumerWidget {
+  const _LocaleSync({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<LanguageCode>(languageNotifierProvider, (_, next) {
+      I18n.of(context).locale = AppLanguage.toLocale(next);
+    });
+    return child;
   }
 }

@@ -22,7 +22,10 @@ class MorePage extends ConsumerWidget {
       MoreMenuEntry.bosses => () => context.router.push(const BossesRoute()),
       MoreMenuEntry.ammoChart => () => context.router.push(const AmmoRoute()),
       MoreMenuEntry.keys => () => context.router.push(const KeysRoute()),
-      _ => null,
+      MoreMenuEntry.crafts => () => context.router.push(const CraftsRoute()),
+      MoreMenuEntry.barters => () => context.router.push(const BartersRoute()),
+      MoreMenuEntry.settings => () => context.router.push(const SettingsRoute()),
+      MoreMenuEntry.about => () => (),
     };
   }
 

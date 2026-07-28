@@ -1,4 +1,5 @@
 import 'package:darkoff/core/config/game_mode.dart';
+import 'package:darkoff/core/localization/language_store.dart';
 import 'package:darkoff/data/datasources/localization/localization_data_source.dart';
 import 'package:darkoff/data/local/dao/items_dao.dart';
 import 'package:darkoff/data/local/dao/reference_dao.dart';
@@ -21,6 +22,7 @@ class PreloadService {
     required TradersService tradersService,
     required TraderMapper traderMapper,
     required LocalizationDataSource localization,
+    required LanguageStore languageStore,
     required Logger logger,
   }) : _repository = repository,
        _dao = dao,
@@ -30,6 +32,7 @@ class PreloadService {
        _tradersService = tradersService,
        _traderMapper = traderMapper,
        _localization = localization,
+       _languageStore = languageStore,
        _logger = logger;
 
   final ItemsRepository _repository;
@@ -40,6 +43,7 @@ class PreloadService {
   final TradersService _tradersService;
   final TraderMapper _traderMapper;
   final LocalizationDataSource _localization;
+  final LanguageStore _languageStore;
   final Logger _logger;
 
   Future<bool> hasLocalData() async {
@@ -49,11 +53,24 @@ class PreloadService {
     return itemCount > 0 && taskCount > 0;
   }
 
+  Future<bool> hasFreshLocalData() async {
+    if (!await hasLocalData()) return false;
+    final synced = _languageStore.dataLanguage == _languageStore.language;
+    if (!synced) {
+      _logger.i(
+        'Catalog language ${_languageStore.dataLanguage?.code} != '
+        '${_languageStore.language.code}; re-sync required',
+      );
+    }
+    return synced;
+  }
+
   Stream<int> preloadItems() async* {
     await _loadTraders();
     yield await _loadItems();
     final tasks = await _loadTasks();
     await _loadMapReferences(tasks);
+    await _languageStore.setDataLanguage(_languageStore.language);
   }
 
   Future<void> _loadTraders() async {

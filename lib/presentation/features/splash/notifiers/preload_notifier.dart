@@ -16,8 +16,8 @@ class PreloadNotifier extends _$PreloadNotifier {
   }
 
   Future<void> startPreload() async {
-    final hasData = await _preloadService.hasLocalData();
-    if (hasData) {
+    final fresh = await _preloadService.hasFreshLocalData();
+    if (fresh) {
       state = const PreloadState.completed();
       return;
     }
