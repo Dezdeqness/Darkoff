@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/theme/themes/color_theme.dart';
@@ -54,16 +55,16 @@ class _TarkovShellScreenState extends ConsumerState<TarkovShellScreen> {
     messenger.hideCurrentSnackBar();
     event.when(
       started: () => messenger.showSnackBar(
-        const SnackBar(content: Text('Refreshing items...')),
+        SnackBar(content: Text(tr.shell.refresh.refreshing)),
       ),
       progress: (loaded) => messenger.showSnackBar(
-        SnackBar(content: Text('Loaded $loaded items...')),
+        SnackBar(content: Text(tr.shell.refresh.progress(loaded: loaded))),
       ),
       completed: () => messenger.showSnackBar(
-        const SnackBar(content: Text('Items refreshed successfully')),
+        SnackBar(content: Text(tr.shell.refresh.success)),
       ),
       error: (msg) => messenger.showSnackBar(
-        SnackBar(content: Text('Failed to refresh: $msg')),
+        SnackBar(content: Text(tr.shell.refresh.failed(error: msg))),
       ),
     );
   }
@@ -74,12 +75,12 @@ class _BottomNav extends StatelessWidget {
 
   final TabsRouter tabsRouter;
 
-  static const _items = [
-    _NavItemData(icon: Icons.home_outlined, label: 'Home'),
-    _NavItemData(icon: Icons.grid_view_rounded, label: 'Items'),
-    _NavItemData(icon: Icons.map_outlined, label: 'Maps'),
-    _NavItemData(icon: Icons.checklist_outlined, label: 'Tasks'),
-    _NavItemData(icon: Icons.more_horiz, label: 'More'),
+  static final _items = <_NavItemData>[
+    _NavItemData(icon: Icons.home_outlined, label: () => tr.nav.home),
+    _NavItemData(icon: Icons.grid_view_rounded, label: () => tr.nav.items),
+    _NavItemData(icon: Icons.map_outlined, label: () => tr.nav.maps),
+    _NavItemData(icon: Icons.checklist_outlined, label: () => tr.nav.tasks),
+    _NavItemData(icon: Icons.more_horiz, label: () => tr.nav.more),
   ];
 
   @override
@@ -115,7 +116,7 @@ class _BottomNav extends StatelessWidget {
 class _NavItemData {
   const _NavItemData({required this.icon, required this.label});
   final IconData icon;
-  final String label;
+  final String Function() label;
 }
 
 class _NavItem extends StatelessWidget {
@@ -146,7 +147,7 @@ class _NavItem extends StatelessWidget {
             Icon(data.icon, color: color, size: 22),
             const SizedBox(height: 4),
             Text(
-              data.label,
+              data.label(),
               style: TextStyle(
                 color: color,
                 fontSize: 10,

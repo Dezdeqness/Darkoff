@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
@@ -26,10 +27,10 @@ class BartersPage extends ConsumerWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: PageHeader(
-                title: 'Barters',
-                subtitle: 'Trader barter trades & profit',
+                title: tr.barters.page.title,
+                subtitle: tr.barters.page.subtitle,
               ),
             ),
             ..._buildContent(state, notifier),
@@ -48,7 +49,7 @@ class BartersPage extends ConsumerWidget {
       BartersListLoading() => [const SliverLoadingIndicator()],
       BartersListError() => [
         SliverErrorMessage(
-          message: 'Failed to load barters',
+          message: tr.barters.error.load,
           onRetry: notifier.refresh,
         ),
       ],
@@ -75,7 +76,7 @@ class BartersPage extends ConsumerWidget {
         ),
       ),
       if (barters.isEmpty)
-        const SliverEmptyMessage(message: 'No barters found')
+        SliverEmptyMessage(message: tr.barters.emptyState.notFound)
       else
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),

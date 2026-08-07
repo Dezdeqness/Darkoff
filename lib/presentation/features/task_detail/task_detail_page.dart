@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_error_view.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
@@ -55,7 +56,7 @@ class TaskDetailPage extends ConsumerWidget {
               const SizedBox(height: 16),
               if (task.prerequisiteTaskNames.isNotEmpty) ...[
                 TaskDetailSection(
-                  title: 'PREREQUISITES',
+                  title: tr.taskDetail.section.prerequisites,
                   child: TaskPrerequisiteList(
                     names: task.prerequisiteTaskNames,
                   ),
@@ -64,7 +65,7 @@ class TaskDetailPage extends ConsumerWidget {
               ],
               if (task.objectives.isNotEmpty) ...[
                 TaskDetailSection(
-                  title: 'OBJECTIVES',
+                  title: tr.taskDetail.section.objectives,
                   child: TaskObjectiveList(objectives: task.objectives),
                 ),
                 const SizedBox(height: 12),
@@ -73,7 +74,7 @@ class TaskDetailPage extends ConsumerWidget {
                   task.rewardStanding.isNotEmpty ||
                   task.experienceLabel != null) ...[
                 TaskDetailSection(
-                  title: 'COMPLETION REWARDS',
+                  title: tr.taskDetail.section.rewards,
                   child: TaskRewardList(
                     experienceLabel: task.experienceLabel,
                     items: task.rewardItems,

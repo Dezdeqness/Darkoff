@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/localization/app_language.dart';
-import 'package:darkoff/core/localization/app_translations.dart';
 import 'package:darkoff/core/localization/language_code.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/settings/notifiers/language_notifier.dart';
@@ -21,13 +21,13 @@ class SettingsPage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: colors.background,
-      appBar: AppBar(title: Text('settings.title'.i18n)),
+      appBar: AppBar(title: Text(tr.settings.title)),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
             Text(
-              'settings.language.title'.i18n.toUpperCase(),
+              tr.settings.language.title.toUpperCase(),
               style: typo.labelMedium.copyWith(
                 color: colors.gold,
                 letterSpacing: 2,
@@ -35,7 +35,7 @@ class SettingsPage extends ConsumerWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'settings.language.subtitle'.i18n,
+              tr.settings.language.subtitle,
               style: typo.bodySmall.copyWith(color: colors.textSecondary),
             ),
             const SizedBox(height: 12),
@@ -79,12 +79,15 @@ class SettingsPage extends ConsumerWidget {
     }
   }
 
-  String _languageLabel(LanguageCode language) {
-    final code = language.code;
-    final key = 'settings.language.$code';
-    final localized = key.i18n;
-    return localized == key ? code.toUpperCase() : localized;
-  }
+  String _languageLabel(LanguageCode language) => switch (language) {
+        LanguageCode.en => tr.settings.language.en,
+        LanguageCode.ru => tr.settings.language.ru,
+        LanguageCode.de => tr.settings.language.de,
+        LanguageCode.fr => tr.settings.language.fr,
+        LanguageCode.es => tr.settings.language.es,
+        LanguageCode.zh => tr.settings.language.zh,
+        _ => language.code.toUpperCase(),
+      };
 }
 
 class _LanguageRow extends StatelessWidget {

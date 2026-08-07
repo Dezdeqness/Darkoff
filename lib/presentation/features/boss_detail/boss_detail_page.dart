@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_error_view.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
@@ -30,7 +31,7 @@ class BossDetailPage extends ConsumerWidget {
         child: Column(
           children: [
             PageHeader(
-              title: model?.displayName ?? 'Boss',
+              title: model?.displayName ?? tr.bossDetail.fallback.title,
               subtitle: model?.healthLabel,
             ),
             Expanded(child: _buildContent(context, ref, state)),

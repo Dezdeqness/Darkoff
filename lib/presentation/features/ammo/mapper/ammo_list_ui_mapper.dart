@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/domain/entities/ammo_entity.dart';
 import 'package:darkoff/presentation/features/ammo/model/ammo_list_ui_model.dart';
 
@@ -115,7 +116,7 @@ class AmmoListUiMapper {
   List<AmmoGroupUiModel> _groups(List<AmmoEntity> ammo) {
     final grouped = <String, List<AmmoEntity>>{};
     for (final a in ammo) {
-      grouped.putIfAbsent(a.caliber ?? 'Unknown', () => []).add(a);
+      grouped.putIfAbsent(a.caliber ?? tr.common.value.unknown, () => []).add(a);
     }
 
     final keys = grouped.keys.toList()..sort();

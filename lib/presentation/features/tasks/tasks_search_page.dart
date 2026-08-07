@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_search_bar.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
@@ -39,7 +40,7 @@ class _TasksSearchPageState extends ConsumerState<TasksSearchPage> {
               child: Hero(
                 tag: 'tasks-search',
                 child: AppSearchBar(
-                  hintText: 'Search tasks...',
+                  hintText: tr.tasks.search.hint,
                   controller: _textController,
                   autofocus: true,
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -62,7 +63,8 @@ class _TasksSearchPageState extends ConsumerState<TasksSearchPage> {
     return state.when(
       initial: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
       loading: () => const SliverLoadingIndicator(),
-      empty: () => const SliverEmptyMessage(message: 'No tasks found'),
+      empty: () =>
+          SliverEmptyMessage(message: tr.tasks.emptyState.notFound),
       loaded: (tasks) => SliverList(
         delegate: SliverChildBuilderDelegate(
           (ctx, i) => TaskCard(task: tasks[i]),
@@ -70,7 +72,7 @@ class _TasksSearchPageState extends ConsumerState<TasksSearchPage> {
         ),
       ),
       error: (message) => SliverErrorMessage(
-        message: 'Failed to search tasks',
+        message: tr.tasks.error.search,
         onRetry: () => ref.read(tasksSearchProvider.notifier).refresh(),
       ),
     );

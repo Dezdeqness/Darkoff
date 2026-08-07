@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_section_header.dart';
 import 'package:darkoff/presentation/features/ammo/ammo_chart_keys.dart';
@@ -49,7 +50,7 @@ class AmmoChart extends ConsumerWidget {
       key: AmmoChartKeys.loading,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppSectionHeader(title: 'Ammo Chart'),
+        AppSectionHeader(title: tr.ammo.page.title),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(
@@ -86,7 +87,7 @@ class AmmoChart extends ConsumerWidget {
       key: AmmoChartKeys.content,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppSectionHeader(title: 'Ammo Chart'),
+        AppSectionHeader(title: tr.ammo.page.title),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(
@@ -125,15 +126,23 @@ class AmmoChart extends ConsumerWidget {
           const SizedBox(width: 16),
           Expanded(
             flex: 3,
-            child: Text('NAME', style: style),
+            child: Text(tr.ammo.column.name, style: style),
           ),
           SizedBox(
             width: 40,
-            child: Text('DMG', style: style, textAlign: TextAlign.center),
+            child: Text(
+              tr.ammo.column.damage,
+              style: style,
+              textAlign: TextAlign.center,
+            ),
           ),
           SizedBox(
             width: 40,
-            child: Text('PEN', style: style, textAlign: TextAlign.center),
+            child: Text(
+              tr.ammo.column.penetration,
+              style: style,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),
@@ -185,7 +194,7 @@ class AmmoChart extends ConsumerWidget {
                 ),
                 if (row.isTracer)
                   Text(
-                    'Tracer',
+                    tr.ammo.type.tracer,
                     style: typo.paragraphSmall
                         .copyWith(color: colors.textTertiary),
                   ),

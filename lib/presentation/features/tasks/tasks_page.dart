@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_filter_chip.dart';
@@ -40,17 +41,17 @@ class _TasksPageState extends ConsumerState<TasksPage> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: PageHeader(
-                title: 'Tasks',
-                subtitle: 'Trader quests & objectives',
+                title: tr.tasks.page.title,
+                subtitle: tr.tasks.page.subtitle,
                 showBack: false,
               ),
             ),
             SliverToBoxAdapter(child: buildSearchBar(context)),
             SliverToBoxAdapter(child: buildTraderChips(context)),
-            const SliverToBoxAdapter(
-              child: SectionLabel('Tasks'),
+            SliverToBoxAdapter(
+              child: SectionLabel(tr.tasks.section.label),
             ),
             buildContent(context, state),
           ],
@@ -65,7 +66,7 @@ class _TasksPageState extends ConsumerState<TasksPage> {
       child: AppSearchBar(
         controller: _searchController,
         onChanged: (_) {},
-        hintText: 'Search tasks...',
+        hintText: tr.tasks.search.hint,
         readOnlyMode: true,
         onTap: () => context.router.push(const TasksSearchRoute()),
       ),
@@ -76,7 +77,8 @@ class _TasksPageState extends ConsumerState<TasksPage> {
     return state.when(
       initial: () => const SliverLoadingIndicator(),
       loading: () => const SliverLoadingIndicator(),
-      empty: () => const SliverEmptyMessage(message: 'No tasks available'),
+      empty: () =>
+          SliverEmptyMessage(message: tr.tasks.emptyState.notAvailable),
       loaded: (tasks) => SliverList(
         delegate: SliverChildBuilderDelegate(
           (ctx, i) => TaskCard(task: tasks[i]),
@@ -84,7 +86,7 @@ class _TasksPageState extends ConsumerState<TasksPage> {
         ),
       ),
       error: (message) => SliverErrorMessage(
-        message: 'Failed to load tasks',
+        message: tr.tasks.error.load,
         onRetry: () => ref.read(tasksProvider.notifier).refresh(),
       ),
     );

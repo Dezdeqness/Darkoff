@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_filter_chip.dart';
@@ -29,7 +30,7 @@ class _ItemsPageState extends ConsumerState<ItemsPage> {
     return Hero(
       tag: 'items-search',
       child: AppSearchBar(
-        hintText: 'Search items...',
+        hintText: tr.items.search.hint,
         onChanged: (v) => setState(() {}),
         controller: _searchController,
         onTap: () {
@@ -63,7 +64,7 @@ class _ItemsPageState extends ConsumerState<ItemsPage> {
     return state.when(
       initial: () => const SliverLoadingIndicator(),
       loading: () => const SliverLoadingIndicator(),
-      empty: () => const SliverEmptyMessage(message: 'No items found'),
+      empty: () => SliverEmptyMessage(message: tr.items.emptyState.notFound),
       loaded: (items, hasMore, isLoadingMore, isRefreshing) => SliverList(
         delegate: SliverChildBuilderDelegate(
           (_, i) => ItemCard(item: items[i]),
@@ -93,8 +94,8 @@ class _ItemsPageState extends ConsumerState<ItemsPage> {
             slivers: [
               SliverToBoxAdapter(
                 child: PageHeader(
-                  title: 'Items',
-                  subtitle: 'Browse all Tarkov items',
+                  title: tr.items.page.title,
+                  subtitle: tr.items.page.subtitle,
                   showBack: false,
                 ),
               ),

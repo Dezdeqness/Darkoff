@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/theme/themes/color_theme.dart';
 import 'package:darkoff/presentation/features/home/model/server_status_ui_model.dart';
@@ -43,7 +44,7 @@ class ServerStatusCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'SERVER STATUS',
+                    tr.serverStatus.label,
                     style: typo.labelMedium.copyWith(
                       color: colors.textSecondary,
                       letterSpacing: 1.0,
@@ -51,7 +52,7 @@ class ServerStatusCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    isLoading ? 'Checking…' : (status?.statusLabel ?? 'Unknown'),
+                    isLoading ? tr.serverStatus.checking : (status?.statusLabel ?? tr.common.value.unknown),
                     style: typo.titleSmall.copyWith(
                       color: isLoading ? colors.textSecondary : accent,
                       fontWeight: FontWeight.w600,
@@ -77,7 +78,7 @@ class ServerStatusCard extends StatelessWidget {
                   borderRadius: shape.radiusXS,
                 ),
                 child: Text(
-                  status?.badgeLabel ?? 'UNKNOWN',
+                  status?.badgeLabel ?? tr.common.value.unknownUpper,
                   style: typo.labelSmall.copyWith(
                     color: accent,
                     letterSpacing: 0.5,

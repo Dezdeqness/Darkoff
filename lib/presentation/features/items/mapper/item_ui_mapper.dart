@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/domain/entities/item_entity.dart';
 import 'package:darkoff/domain/entities/item_type.dart';
@@ -8,7 +9,7 @@ class ItemUiMapper {
     '${formatPrice(entity.basePrice)} ₽';
     return ItemUiModel(
       id: entity.id,
-      displayName: entity.name ?? 'Unknown Item',
+      displayName: entity.name ?? tr.common.item.unknown,
       shortName: entity.shortName,
       displayPrice: '${formatPrice(entity.basePrice)} ₽',
       backgroundColor: entity.backgroundColor,
@@ -34,26 +35,26 @@ class ItemUiMapper {
   }
 
   String _categoryLabel(List<ItemType> types) {
-    if (types.isEmpty) return 'Item';
+    if (types.isEmpty) return tr.items.category.item;
     final primary = types.first;
     return switch (primary) {
-      ItemType.barter => 'Barter item',
-      ItemType.keys || ItemType.markedOnly => 'Key',
-      ItemType.meds || ItemType.injectors => 'Medical item',
-      ItemType.ammo || ItemType.ammoBox => 'Ammo',
-      ItemType.armor || ItemType.armorPlate => 'Armor',
-      ItemType.backpack => 'Backpack',
-      ItemType.helmet => 'Helmet',
-      ItemType.rig => 'Rig',
-      ItemType.headphones => 'Headset',
-      ItemType.glasses => 'Visor',
-      ItemType.gun => 'Weapon',
-      ItemType.mods => 'Mod',
-      ItemType.grenade => 'Grenade',
-      ItemType.provisions => 'Provision',
-      ItemType.container => 'Container',
-      ItemType.wearable => 'Gear',
-      _ => 'Item',
+      ItemType.barter => tr.items.type.barterItem,
+      ItemType.keys || ItemType.markedOnly => tr.items.type.key,
+      ItemType.meds || ItemType.injectors => tr.items.type.medicalItem,
+      ItemType.ammo || ItemType.ammoBox => tr.items.type.ammo,
+      ItemType.armor || ItemType.armorPlate => tr.items.type.armor,
+      ItemType.backpack => tr.items.type.backpack,
+      ItemType.helmet => tr.items.type.helmet,
+      ItemType.rig => tr.items.type.rig,
+      ItemType.headphones => tr.items.type.headset,
+      ItemType.glasses => tr.items.type.visor,
+      ItemType.gun => tr.items.type.weapon,
+      ItemType.mods => tr.items.type.mod,
+      ItemType.grenade => tr.items.type.grenade,
+      ItemType.provisions => tr.items.type.provision,
+      ItemType.container => tr.items.type.container,
+      ItemType.wearable => tr.items.type.gear,
+      _ => tr.items.category.item,
     };
   }
 }

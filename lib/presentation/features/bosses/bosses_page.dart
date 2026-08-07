@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
@@ -23,10 +24,10 @@ class BossesPage extends ConsumerWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: PageHeader(
-                title: 'Bosses',
-                subtitle: 'Spawn locations & health',
+                title: tr.bosses.page.title,
+                subtitle: tr.bosses.page.subtitle,
               ),
             ),
             ..._buildContent(context, ref, state),
@@ -46,7 +47,7 @@ class BossesPage extends ConsumerWidget {
       BossesListLoading() => [const SliverLoadingIndicator()],
       BossesListError() => [
         SliverErrorMessage(
-          message: 'Failed to load bosses',
+          message: tr.bosses.error.load,
           onRetry: () => ref.read(bossesListProvider.notifier).refresh(),
         ),
       ],

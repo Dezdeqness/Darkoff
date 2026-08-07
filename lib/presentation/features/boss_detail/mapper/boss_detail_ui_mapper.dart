@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/domain/entities/boss_entity.dart';
 import 'package:darkoff/presentation/features/boss_detail/model/boss_detail_ui_model.dart';
 
@@ -28,7 +29,7 @@ class BossDetailUiMapper {
                 : null,
             escorts: [
               for (final e in spawn.escorts)
-                '${e.bossName} × ${e.count} '
+                '${e.bossName} Г— ${e.count} '
                     '(${(e.chance * 100).toStringAsFixed(0)}%)',
             ],
           ),
@@ -43,13 +44,13 @@ class BossDetailUiMapper {
   }
 
   String _partLabel(String part) => switch (part) {
-    'Chest' => 'Chest',
-    'Head' => 'Head',
-    'Stomach' => 'Stomach',
-    'LeftArm' => 'Left arm',
-    'RightArm' => 'Right arm',
-    'LeftLeg' => 'Left leg',
-    'RightLeg' => 'Right leg',
+    'Chest' => tr.bossDetail.bodyPart.chest,
+    'Head' => tr.bossDetail.bodyPart.head,
+    'Stomach' => tr.bossDetail.bodyPart.stomach,
+    'LeftArm' => tr.bossDetail.bodyPart.leftArm,
+    'RightArm' => tr.bossDetail.bodyPart.rightArm,
+    'LeftLeg' => tr.bossDetail.bodyPart.leftLeg,
+    'RightLeg' => tr.bossDetail.bodyPart.rightLeg,
     _ => part,
   };
 }

@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +44,7 @@ class SliverErrorMessage extends StatelessWidget {
             const SizedBox(height: 8),
             TextButton(
               onPressed: onRetry,
-              child: const Text('Retry'),
+              child: Text(tr.common.action.retry),
             ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/maps/model/map_ui_model.dart';
 import 'package:darkoff/presentation/features/maps/widgets/map_boss_spawn_row.dart';
@@ -34,13 +35,13 @@ class MapDetailView extends StatelessWidget {
             children: [
               MapStatTile(
                 icon: Icons.people_outline,
-                label: 'Players',
+                label: tr.maps.info.players,
                 value: map.playersLabel,
               ),
               const SizedBox(width: 10),
               MapStatTile(
                 icon: Icons.timer_outlined,
-                label: 'Duration',
+                label: tr.maps.info.duration,
                 value: map.durationLabel,
               ),
             ],
@@ -48,7 +49,7 @@ class MapDetailView extends StatelessWidget {
 
           if (map.enemies.isNotEmpty) ...[
             const SizedBox(height: 24),
-            const MapSectionLabel('Enemies'),
+            MapSectionLabel(tr.maps.section.enemies),
             const SizedBox(height: 10),
             Wrap(
               spacing: 8,
@@ -59,7 +60,7 @@ class MapDetailView extends StatelessWidget {
 
           if (map.bosses.isNotEmpty) ...[
             const SizedBox(height: 24),
-            const MapSectionLabel('Bosses'),
+            MapSectionLabel(tr.maps.section.bosses),
             const SizedBox(height: 10),
             for (final boss in map.bosses) MapBossSpawnRow(boss: boss),
           ],

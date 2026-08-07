@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/item_icon.dart';
@@ -27,7 +28,7 @@ class MapLootSection extends ConsumerWidget {
       children: [
         const SizedBox(height: 24),
         Text(
-          'VALUABLE LOOT',
+          tr.maps.section.valuableLoot,
           style: typo.labelMedium.copyWith(
             color: colors.gold,
             letterSpacing: 2,

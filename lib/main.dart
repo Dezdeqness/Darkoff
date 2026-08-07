@@ -1,7 +1,7 @@
 import 'package:darkoff/core/config/app_config.dart';
 import 'package:darkoff/core/localization/app_language.dart';
-import 'package:darkoff/core/localization/app_translations.dart';
-import 'package:darkoff/core/localization/language_code.dart';
+import 'package:darkoff/core/localization/language_store.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.dart';
 import 'package:darkoff/core/theme/app_theme.dart';
 import 'package:darkoff/core/theme/app_theme_provider.dart';
@@ -15,7 +15,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:i18n_extension/i18n_extension.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,10 +35,17 @@ Future<void> main() async {
   };
 
   await setupServiceLocator();
-  await AppTranslations.load();
+  await LocaleSettings.setLocale(
+    AppLanguage.toSlangLocale(getIt<LanguageStore>().language),
+  );
 
-  runApp(const ProviderScope(child: DarkoffApp()));
+  runApp(
+    TranslationProvider(
+      child: const ProviderScope(child: DarkoffApp()),
+    ),
+  );
 }
+
 
 class DarkoffApp extends ConsumerStatefulWidget {
   const DarkoffApp({super.key});
@@ -60,57 +66,38 @@ class _DarkoffAppState extends ConsumerState<DarkoffApp> {
 
     return AppThemeProvider(
       appTheme: AppTheme.dark(),
-      child: I18n(
-        initialLocale: locale,
-        child: _LocaleSync(
-          child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          routerConfig: _appRouter.config(),
-          locale: locale,
-          supportedLocales: AppLanguage.supportedUiLocales,
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          theme: ThemeData(
-            brightness: Brightness.dark,
-            scaffoldBackgroundColor: colors.background,
-            colorScheme: ColorScheme.dark(
-              surface: colors.surface,
-              primary: colors.gold,
-              onPrimary: colors.background,
-              onSurface: colors.textPrimary,
-              outline: colors.border,
-            ),
-            cardTheme: CardThemeData(
-              color: colors.surface,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(color: colors.border),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            dividerColor: colors.border,
-            extensions: [AppTheme.dark()],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: _appRouter.config(),
+        locale: locale,
+        supportedLocales: AppLanguage.supportedUiLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: colors.background,
+          colorScheme: ColorScheme.dark(
+            surface: colors.surface,
+            primary: colors.gold,
+            onPrimary: colors.background,
+            onSurface: colors.textPrimary,
+            outline: colors.border,
           ),
-        ),
+          cardTheme: CardThemeData(
+            color: colors.surface,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: colors.border),
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          dividerColor: colors.border,
+          extensions: [AppTheme.dark()],
         ),
       ),
     );
-  }
-}
-
-class _LocaleSync extends ConsumerWidget {
-  const _LocaleSync({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen<LanguageCode>(languageNotifierProvider, (_, next) {
-      I18n.of(context).locale = AppLanguage.toLocale(next);
-    });
-    return child;
   }
 }

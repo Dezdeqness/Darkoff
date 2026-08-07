@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/widgets/app_section_header.dart';
 import 'package:darkoff/presentation/features/boss_detail/model/boss_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/boss_detail/model/boss_loot_ui_model.dart';
@@ -23,12 +24,16 @@ class BossDetailView extends ConsumerWidget {
         if (model.posterUrl != null)
           SliverToBoxAdapter(child: BossPoster(url: model.posterUrl!)),
         if (model.bodyParts.isNotEmpty) ...[
-          const SliverToBoxAdapter(child: AppSectionHeader(title: 'Health')),
+          SliverToBoxAdapter(
+            child: AppSectionHeader(title: tr.bossDetail.section.health),
+          ),
           SliverToBoxAdapter(child: BossHealthGrid(parts: model.bodyParts)),
         ],
         if (model.spawns.isNotEmpty) ...[
-          const SliverToBoxAdapter(
-            child: AppSectionHeader(title: 'Spawn locations'),
+          SliverToBoxAdapter(
+            child: AppSectionHeader(
+              title: tr.bossDetail.section.spawnLocations,
+            ),
           ),
           SliverList.builder(
             itemCount: model.spawns.length,
@@ -51,9 +56,11 @@ class BossDetailView extends ConsumerWidget {
 
   List<Widget> _buildLootSlivers(AsyncValue<List<BossLootUiModel>> loot) {
     return loot.when(
-      loading: () => const [
-        SliverToBoxAdapter(child: AppSectionHeader(title: 'Loot')),
+      loading: () => [
         SliverToBoxAdapter(
+          child: AppSectionHeader(title: tr.bossDetail.section.loot),
+        ),
+        const SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Center(child: CircularProgressIndicator()),
@@ -64,7 +71,9 @@ class BossDetailView extends ConsumerWidget {
       data: (items) {
         if (items.isEmpty) return const [];
         return [
-          const SliverToBoxAdapter(child: AppSectionHeader(title: 'Loot')),
+          SliverToBoxAdapter(
+            child: AppSectionHeader(title: tr.bossDetail.section.loot),
+          ),
           SliverList.builder(
             itemCount: items.length,
             itemBuilder: (ctx, i) => Padding(

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/utils/color_utils.dart';
@@ -78,7 +79,7 @@ class ItemCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  'Flea Market',
+                  tr.common.price.fleaMarket,
                   style:
                       typo.paragraphSmall.copyWith(color: colors.textSecondary),
                 ),

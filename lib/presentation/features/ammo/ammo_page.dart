@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_search_bar.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
@@ -41,17 +42,17 @@ class _AmmoPageState extends ConsumerState<AmmoPage> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: PageHeader(
-                title: 'Ammo Chart',
-                subtitle: 'Damage & penetration reference',
+                title: tr.ammo.page.title,
+                subtitle: tr.ammo.page.subtitle,
               ),
             ),
             SliverToBoxAdapter(
               child: AppSearchBar(
                 controller: _searchController,
                 onChanged: notifier.setSearch,
-                hintText: 'Search ammo...',
+                hintText: tr.ammo.search.hint,
               ),
             ),
             ..._buildContent(state, notifier),
@@ -67,7 +68,7 @@ class _AmmoPageState extends ConsumerState<AmmoPage> {
       AmmoListLoading() => [const SliverLoadingIndicator()],
       AmmoListError() => [
         SliverErrorMessage(
-          message: 'Failed to load ammo data',
+          message: tr.ammo.error.load,
           onRetry: notifier.refresh,
         ),
       ],
@@ -92,7 +93,7 @@ class _AmmoPageState extends ConsumerState<AmmoPage> {
         ),
       ),
       if (ammo.isEmpty)
-        const SliverEmptyMessage(message: 'No ammo found')
+        SliverEmptyMessage(message: tr.ammo.emptyState.notFound)
       else if (ammo.grouped)
         SliverList(
           delegate: SliverChildBuilderDelegate(

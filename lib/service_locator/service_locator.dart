@@ -1,7 +1,6 @@
 import 'package:darkoff/service_locator/boss_service_locator.dart';
 import 'package:darkoff/service_locator/barters_service_locator.dart';
 import 'package:darkoff/service_locator/ammo_service_locator.dart';
-import 'package:darkoff/service_locator/categories_service_locator.dart';
 import 'package:darkoff/service_locator/crafts_service_locator.dart';
 import 'package:darkoff/service_locator/keys_service_locator.dart';
 import 'package:darkoff/service_locator/database_service_locator.dart';
@@ -31,7 +30,6 @@ Future<void> setupServiceLocator() async {
   await setupNetworkServiceLocator();
 
   setupDatabaseServiceLocator();
-  setupCategoriesServiceLocator();
   setupItemsServiceLocator();
   setupAmmoServiceLocator();
   setupHideoutServiceLocator();

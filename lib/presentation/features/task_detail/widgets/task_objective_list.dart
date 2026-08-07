@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/task_detail/model/task_detail_ui_model.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class _ObjectiveRow extends StatelessWidget {
                 ),
                 if (objective.optional)
                   Text(
-                    'Optional',
+                    tr.taskDetail.objective.optional,
                     style: typo.paragraphSmall.copyWith(
                       color: colors.textTertiary,
                     ),

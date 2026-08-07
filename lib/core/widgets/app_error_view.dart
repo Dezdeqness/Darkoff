@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:flutter/material.dart';
 
 class AppErrorView extends StatelessWidget {
@@ -24,7 +25,7 @@ class AppErrorView extends StatelessWidget {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: onRetry,
-            child: const Text('Retry'),
+            child: Text(tr.common.action.retry),
           ),
         ],
       ),

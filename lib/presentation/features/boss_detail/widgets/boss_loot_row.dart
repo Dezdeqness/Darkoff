@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_image.dart';
@@ -51,14 +52,14 @@ class BossLootRow extends StatelessWidget {
               children: [
                 _priceLine(
                   context,
-                  label: 'Flea',
+                  label: tr.common.price.flea,
                   value: item.fleaPrice,
                   color: colors.gold,
                 ),
                 const SizedBox(height: 2),
                 _priceLine(
                   context,
-                  label: 'Trader',
+                  label: tr.common.price.trader,
                   value: item.traderPrice,
                   color: colors.textSecondary,
                 ),

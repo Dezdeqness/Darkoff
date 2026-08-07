@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
@@ -36,9 +37,9 @@ class MapDetailPage extends ConsumerWidget {
   Widget _header(MapDetailState state) => PageHeader(
     title: switch (state) {
       MapDetailLoaded(:final map) => map.name,
-      _ => 'Map',
+      _ => tr.maps.detail.fallbackTitle,
     },
-    subtitle: 'Raid location',
+    subtitle: tr.maps.detail.subtitle,
   );
 
   List<Widget> _buildContent(MapDetailState state, WidgetRef ref) {

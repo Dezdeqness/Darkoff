@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_card.dart';
 import 'package:darkoff/presentation/features/home/home_keys.dart';
@@ -55,10 +56,10 @@ class HomePage extends ConsumerWidget {
         .when(
           initial: () => loading,
           loading: () => loading,
-          empty: () => const HomePlaceholderWidget(
+          empty: () => HomePlaceholderWidget(
             key: HomeKeys.marketEmpty,
             height: marketSectionHeight,
-            message: 'No market data',
+            message: tr.home.market.empty,
           ),
           loaded: (items) => GridView.builder(
             key: HomeKeys.marketLoaded,
@@ -76,12 +77,12 @@ class HomePage extends ConsumerWidget {
           error: (_) => HomePlaceholderWidget(
             key: HomeKeys.marketError,
             height: marketSectionHeight,
-            message: 'Failed to load market overview',
+            message: tr.home.market.error,
             onRetry: () => ref.read(marketSnapshotProvider.notifier).refresh(),
           ),
         );
 
-    return HomeSection(title: 'Market Overview', child: child);
+    return HomeSection(title: tr.home.market.title, child: child);
   }
 
   Widget buildPriceChanges(BuildContext context, WidgetRef ref) {
@@ -100,7 +101,7 @@ class HomePage extends ConsumerWidget {
       empty: () => HomePlaceholderWidget(
         key: HomeKeys.priceChangesEmpty,
         height: priceSectionHeight,
-        message: 'No price data',
+        message: tr.home.priceChanges.empty,
       ),
       loaded: (items) => AppCard(
         key: HomeKeys.priceChangesLoaded,
@@ -115,12 +116,12 @@ class HomePage extends ConsumerWidget {
       error: (_) => HomePlaceholderWidget(
         key: HomeKeys.priceChangesError,
         height: priceSectionHeight,
-        message: 'Failed to load market data',
+        message: tr.home.priceChanges.error,
         onRetry: () => ref.read(priceChangesProvider.notifier).refresh(),
       ),
     );
 
-    return HomeSection(title: 'Price Changes (24h)', child: child);
+    return HomeSection(title: tr.home.priceChanges.title, child: child);
   }
 
   @override

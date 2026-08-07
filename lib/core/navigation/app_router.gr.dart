@@ -9,64 +9,62 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i30;
-import 'package:collection/collection.dart' as _i32;
-import 'package:darkoff/core/navigation/shells/tarkov_shell_page.dart' as _i23;
+import 'package:auto_route/auto_route.dart' as _i29;
+import 'package:collection/collection.dart' as _i31;
+import 'package:darkoff/core/navigation/shells/tarkov_shell_page.dart' as _i22;
 import 'package:darkoff/presentation/features/ammo/ammo_page.dart' as _i1;
 import 'package:darkoff/presentation/features/barters/barters_page.dart' as _i2;
 import 'package:darkoff/presentation/features/boss_detail/boss_detail_page.dart'
     as _i3;
 import 'package:darkoff/presentation/features/bosses/bosses_page.dart' as _i4;
-import 'package:darkoff/presentation/features/categories/categories_page.dart'
-    as _i5;
-import 'package:darkoff/presentation/features/crafts/crafts_page.dart' as _i6;
+import 'package:darkoff/presentation/features/crafts/crafts_page.dart' as _i5;
 import 'package:darkoff/presentation/features/flea_market/flea_market_page.dart'
-    as _i7;
-import 'package:darkoff/presentation/features/hideout/hideout_page.dart' as _i9;
+    as _i6;
+import 'package:darkoff/presentation/features/hideout/hideout_page.dart' as _i8;
 import 'package:darkoff/presentation/features/hideout_detail/hideout_detail_page.dart'
-    as _i8;
-import 'package:darkoff/presentation/features/home/home_page.dart' as _i10;
+    as _i7;
+import 'package:darkoff/presentation/features/home/home_page.dart' as _i9;
 import 'package:darkoff/presentation/features/item_detail/item_detail_page.dart'
-    as _i11;
-import 'package:darkoff/presentation/features/items/items_page.dart' as _i12;
+    as _i10;
+import 'package:darkoff/presentation/features/items/items_page.dart' as _i11;
 import 'package:darkoff/presentation/features/items/items_search_page.dart'
-    as _i13;
+    as _i12;
 import 'package:darkoff/presentation/features/items/items_shell_route.dart'
-    as _i14;
-import 'package:darkoff/presentation/features/keys/keys_page.dart' as _i15;
+    as _i13;
+import 'package:darkoff/presentation/features/keys/keys_page.dart' as _i14;
 import 'package:darkoff/presentation/features/maps/map_detail_page.dart'
-    as _i16;
-import 'package:darkoff/presentation/features/maps/maps_page.dart' as _i17;
-import 'package:darkoff/presentation/features/more/more_page.dart' as _i18;
+    as _i15;
+import 'package:darkoff/presentation/features/maps/maps_page.dart' as _i16;
+import 'package:darkoff/presentation/features/more/more_page.dart' as _i17;
 import 'package:darkoff/presentation/features/more/more_shell_route.dart'
-    as _i19;
+    as _i18;
 import 'package:darkoff/presentation/features/settings/settings_page.dart'
-    as _i20;
+    as _i19;
 import 'package:darkoff/presentation/features/shopping_list/shopping_list_page.dart'
-    as _i21;
-import 'package:darkoff/presentation/features/splash/splash_page.dart' as _i22;
+    as _i20;
+import 'package:darkoff/presentation/features/splash/splash_page.dart' as _i21;
 import 'package:darkoff/presentation/features/task_detail/task_detail_page.dart'
-    as _i24;
-import 'package:darkoff/presentation/features/tasks/tasks_page.dart' as _i25;
+    as _i23;
+import 'package:darkoff/presentation/features/tasks/tasks_page.dart' as _i24;
 import 'package:darkoff/presentation/features/tasks/tasks_search_page.dart'
-    as _i26;
+    as _i25;
 import 'package:darkoff/presentation/features/tasks/tasks_shell_route.dart'
-    as _i27;
+    as _i26;
 import 'package:darkoff/presentation/features/traders/traders_page.dart'
-    as _i29;
-import 'package:darkoff/presentation/features/traders_detail/traders_detail_page.dart'
     as _i28;
-import 'package:flutter/material.dart' as _i31;
+import 'package:darkoff/presentation/features/traders_detail/traders_detail_page.dart'
+    as _i27;
+import 'package:flutter/material.dart' as _i30;
 
 /// generated route for
 /// [_i1.AmmoPage]
-class AmmoRoute extends _i30.PageRouteInfo<void> {
-  const AmmoRoute({List<_i30.PageRouteInfo>? children})
+class AmmoRoute extends _i29.PageRouteInfo<void> {
+  const AmmoRoute({List<_i29.PageRouteInfo>? children})
     : super(AmmoRoute.name, initialChildren: children);
 
   static const String name = 'AmmoRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
       return const _i1.AmmoPage();
@@ -76,13 +74,13 @@ class AmmoRoute extends _i30.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.BartersPage]
-class BartersRoute extends _i30.PageRouteInfo<void> {
-  const BartersRoute({List<_i30.PageRouteInfo>? children})
+class BartersRoute extends _i29.PageRouteInfo<void> {
+  const BartersRoute({List<_i29.PageRouteInfo>? children})
     : super(BartersRoute.name, initialChildren: children);
 
   static const String name = 'BartersRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
       return const _i2.BartersPage();
@@ -92,11 +90,11 @@ class BartersRoute extends _i30.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.BossDetailPage]
-class BossDetailRoute extends _i30.PageRouteInfo<BossDetailRouteArgs> {
+class BossDetailRoute extends _i29.PageRouteInfo<BossDetailRouteArgs> {
   BossDetailRoute({
-    _i31.Key? key,
+    _i30.Key? key,
     required String bossId,
-    List<_i30.PageRouteInfo>? children,
+    List<_i29.PageRouteInfo>? children,
   }) : super(
          BossDetailRoute.name,
          args: BossDetailRouteArgs(key: key, bossId: bossId),
@@ -106,7 +104,7 @@ class BossDetailRoute extends _i30.PageRouteInfo<BossDetailRouteArgs> {
 
   static const String name = 'BossDetailRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
@@ -122,7 +120,7 @@ class BossDetailRoute extends _i30.PageRouteInfo<BossDetailRouteArgs> {
 class BossDetailRouteArgs {
   const BossDetailRouteArgs({this.key, required this.bossId});
 
-  final _i31.Key? key;
+  final _i30.Key? key;
 
   final String bossId;
 
@@ -144,13 +142,13 @@ class BossDetailRouteArgs {
 
 /// generated route for
 /// [_i4.BossesPage]
-class BossesRoute extends _i30.PageRouteInfo<void> {
-  const BossesRoute({List<_i30.PageRouteInfo>? children})
+class BossesRoute extends _i29.PageRouteInfo<void> {
+  const BossesRoute({List<_i29.PageRouteInfo>? children})
     : super(BossesRoute.name, initialChildren: children);
 
   static const String name = 'BossesRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
       return const _i4.BossesPage();
@@ -159,60 +157,44 @@ class BossesRoute extends _i30.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.CategoriesPage]
-class CategoriesRoute extends _i30.PageRouteInfo<void> {
-  const CategoriesRoute({List<_i30.PageRouteInfo>? children})
-    : super(CategoriesRoute.name, initialChildren: children);
-
-  static const String name = 'CategoriesRoute';
-
-  static _i30.PageInfo page = _i30.PageInfo(
-    name,
-    builder: (data) {
-      return const _i5.CategoriesPage();
-    },
-  );
-}
-
-/// generated route for
-/// [_i6.CraftsPage]
-class CraftsRoute extends _i30.PageRouteInfo<void> {
-  const CraftsRoute({List<_i30.PageRouteInfo>? children})
+/// [_i5.CraftsPage]
+class CraftsRoute extends _i29.PageRouteInfo<void> {
+  const CraftsRoute({List<_i29.PageRouteInfo>? children})
     : super(CraftsRoute.name, initialChildren: children);
 
   static const String name = 'CraftsRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i6.CraftsPage();
+      return const _i5.CraftsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i7.FleaMarketPage]
-class FleaMarketRoute extends _i30.PageRouteInfo<void> {
-  const FleaMarketRoute({List<_i30.PageRouteInfo>? children})
+/// [_i6.FleaMarketPage]
+class FleaMarketRoute extends _i29.PageRouteInfo<void> {
+  const FleaMarketRoute({List<_i29.PageRouteInfo>? children})
     : super(FleaMarketRoute.name, initialChildren: children);
 
   static const String name = 'FleaMarketRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i7.FleaMarketPage();
+      return const _i6.FleaMarketPage();
     },
   );
 }
 
 /// generated route for
-/// [_i8.HideoutDetailPage]
-class HideoutDetailRoute extends _i30.PageRouteInfo<HideoutDetailRouteArgs> {
+/// [_i7.HideoutDetailPage]
+class HideoutDetailRoute extends _i29.PageRouteInfo<HideoutDetailRouteArgs> {
   HideoutDetailRoute({
-    _i31.Key? key,
+    _i30.Key? key,
     required String stationId,
-    List<_i30.PageRouteInfo>? children,
+    List<_i29.PageRouteInfo>? children,
   }) : super(
          HideoutDetailRoute.name,
          args: HideoutDetailRouteArgs(key: key, stationId: stationId),
@@ -222,7 +204,7 @@ class HideoutDetailRoute extends _i30.PageRouteInfo<HideoutDetailRouteArgs> {
 
   static const String name = 'HideoutDetailRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
@@ -230,7 +212,7 @@ class HideoutDetailRoute extends _i30.PageRouteInfo<HideoutDetailRouteArgs> {
         orElse: () =>
             HideoutDetailRouteArgs(stationId: pathParams.getString('detailId')),
       );
-      return _i8.HideoutDetailPage(key: args.key, stationId: args.stationId);
+      return _i7.HideoutDetailPage(key: args.key, stationId: args.stationId);
     },
   );
 }
@@ -238,7 +220,7 @@ class HideoutDetailRoute extends _i30.PageRouteInfo<HideoutDetailRouteArgs> {
 class HideoutDetailRouteArgs {
   const HideoutDetailRouteArgs({this.key, required this.stationId});
 
-  final _i31.Key? key;
+  final _i30.Key? key;
 
   final String stationId;
 
@@ -259,44 +241,44 @@ class HideoutDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i9.HideoutPage]
-class HideoutRoute extends _i30.PageRouteInfo<void> {
-  const HideoutRoute({List<_i30.PageRouteInfo>? children})
+/// [_i8.HideoutPage]
+class HideoutRoute extends _i29.PageRouteInfo<void> {
+  const HideoutRoute({List<_i29.PageRouteInfo>? children})
     : super(HideoutRoute.name, initialChildren: children);
 
   static const String name = 'HideoutRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i9.HideoutPage();
+      return const _i8.HideoutPage();
     },
   );
 }
 
 /// generated route for
-/// [_i10.HomePage]
-class HomeRoute extends _i30.PageRouteInfo<void> {
-  const HomeRoute({List<_i30.PageRouteInfo>? children})
+/// [_i9.HomePage]
+class HomeRoute extends _i29.PageRouteInfo<void> {
+  const HomeRoute({List<_i29.PageRouteInfo>? children})
     : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i10.HomePage();
+      return const _i9.HomePage();
     },
   );
 }
 
 /// generated route for
-/// [_i11.ItemDetailPage]
-class ItemDetailRoute extends _i30.PageRouteInfo<ItemDetailRouteArgs> {
+/// [_i10.ItemDetailPage]
+class ItemDetailRoute extends _i29.PageRouteInfo<ItemDetailRouteArgs> {
   ItemDetailRoute({
-    _i31.Key? key,
+    _i30.Key? key,
     required String itemId,
-    List<_i30.PageRouteInfo>? children,
+    List<_i29.PageRouteInfo>? children,
   }) : super(
          ItemDetailRoute.name,
          args: ItemDetailRouteArgs(key: key, itemId: itemId),
@@ -306,14 +288,14 @@ class ItemDetailRoute extends _i30.PageRouteInfo<ItemDetailRouteArgs> {
 
   static const String name = 'ItemDetailRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<ItemDetailRouteArgs>(
         orElse: () => ItemDetailRouteArgs(itemId: pathParams.getString('id')),
       );
-      return _i11.ItemDetailPage(key: args.key, itemId: args.itemId);
+      return _i10.ItemDetailPage(key: args.key, itemId: args.itemId);
     },
   );
 }
@@ -321,7 +303,7 @@ class ItemDetailRoute extends _i30.PageRouteInfo<ItemDetailRouteArgs> {
 class ItemDetailRouteArgs {
   const ItemDetailRouteArgs({this.key, required this.itemId});
 
-  final _i31.Key? key;
+  final _i30.Key? key;
 
   final String itemId;
 
@@ -342,12 +324,12 @@ class ItemDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i12.ItemsPage]
-class ItemsRoute extends _i30.PageRouteInfo<ItemsRouteArgs> {
+/// [_i11.ItemsPage]
+class ItemsRoute extends _i29.PageRouteInfo<ItemsRouteArgs> {
   ItemsRoute({
-    _i31.Key? key,
+    _i30.Key? key,
     List<String> categoryNames = const [],
-    List<_i30.PageRouteInfo>? children,
+    List<_i29.PageRouteInfo>? children,
   }) : super(
          ItemsRoute.name,
          args: ItemsRouteArgs(key: key, categoryNames: categoryNames),
@@ -356,13 +338,13 @@ class ItemsRoute extends _i30.PageRouteInfo<ItemsRouteArgs> {
 
   static const String name = 'ItemsRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ItemsRouteArgs>(
         orElse: () => const ItemsRouteArgs(),
       );
-      return _i12.ItemsPage(key: args.key, categoryNames: args.categoryNames);
+      return _i11.ItemsPage(key: args.key, categoryNames: args.categoryNames);
     },
   );
 }
@@ -370,7 +352,7 @@ class ItemsRoute extends _i30.PageRouteInfo<ItemsRouteArgs> {
 class ItemsRouteArgs {
   const ItemsRouteArgs({this.key, this.categoryNames = const []});
 
-  final _i31.Key? key;
+  final _i30.Key? key;
 
   final List<String> categoryNames;
 
@@ -384,7 +366,7 @@ class ItemsRouteArgs {
     if (identical(this, other)) return true;
     if (other is! ItemsRouteArgs) return false;
     return key == other.key &&
-        const _i32.ListEquality<String>().equals(
+        const _i31.ListEquality<String>().equals(
           categoryNames,
           other.categoryNames,
         );
@@ -392,64 +374,64 @@ class ItemsRouteArgs {
 
   @override
   int get hashCode =>
-      key.hashCode ^ const _i32.ListEquality<String>().hash(categoryNames);
+      key.hashCode ^ const _i31.ListEquality<String>().hash(categoryNames);
 }
 
 /// generated route for
-/// [_i13.ItemsSearchPage]
-class ItemsSearchRoute extends _i30.PageRouteInfo<void> {
-  const ItemsSearchRoute({List<_i30.PageRouteInfo>? children})
+/// [_i12.ItemsSearchPage]
+class ItemsSearchRoute extends _i29.PageRouteInfo<void> {
+  const ItemsSearchRoute({List<_i29.PageRouteInfo>? children})
     : super(ItemsSearchRoute.name, initialChildren: children);
 
   static const String name = 'ItemsSearchRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i13.ItemsSearchPage();
+      return const _i12.ItemsSearchPage();
     },
   );
 }
 
 /// generated route for
-/// [_i14.ItemsShellRoute]
-class ItemsShellRoute extends _i30.PageRouteInfo<void> {
-  const ItemsShellRoute({List<_i30.PageRouteInfo>? children})
+/// [_i13.ItemsShellRoute]
+class ItemsShellRoute extends _i29.PageRouteInfo<void> {
+  const ItemsShellRoute({List<_i29.PageRouteInfo>? children})
     : super(ItemsShellRoute.name, initialChildren: children);
 
   static const String name = 'ItemsShellRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i14.ItemsShellRoute();
+      return const _i13.ItemsShellRoute();
     },
   );
 }
 
 /// generated route for
-/// [_i15.KeysPage]
-class KeysRoute extends _i30.PageRouteInfo<void> {
-  const KeysRoute({List<_i30.PageRouteInfo>? children})
+/// [_i14.KeysPage]
+class KeysRoute extends _i29.PageRouteInfo<void> {
+  const KeysRoute({List<_i29.PageRouteInfo>? children})
     : super(KeysRoute.name, initialChildren: children);
 
   static const String name = 'KeysRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i15.KeysPage();
+      return const _i14.KeysPage();
     },
   );
 }
 
 /// generated route for
-/// [_i16.MapDetailPage]
-class MapDetailRoute extends _i30.PageRouteInfo<MapDetailRouteArgs> {
+/// [_i15.MapDetailPage]
+class MapDetailRoute extends _i29.PageRouteInfo<MapDetailRouteArgs> {
   MapDetailRoute({
-    _i31.Key? key,
+    _i30.Key? key,
     required String mapId,
-    List<_i30.PageRouteInfo>? children,
+    List<_i29.PageRouteInfo>? children,
   }) : super(
          MapDetailRoute.name,
          args: MapDetailRouteArgs(key: key, mapId: mapId),
@@ -459,14 +441,14 @@ class MapDetailRoute extends _i30.PageRouteInfo<MapDetailRouteArgs> {
 
   static const String name = 'MapDetailRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<MapDetailRouteArgs>(
         orElse: () => MapDetailRouteArgs(mapId: pathParams.getString('mapId')),
       );
-      return _i16.MapDetailPage(key: args.key, mapId: args.mapId);
+      return _i15.MapDetailPage(key: args.key, mapId: args.mapId);
     },
   );
 }
@@ -474,7 +456,7 @@ class MapDetailRoute extends _i30.PageRouteInfo<MapDetailRouteArgs> {
 class MapDetailRouteArgs {
   const MapDetailRouteArgs({this.key, required this.mapId});
 
-  final _i31.Key? key;
+  final _i30.Key? key;
 
   final String mapId;
 
@@ -495,124 +477,124 @@ class MapDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i17.MapsPage]
-class MapsRoute extends _i30.PageRouteInfo<void> {
-  const MapsRoute({List<_i30.PageRouteInfo>? children})
+/// [_i16.MapsPage]
+class MapsRoute extends _i29.PageRouteInfo<void> {
+  const MapsRoute({List<_i29.PageRouteInfo>? children})
     : super(MapsRoute.name, initialChildren: children);
 
   static const String name = 'MapsRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i17.MapsPage();
+      return const _i16.MapsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i18.MorePage]
-class MoreRoute extends _i30.PageRouteInfo<void> {
-  const MoreRoute({List<_i30.PageRouteInfo>? children})
+/// [_i17.MorePage]
+class MoreRoute extends _i29.PageRouteInfo<void> {
+  const MoreRoute({List<_i29.PageRouteInfo>? children})
     : super(MoreRoute.name, initialChildren: children);
 
   static const String name = 'MoreRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i18.MorePage();
+      return const _i17.MorePage();
     },
   );
 }
 
 /// generated route for
-/// [_i19.MoreShellRoute]
-class MoreShellRoute extends _i30.PageRouteInfo<void> {
-  const MoreShellRoute({List<_i30.PageRouteInfo>? children})
+/// [_i18.MoreShellRoute]
+class MoreShellRoute extends _i29.PageRouteInfo<void> {
+  const MoreShellRoute({List<_i29.PageRouteInfo>? children})
     : super(MoreShellRoute.name, initialChildren: children);
 
   static const String name = 'MoreShellRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i19.MoreShellRoute();
+      return const _i18.MoreShellRoute();
     },
   );
 }
 
 /// generated route for
-/// [_i20.SettingsPage]
-class SettingsRoute extends _i30.PageRouteInfo<void> {
-  const SettingsRoute({List<_i30.PageRouteInfo>? children})
+/// [_i19.SettingsPage]
+class SettingsRoute extends _i29.PageRouteInfo<void> {
+  const SettingsRoute({List<_i29.PageRouteInfo>? children})
     : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i20.SettingsPage();
+      return const _i19.SettingsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i21.ShoppingListPage]
-class ShoppingListRoute extends _i30.PageRouteInfo<void> {
-  const ShoppingListRoute({List<_i30.PageRouteInfo>? children})
+/// [_i20.ShoppingListPage]
+class ShoppingListRoute extends _i29.PageRouteInfo<void> {
+  const ShoppingListRoute({List<_i29.PageRouteInfo>? children})
     : super(ShoppingListRoute.name, initialChildren: children);
 
   static const String name = 'ShoppingListRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i21.ShoppingListPage();
+      return const _i20.ShoppingListPage();
     },
   );
 }
 
 /// generated route for
-/// [_i22.SplashPage]
-class SplashRoute extends _i30.PageRouteInfo<void> {
-  const SplashRoute({List<_i30.PageRouteInfo>? children})
+/// [_i21.SplashPage]
+class SplashRoute extends _i29.PageRouteInfo<void> {
+  const SplashRoute({List<_i29.PageRouteInfo>? children})
     : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i22.SplashPage();
+      return const _i21.SplashPage();
     },
   );
 }
 
 /// generated route for
-/// [_i23.TarkovShellScreen]
-class TarkovShellRoute extends _i30.PageRouteInfo<void> {
-  const TarkovShellRoute({List<_i30.PageRouteInfo>? children})
+/// [_i22.TarkovShellScreen]
+class TarkovShellRoute extends _i29.PageRouteInfo<void> {
+  const TarkovShellRoute({List<_i29.PageRouteInfo>? children})
     : super(TarkovShellRoute.name, initialChildren: children);
 
   static const String name = 'TarkovShellRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i23.TarkovShellScreen();
+      return const _i22.TarkovShellScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i24.TaskDetailPage]
-class TaskDetailRoute extends _i30.PageRouteInfo<TaskDetailRouteArgs> {
+/// [_i23.TaskDetailPage]
+class TaskDetailRoute extends _i29.PageRouteInfo<TaskDetailRouteArgs> {
   TaskDetailRoute({
-    _i31.Key? key,
+    _i30.Key? key,
     required String taskId,
-    List<_i30.PageRouteInfo>? children,
+    List<_i29.PageRouteInfo>? children,
   }) : super(
          TaskDetailRoute.name,
          args: TaskDetailRouteArgs(key: key, taskId: taskId),
@@ -622,7 +604,7 @@ class TaskDetailRoute extends _i30.PageRouteInfo<TaskDetailRouteArgs> {
 
   static const String name = 'TaskDetailRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
@@ -630,7 +612,7 @@ class TaskDetailRoute extends _i30.PageRouteInfo<TaskDetailRouteArgs> {
         orElse: () =>
             TaskDetailRouteArgs(taskId: pathParams.getString('taskId')),
       );
-      return _i24.TaskDetailPage(key: args.key, taskId: args.taskId);
+      return _i23.TaskDetailPage(key: args.key, taskId: args.taskId);
     },
   );
 }
@@ -638,7 +620,7 @@ class TaskDetailRoute extends _i30.PageRouteInfo<TaskDetailRouteArgs> {
 class TaskDetailRouteArgs {
   const TaskDetailRouteArgs({this.key, required this.taskId});
 
-  final _i31.Key? key;
+  final _i30.Key? key;
 
   final String taskId;
 
@@ -659,60 +641,60 @@ class TaskDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i25.TasksPage]
-class TasksRoute extends _i30.PageRouteInfo<void> {
-  const TasksRoute({List<_i30.PageRouteInfo>? children})
+/// [_i24.TasksPage]
+class TasksRoute extends _i29.PageRouteInfo<void> {
+  const TasksRoute({List<_i29.PageRouteInfo>? children})
     : super(TasksRoute.name, initialChildren: children);
 
   static const String name = 'TasksRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i25.TasksPage();
+      return const _i24.TasksPage();
     },
   );
 }
 
 /// generated route for
-/// [_i26.TasksSearchPage]
-class TasksSearchRoute extends _i30.PageRouteInfo<void> {
-  const TasksSearchRoute({List<_i30.PageRouteInfo>? children})
+/// [_i25.TasksSearchPage]
+class TasksSearchRoute extends _i29.PageRouteInfo<void> {
+  const TasksSearchRoute({List<_i29.PageRouteInfo>? children})
     : super(TasksSearchRoute.name, initialChildren: children);
 
   static const String name = 'TasksSearchRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i26.TasksSearchPage();
+      return const _i25.TasksSearchPage();
     },
   );
 }
 
 /// generated route for
-/// [_i27.TasksShellRoute]
-class TasksShellRoute extends _i30.PageRouteInfo<void> {
-  const TasksShellRoute({List<_i30.PageRouteInfo>? children})
+/// [_i26.TasksShellRoute]
+class TasksShellRoute extends _i29.PageRouteInfo<void> {
+  const TasksShellRoute({List<_i29.PageRouteInfo>? children})
     : super(TasksShellRoute.name, initialChildren: children);
 
   static const String name = 'TasksShellRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i27.TasksShellRoute();
+      return const _i26.TasksShellRoute();
     },
   );
 }
 
 /// generated route for
-/// [_i28.TradersDetailPage]
-class TradersDetailRoute extends _i30.PageRouteInfo<TradersDetailRouteArgs> {
+/// [_i27.TradersDetailPage]
+class TradersDetailRoute extends _i29.PageRouteInfo<TradersDetailRouteArgs> {
   TradersDetailRoute({
-    _i31.Key? key,
+    _i30.Key? key,
     required String traderId,
-    List<_i30.PageRouteInfo>? children,
+    List<_i29.PageRouteInfo>? children,
   }) : super(
          TradersDetailRoute.name,
          args: TradersDetailRouteArgs(key: key, traderId: traderId),
@@ -722,7 +704,7 @@ class TradersDetailRoute extends _i30.PageRouteInfo<TradersDetailRouteArgs> {
 
   static const String name = 'TradersDetailRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
@@ -730,7 +712,7 @@ class TradersDetailRoute extends _i30.PageRouteInfo<TradersDetailRouteArgs> {
         orElse: () =>
             TradersDetailRouteArgs(traderId: pathParams.getString('traderId')),
       );
-      return _i28.TradersDetailPage(key: args.key, traderId: args.traderId);
+      return _i27.TradersDetailPage(key: args.key, traderId: args.traderId);
     },
   );
 }
@@ -738,7 +720,7 @@ class TradersDetailRoute extends _i30.PageRouteInfo<TradersDetailRouteArgs> {
 class TradersDetailRouteArgs {
   const TradersDetailRouteArgs({this.key, required this.traderId});
 
-  final _i31.Key? key;
+  final _i30.Key? key;
 
   final String traderId;
 
@@ -759,17 +741,17 @@ class TradersDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i29.TradersPage]
-class TradersRoute extends _i30.PageRouteInfo<void> {
-  const TradersRoute({List<_i30.PageRouteInfo>? children})
+/// [_i28.TradersPage]
+class TradersRoute extends _i29.PageRouteInfo<void> {
+  const TradersRoute({List<_i29.PageRouteInfo>? children})
     : super(TradersRoute.name, initialChildren: children);
 
   static const String name = 'TradersRoute';
 
-  static _i30.PageInfo page = _i30.PageInfo(
+  static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i29.TradersPage();
+      return const _i28.TradersPage();
     },
   );
 }

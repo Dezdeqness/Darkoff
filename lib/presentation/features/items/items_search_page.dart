@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_search_bar.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
@@ -40,7 +41,7 @@ class _ItemsSearchPageState extends ConsumerState<ItemsSearchPage> {
               child: Hero(
                 tag: 'items-search',
                 child: AppSearchBar(
-                  hintText: 'Search items...',
+                  hintText: tr.items.search.hint,
                   controller: _textController,
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                   onChanged: (query) {
@@ -64,7 +65,7 @@ class _ItemsSearchPageState extends ConsumerState<ItemsSearchPage> {
     return state.when(
       initial: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
       loading: () => const SliverLoadingIndicator(),
-      empty: () => const SliverEmptyMessage(message: 'No items found'),
+      empty: () => SliverEmptyMessage(message: tr.items.emptyState.notFound),
       loaded: (items, hasMore, isLoadingMore, isRefreshing) => SliverList(
         delegate: SliverChildBuilderDelegate(
           (_, i) => ItemCard(item: items[i]),

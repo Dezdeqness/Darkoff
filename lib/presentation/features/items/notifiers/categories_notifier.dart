@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/presentation/features/items/state/categories_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,14 +11,14 @@ class CategoriesNotifier extends _$CategoriesNotifier {
   @override
   CategoriesState build() {
     return CategoriesState(
-      categories: const [
-        CategoryUiModel(label: 'All', names: []),
-        CategoryUiModel(label: 'Keys', names: ['keys', 'key']),
-        CategoryUiModel(label: 'Meds', names: ['meds', 'medical-supplies']),
-        CategoryUiModel(label: 'Ammo', names: ['ammo', 'ammo-container']),
+      categories: [
+        CategoryUiModel(label: tr.common.filter.all, names: const []),
+        CategoryUiModel(label: tr.items.filter.keys, names: const ['keys', 'key']),
+        CategoryUiModel(label: tr.items.filter.meds, names: const ['meds', 'medical-supplies']),
+        CategoryUiModel(label: tr.items.filter.ammo, names: const ['ammo', 'ammo-container']),
         CategoryUiModel(
-          label: 'Gear',
-          names: [
+          label: tr.items.filter.gear,
+          names: const [
             'headwear',
             'armor',
             'armor-plate',

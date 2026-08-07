@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,7 @@ class HomePlaceholderWidget extends StatelessWidget {
             if (onRetry != null)
               TextButton(
                 onPressed: onRetry,
-                child: Text('Retry', style: TextStyle(color: colors.gold)),
+                child: Text(tr.common.action.retry, style: TextStyle(color: colors.gold)),
               ),
           ],
         ),

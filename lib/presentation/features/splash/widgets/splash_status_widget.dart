@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/animated_progress_bar.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,9 @@ class SplashStatusWidget extends StatelessWidget {
     final isDone = mode == StatusMode.done;
 
     final text = switch (mode) {
-      StatusMode.loading => 'Loading data...',
-      StatusMode.done => 'Ready',
-      StatusMode.error => 'Try again',
+      StatusMode.loading => tr.splash.status.loading,
+      StatusMode.done => tr.splash.status.ready,
+      StatusMode.error => tr.common.action.tryAgain,
     };
 
     final color = isError

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/ammo/model/ammo_list_ui_model.dart';
@@ -46,7 +47,7 @@ class AmmoRow extends StatelessWidget {
                   ),
                   if (row.tracer)
                     Text(
-                      'Tracer',
+                      tr.ammo.type.tracer,
                       style: typo.paragraphSmall.copyWith(
                         color: colors.textTertiary,
                       ),

@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/ammo/model/ammo_list_ui_model.dart';
 import 'package:darkoff/presentation/features/ammo/widgets/ammo_row.dart';
@@ -35,7 +36,7 @@ class AmmoGroupCard extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const _AmmoHeaderRow(),
+                _AmmoHeaderRow(),
                 ...group.rows.asMap().entries.map(
                   (e) => AmmoRow(
                     row: e.value,
@@ -65,14 +66,25 @@ class _AmmoHeaderRow extends StatelessWidget {
       child: Row(
         children: [
           const SizedBox(width: 16),
-          Expanded(flex: 3, child: Text('NAME', style: style)),
-          SizedBox(
-            width: 40,
-            child: Text('DMG', style: style, textAlign: TextAlign.center),
+          Expanded(
+            flex: 3,
+            child: Text(tr.ammo.column.name, style: style),
           ),
           SizedBox(
             width: 40,
-            child: Text('PEN', style: style, textAlign: TextAlign.center),
+            child: Text(
+              tr.ammo.column.damage,
+              style: style,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(
+            width: 40,
+            child: Text(
+              tr.ammo.column.penetration,
+              style: style,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

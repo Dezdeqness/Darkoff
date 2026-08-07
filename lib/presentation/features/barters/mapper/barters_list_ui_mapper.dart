@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/domain/entities/barter_entity.dart';
 import 'package:darkoff/domain/entities/contained_item_entity.dart';
@@ -50,7 +51,7 @@ class BartersListUiMapper {
     final options = <BarterTraderOption>[
       BarterTraderOption(
         value: '',
-        label: 'All',
+        label: tr.common.filter.all,
         active: selectedTrader.isEmpty,
       ),
     ];
@@ -85,7 +86,7 @@ class BartersListUiMapper {
     id: item.id,
     iconLink: item.iconLink,
     shortName: item.shortName,
-    countLabel: '${item.count.toInt()}×',
+    countLabel: '${item.count.toInt()}Г—',
   );
 
   int _totalValue(List<ContainedItemEntity> items) =>

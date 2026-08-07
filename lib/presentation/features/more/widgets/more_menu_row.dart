@@ -1,4 +1,3 @@
-import 'package:darkoff/core/localization/app_translations.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/more/model/more_menu.dart';
 import 'package:flutter/material.dart';
@@ -49,13 +48,13 @@ class MoreMenuRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      entry.labelKey.i18n,
+                      entry.label,
                       style:
                           typo.labelLarge.copyWith(color: colors.textPrimary),
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      entry.subtitleKey.i18n,
+                      entry.subtitle,
                       style: typo.paragraphSmall
                           .copyWith(color: colors.textSecondary),
                     ),

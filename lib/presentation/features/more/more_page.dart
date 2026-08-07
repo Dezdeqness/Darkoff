@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:darkoff/core/localization/app_translations.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
@@ -69,14 +69,14 @@ class MorePage extends ConsumerWidget {
           slivers: [
             SliverToBoxAdapter(
               child: PageHeader(
-                title: 'more.title'.i18n,
-                subtitle: 'more.subtitle'.i18n,
+                title: tr.more.title,
+                subtitle: tr.more.subtitle,
                 showBack: false,
               ),
             ),
             for (final section in sections) ...[
               SliverToBoxAdapter(
-                child: SectionLabel(section.section.titleKey.i18n),
+                child: SectionLabel(section.section.title),
               ),
               SliverToBoxAdapter(
                 child: buildSection(context: context, entries: section.entries),

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/maps/notifiers/maps_notifier.dart';
 import 'package:darkoff/presentation/features/maps/state/maps_state.dart';
@@ -22,10 +23,10 @@ class MapsPage extends ConsumerWidget {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: _buildHeader(context)),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(16, 20, 16, 8),
-                child: MapSectionLabel('All Maps'),
+                padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
+                child: MapSectionLabel(tr.maps.section.all),
               ),
             ),
             ..._buildContent(context, ref, state),
@@ -51,13 +52,13 @@ class MapsPage extends ConsumerWidget {
         ),
       ],
       MapsEmpty() => [
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.all(32),
+            padding: const EdgeInsets.all(32),
             child: Center(
               child: Text(
-                'No maps available',
-                style: TextStyle(color: Color(0xFF888888)),
+                tr.maps.emptyState.notFound,
+                style: const TextStyle(color: Color(0xFF888888)),
               ),
             ),
           ),
@@ -70,13 +71,13 @@ class MapsPage extends ConsumerWidget {
             child: Column(
               children: [
                 Text(
-                  'Failed to load maps',
+                  tr.maps.error.load,
                   style: TextStyle(color: context.colorTheme.loss),
                 ),
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: () => ref.read(mapsProvider.notifier).refresh(),
-                  child: const Text('Retry'),
+                  child: Text(tr.common.action.retry),
                 ),
               ],
             ),
@@ -104,7 +105,7 @@ class MapsPage extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Maps',
+            tr.maps.page.title,
             style: typo.titleLarge.copyWith(
               color: colors.textPrimary,
               letterSpacing: 0.5,
@@ -112,7 +113,7 @@ class MapsPage extends ConsumerWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Tarkov raid locations',
+            tr.maps.page.subtitle,
             style: typo.bodySmall.copyWith(color: colors.textSecondary),
           ),
         ],
