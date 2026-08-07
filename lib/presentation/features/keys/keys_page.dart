@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_search_bar.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
@@ -39,17 +40,17 @@ class _KeysPageState extends ConsumerState<KeysPage> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: PageHeader(
-                title: 'Keys',
-                subtitle: 'Market prices & locations',
+                title: tr.keys.page.title,
+                subtitle: tr.keys.page.subtitle,
               ),
             ),
             SliverToBoxAdapter(
               child: AppSearchBar(
                 controller: _searchController,
                 onChanged: notifier.setSearch,
-                hintText: 'Search keys...',
+                hintText: tr.keys.search.hint,
               ),
             ),
             ..._buildContent(state, notifier),
@@ -65,7 +66,7 @@ class _KeysPageState extends ConsumerState<KeysPage> {
       KeysListLoading() => [const SliverLoadingIndicator()],
       KeysListError() => [
         SliverErrorMessage(
-          message: 'Failed to load keys',
+          message: tr.keys.error.load,
           onRetry: notifier.refresh,
         ),
       ],
@@ -80,7 +81,7 @@ class _KeysPageState extends ConsumerState<KeysPage> {
         child: KeySortBar(chips: keys.sortChips, onSelected: notifier.setSort),
       ),
       if (keys.isEmpty)
-        const SliverEmptyMessage(message: 'No keys found')
+        SliverEmptyMessage(message: tr.keys.emptyState.notFound)
       else
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),

@@ -22,7 +22,7 @@ class AmmoListUiMapper {
     return AmmoListUiModel(
       calibers: calibers,
       selectedCaliber: selectedCaliber,
-      sortLabel: sortByPen ? 'Penetration ↓' : 'Damage ↓',
+      sortLabel: sortByPen ? tr.ammo.sort.penetration : tr.ammo.sort.damage,
       grouped: grouped,
       groups: grouped ? _groups(filtered) : const [],
       rows: grouped

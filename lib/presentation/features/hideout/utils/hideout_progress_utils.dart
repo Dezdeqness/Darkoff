@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/domain/entities/hideout_entity.dart';
 import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
 
@@ -143,7 +144,10 @@ ShoppingList computeShoppingList(
       if (missing <= 0) continue;
 
       contributingStations.add(station.id);
-      final source = '${station.name} L${level.level}';
+      final source = tr.hideout.station.sourceLevel(
+        station: station.name,
+        level: level.level,
+      );
 
       final existing = byItem[req.id];
       if (existing == null) {

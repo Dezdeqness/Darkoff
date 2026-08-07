@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/domain/entities/hideout_entity.dart';
 import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
@@ -75,7 +76,7 @@ class HideoutDetailUiMapper {
 
     return LevelCardUiModel(
       level: level.level,
-      title: 'Level ${level.level}',
+      title: tr.hideoutDetail.levelTitle(level: level.level),
       status: status,
       defaultExpanded: defaultExpanded,
       readOnly: readOnly,
@@ -87,26 +88,35 @@ class HideoutDetailUiMapper {
           : null,
       collapsedSummaryText: status == HideoutLevelStatus.nextUp
           ? null
-          : '${itemReqs.length} items · ${formatCompactPrice(cost)} ₽',
+          : tr.hideoutDetail.collapsedSummary(
+              items: itemReqs.length,
+              cost: formatCompactPrice(cost),
+            ),
       lockedMessage: status == HideoutLevelStatus.locked
-          ? 'Complete Level ${level.level - 1} to unlock'
+          ? tr.hideoutDetail.lockedMessage(previousLevel: level.level - 1)
           : null,
       prereqLabel: hasPrereqs
           ? (allStationPrereqsMet
-              ? 'PREREQUISITES · ALL MET'
-              : 'PREREQUISITES')
+              ? tr.hideoutDetail.section.prerequisitesAllMet
+              : tr.hideoutDetail.section.prerequisites)
           : null,
       prereqs: [
         ...level.stationRequirements.map(
           (r) => PrereqRowUiModel(
-            label: '${r.stationName} Level ${r.level}',
+            label: tr.hideoutDetail.prereq.stationLevel(
+              station: r.stationName,
+              level: r.level,
+            ),
             met: progress.builtLevels.contains(
                 HideoutProgressEntity.levelKey(r.stationId, r.level)),
           ),
         ),
         ...level.traderRequirements.map(
           (r) => PrereqRowUiModel(
-            label: '${r.traderName} LL${r.loyaltyLevel ?? '?'}',
+            label: tr.hideoutDetail.prereq.traderLoyalty(
+              trader: r.traderName,
+              loyalty: r.loyaltyLevel ?? '?',
+            ),
             isTrader: true,
           ),
         ),
@@ -114,8 +124,11 @@ class HideoutDetailUiMapper {
       resourcesLabel: itemReqs.isEmpty
           ? null
           : readOnly
-              ? 'WAS REQUIRED'
-              : 'RESOURCES · $complete / ${itemReqs.length} COMPLETE',
+              ? tr.hideoutDetail.status.wasRequired
+              : tr.hideoutDetail.resources.progress(
+                  completed: complete,
+                  total: itemReqs.length,
+                ),
       items: [
         for (final req in itemReqs)
           ItemReqRowUiModel(
@@ -147,18 +160,24 @@ class HideoutDetailUiMapper {
   }
 
   String _itemSubtitle(HideoutItemReqEntity req, int owned) {
-    if (owned >= req.count) return '✓ Requirement met';
+    if (owned >= req.count) return tr.hideoutDetail.status.requirementMet;
     final missing = req.count - owned;
     if (req.price != null) {
-      return '${formatPrice(req.price!)} ₽ each · need $missing more';
+      return tr.hideoutDetail.status.needMoreWithPrice(
+        price: formatPrice(req.price!),
+        count: missing,
+      );
     }
-    return 'need $missing more';
+    return tr.hideoutDetail.status.needMore(count: missing);
   }
 
   String _moneySubtitle(HideoutItemReqEntity req, int owned) {
     final missing = (req.count - owned).clamp(0, req.count);
-    if (missing == 0) return '✓ Requirement met';
-    return '${formatPrice(req.count)} required · ${formatPrice(missing)} to go';
+    if (missing == 0) return tr.hideoutDetail.status.requirementMet;
+    return tr.hideoutDetail.status.moneyToGo(
+      required: formatPrice(req.count),
+      missing: formatPrice(missing),
+    );
   }
 
   String _formatDuration(int seconds) {

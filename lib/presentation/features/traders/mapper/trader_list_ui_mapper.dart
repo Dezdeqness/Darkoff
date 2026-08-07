@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/domain/entities/trader_entity.dart';
 import 'package:darkoff/presentation/features/traders/model/trader_list_ui_model.dart';
 
@@ -19,8 +20,10 @@ class TraderListUiMapper {
 
   String _tradesText(TraderEntity trader) {
     final parts = <String>[
-      if (trader.cashOffers.isNotEmpty) '${trader.cashOffers.length} offers',
-      if (trader.barters.isNotEmpty) '${trader.barters.length} barters',
+      if (trader.cashOffers.isNotEmpty)
+        tr.traders.card.offers(count: trader.cashOffers.length),
+      if (trader.barters.isNotEmpty)
+        tr.traders.card.barters(count: trader.barters.length),
     ];
     return parts.join(' · ');
   }

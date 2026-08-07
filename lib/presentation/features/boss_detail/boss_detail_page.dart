@@ -51,7 +51,7 @@ class BossDetailPage extends ConsumerWidget {
         child: CircularProgressIndicator(),
       ),
       BossDetailError() => AppErrorView(
-        message: 'Failed to load boss',
+        message: tr.bossDetail.error.load,
         onRetry: () => ref.read(bossDetailProvider(bossId).notifier).refresh(),
       ),
       BossDetailLoaded(:final boss) => BossDetailView(

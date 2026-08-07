@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/widgets/app_card.dart';
 import 'package:darkoff/presentation/features/hideout/notifiers/hideout_progress_notifier.dart';
 import 'package:darkoff/presentation/features/hideout_detail/model/hideout_detail_ui_model.dart';
@@ -57,7 +58,10 @@ class _LevelCardState extends ConsumerState<LevelCard> {
               Padding(
                 padding: const EdgeInsets.all(14),
                 child: locked
-                    ? LevelLockedBody(message: model.lockedMessage ?? 'Locked')
+                    ? LevelLockedBody(
+                        message:
+                            model.lockedMessage ?? tr.hideoutDetail.badge.locked,
+                      )
                     : LevelCardBody(
                         stationId: widget.stationId,
                         model: model,

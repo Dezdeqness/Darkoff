@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/presentation/features/traders_detail/notifiers/trader_offers_notifier.dart';
 import 'package:darkoff/presentation/features/traders_detail/state/trader_offers_state.dart';
 import 'package:darkoff/presentation/features/traders_detail/widgets/offer_card.dart';
@@ -26,7 +27,7 @@ class OffersTab extends ConsumerWidget {
           selectedLevel: selectedLevel,
           onSelectLevel: (l) =>
               ref.read(traderOffersProvider(traderId).notifier).selectLevel(l),
-          emptyLabel: 'No offers for this level',
+          emptyLabel: tr.traderDetail.tab.noOffers,
           itemCount: offers.length,
           itemBuilder: (i) => OfferCard(
             offer: offers[i],

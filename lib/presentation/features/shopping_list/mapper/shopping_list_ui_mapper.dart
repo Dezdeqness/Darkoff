@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/domain/entities/hideout_entity.dart';
 import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
@@ -12,8 +13,10 @@ class ShoppingListUiMapper {
     final shopping = computeShoppingList(stations, progress);
 
     return ShoppingListUiModel(
-      title: '${shopping.totalCount} items · across '
-          '${shopping.stationCount} stations',
+      title: tr.shoppingList.summary.title(
+        items: shopping.totalCount,
+        stations: shopping.stationCount,
+      ),
       displayCost: '${formatPrice(shopping.totalCost)} ₽',
       rows: [
         for (final item in shopping.items)

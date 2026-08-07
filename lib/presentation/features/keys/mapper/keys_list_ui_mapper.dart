@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/domain/entities/key_entity.dart';
 import 'package:darkoff/presentation/features/keys/model/keys_list_ui_model.dart';
@@ -42,17 +43,17 @@ class KeysListUiMapper {
   List<KeySortChipUiModel> _sortChips(KeySort sort) => [
     KeySortChipUiModel(
       value: KeySort.name,
-      label: 'A–Z',
+      label: tr.keys.sort.name,
       active: sort == KeySort.name,
     ),
     KeySortChipUiModel(
       value: KeySort.priceDesc,
-      label: '↓ Price',
+      label: tr.keys.sort.priceDesc,
       active: sort == KeySort.priceDesc,
     ),
     KeySortChipUiModel(
       value: KeySort.priceAsc,
-      label: '↑ Price',
+      label: tr.keys.sort.priceAsc,
       active: sort == KeySort.priceAsc,
     ),
   ];
@@ -66,9 +67,11 @@ class KeysListUiMapper {
       iconLink: key.iconLink,
       name: key.name,
       categoryLabel: key.categoryName,
-      priceLabel: hasPrice ? '${formatPrice(key.avgPrice!)} ₽' : 'No data',
+      priceLabel: hasPrice ? '${formatPrice(key.avgPrice!)} ₽' : tr.common.value.noData,
       hasPrice: hasPrice,
-      lowPriceLabel: hasLow ? 'low ${formatPrice(key.low24hPrice!)} ₽' : null,
+      lowPriceLabel: hasLow
+          ? tr.keys.row.lowPrice(price: formatPrice(key.low24hPrice!))
+          : null,
     );
   }
 }

@@ -154,6 +154,10 @@
       "damage": "УРОН",
       "penetration": "ПРОБ"
     },
+    "sort": {
+      "damage": "Урон ↓",
+      "penetration": "Пробитие ↓"
+    },
     "type": {
       "tracer": "Трассер"
     }
@@ -168,6 +172,14 @@
     },
     "emptyState": {
       "notFound": "Бартеры не найдены"
+    },
+    "sort": {
+      "profitDesc": "Прибыль ↓",
+      "profitAsc": "Прибыль ↑"
+    },
+    "card": {
+      "cost": "Цена: ",
+      "value": "Ценность: "
     }
   },
   "bosses": {
@@ -183,11 +195,17 @@
     "fallback": {
       "title": "Босс"
     },
+    "error": {
+      "load": "Не удалось загрузить босса"
+    },
     "section": {
       "health": "Здоровье",
       "spawnLocations": "Места появления",
       "loot": "Лут"
     },
+    "healthTotal": "{hp} HP всего",
+    "spawnChance": "{percent}% появление",
+    "escort": "{name} × {count} ({chance}%)",
     "bodyPart": {
       "chest": "Грудь",
       "head": "Голова",
@@ -196,16 +214,6 @@
       "rightArm": "Правая рука",
       "leftLeg": "Левая нога",
       "rightLeg": "Правая нога"
-    }
-  },
-  "categories": {
-    "page": {
-      "title": "Категории"
-    },
-    "type": {
-      "gear": "Снаряжение",
-      "weaponry": "Оружие",
-      "otherStuff": "Прочее"
     }
   },
   "crafts": {
@@ -218,6 +226,14 @@
     },
     "emptyState": {
       "notFound": "Крафты не найдены"
+    },
+    "sort": {
+      "profitPerHour": "Прибыль/час ↓",
+      "totalProfit": "Общая прибыль ↓"
+    },
+    "card": {
+      "stationLevel": "{station} Ур.{level}",
+      "profitPerHour": "{value} ₽/ч"
     }
   },
   "fleaMarket": {
@@ -256,13 +272,21 @@
       "guidance": {
         "track": "Отслеживайте станцию для формирования списка",
         "tap": "Нажмите для сводного списка"
-      }
+      },
+      "itemsStillNeeded": "Ещё нужно предметов: {count}"
     },
     "status": {
       "fullyBuilt": "Полностью построено"
     },
     "shoppingCard": {
       "label": "СПИСОК ПОКУПОК"
+    },
+    "summary": {
+      "tracked": "{stations} отслеж. · {owned} / {total} предметов собрано"
+    },
+    "station": {
+      "meta": "{collected} / {total} предметов собрано · нужно {cost} ₽",
+      "sourceLevel": "{station} Ур.{level}"
     }
   },
   "hideoutDetail": {
@@ -276,14 +300,32 @@
     },
     "section": {
       "bonuses": "БОНУСЫ (РАЗБЛОКИРУЮТСЯ ПОСЛЕ ПОСТРОЙКИ)",
-      "prerequisites": "ТРЕБОВАНИЯ"
+      "prerequisites": "ТРЕБОВАНИЯ",
+      "prerequisitesAllMet": "ТРЕБОВАНИЯ · ВСЕ ВЫПОЛНЕНЫ"
     },
     "action": {
       "unmarkBuilt": "Отменить постройку",
       "markBuilt": "Отметить уровень построенным"
     },
     "status": {
-      "wasRequired": "БЫЛО НЕОБХОДИМО"
+      "wasRequired": "БЫЛО НЕОБХОДИМО",
+      "requirementMet": "✓ Требование выполнено",
+      "needMore": "нужно ещё {count}",
+      "needMoreWithPrice": "{price} ₽ за шт. · нужно ещё {count}",
+      "moneyToGo": "нужно {required} · осталось {missing}"
+    },
+    "error": {
+      "load": "Не удалось загрузить станцию"
+    },
+    "levelTitle": "Уровень {level}",
+    "lockedMessage": "Постройте уровень {previousLevel} для разблокировки",
+    "collapsedSummary": "{items} предм. · {cost} ₽",
+    "prereq": {
+      "stationLevel": "{station} Уровень {level}",
+      "traderLoyalty": "{trader} УЛ{loyalty}"
+    },
+    "resources": {
+      "progress": "РЕСУРСЫ · {completed} / {total} СОБРАНО"
     }
   },
   "items": {
@@ -331,6 +373,7 @@
       "prices": "Цены",
       "sellTo": "Продать"
     },
+    "sellToVendor": "Продать: {vendor}",
     "property": {
       "size": "Размер",
       "weight": "Вес",
@@ -443,12 +486,24 @@
     },
     "emptyState": {
       "notFound": "Ключи не найдены"
+    },
+    "sort": {
+      "name": "А–Я",
+      "priceDesc": "↓ Цена",
+      "priceAsc": "↑ Цена"
+    },
+    "row": {
+      "lowPrice": "мин. {price} ₽"
     }
   },
   "maps": {
     "page": {
       "title": "Карты",
       "subtitle": "Локации рейдов Таркова"
+    },
+    "detail": {
+      "fallbackTitle": "Карта",
+      "subtitle": "Локация рейда"
     },
     "section": {
       "all": "Все карты",
@@ -473,7 +528,10 @@
       "subtitle": "Всё, что осталось собрать"
     },
     "empty": "Нечего покупать — отслеживайте станцию для формирования списка",
-    "fleaEstimate": "Оценка Барахолки"
+    "fleaEstimate": "Оценка Барахолки",
+    "summary": {
+      "title": "{items} предметов · со {stations} станций"
+    }
   },
   "tasks": {
     "page": {
@@ -503,6 +561,16 @@
     },
     "objective": {
       "optional": "Необязательно"
+    },
+    "meta": {
+      "levelRequirement": "Уровень {level}+",
+      "experience": "{amount} XP"
+    },
+    "experienceLabel": "{amount} опыта",
+    "reward": {
+      "priceEach": "{price} ₽ за шт.",
+      "count": "× {count}",
+      "standing": "{trader}: {sign}{amount} репутации"
     }
   },
   "traders": {
@@ -520,6 +588,10 @@
     },
     "time": {
       "moments": "мгновения"
+    },
+    "card": {
+      "offers": "{count} предл.",
+      "barters": "{count} бартеров"
     }
   },
   "traderDetail": {

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_card.dart';
@@ -96,7 +97,7 @@ class BarterCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Cost: ',
+                tr.barters.card.cost,
                 style: typo.paragraphSmall.copyWith(color: colors.textTertiary),
               ),
               Text(
@@ -105,7 +106,7 @@ class BarterCard extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               Text(
-                'Value: ',
+                tr.barters.card.value,
                 style: typo.paragraphSmall.copyWith(color: colors.textTertiary),
               ),
               Text(

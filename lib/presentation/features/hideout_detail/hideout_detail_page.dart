@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/item_icon.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
@@ -37,7 +38,7 @@ class HideoutDetailPage extends ConsumerWidget {
           slivers: [
             SliverToBoxAdapter(
               child: PageHeader(
-                title: detail?.name ?? 'Station',
+                title: detail?.name ?? tr.hideoutDetail.fallback.title,
                 trailing: detail == null
                     ? null
                     : buildTrailing(context: context, ref: ref, detail: detail),
@@ -94,7 +95,7 @@ class HideoutDetailPage extends ConsumerWidget {
       initial: () => const SliverLoadingIndicator(),
       loading: () => const SliverLoadingIndicator(),
       error: (_) => SliverErrorMessage(
-        message: 'Failed to load station',
+        message: tr.hideoutDetail.error.load,
         onRetry: () =>
             ref.read(hideoutDetailProvider(stationId).notifier).retry(),
       ),

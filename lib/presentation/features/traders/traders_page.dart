@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
@@ -22,10 +23,10 @@ class TradersPage extends ConsumerWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: PageHeader(
-                title: 'Traders',
-                subtitle: 'Offers, barters & reset times',
+                title: tr.traders.page.title,
+                subtitle: tr.traders.page.subtitle,
               ),
             ),
             ...buildContent(context, ref, state),
@@ -44,7 +45,7 @@ class TradersPage extends ConsumerWidget {
         ],
       TradersListError() => [
           SliverErrorMessage(
-            message: 'Failed to load traders',
+            message: tr.traders.error.load,
             onRetry: () => ref.read(tradersListProvider.notifier).refresh(),
           ),
         ],

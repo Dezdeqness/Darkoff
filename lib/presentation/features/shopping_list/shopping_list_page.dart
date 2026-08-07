@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
@@ -23,10 +24,10 @@ class ShoppingListPage extends ConsumerWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: PageHeader(
-                title: 'Shopping List',
-                subtitle: 'Everything you still need to collect',
+                title: tr.shoppingList.page.title,
+                subtitle: tr.shoppingList.page.subtitle,
               ),
             ),
             buildContent(state),
@@ -40,8 +41,8 @@ class ShoppingListPage extends ConsumerWidget {
   Widget buildContent(ShoppingListState state) {
     return state.when(
       loading: () => const SliverLoadingIndicator(),
-      empty: () => const SliverEmptyMessage(
-        message: 'Nothing to buy — track a station to build your list',
+      empty: () => SliverEmptyMessage(
+        message: tr.shoppingList.empty,
       ),
       loaded: buildList,
     );

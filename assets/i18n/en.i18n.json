@@ -154,6 +154,10 @@
       "damage": "DMG",
       "penetration": "PEN"
     },
+    "sort": {
+      "damage": "Damage ↓",
+      "penetration": "Penetration ↓"
+    },
     "type": {
       "tracer": "Tracer"
     }
@@ -168,6 +172,14 @@
     },
     "emptyState": {
       "notFound": "No barters found"
+    },
+    "sort": {
+      "profitDesc": "Profit ↓",
+      "profitAsc": "Profit ↑"
+    },
+    "card": {
+      "cost": "Cost: ",
+      "value": "Value: "
     }
   },
   "bosses": {
@@ -183,11 +195,17 @@
     "fallback": {
       "title": "Boss"
     },
+    "error": {
+      "load": "Failed to load boss"
+    },
     "section": {
       "health": "Health",
       "spawnLocations": "Spawn locations",
       "loot": "Loot"
     },
+    "healthTotal": "{hp} HP total",
+    "spawnChance": "{percent}% spawn",
+    "escort": "{name} × {count} ({chance}%)",
     "bodyPart": {
       "chest": "Chest",
       "head": "Head",
@@ -196,16 +214,6 @@
       "rightArm": "Right arm",
       "leftLeg": "Left leg",
       "rightLeg": "Right leg"
-    }
-  },
-  "categories": {
-    "page": {
-      "title": "Categories"
-    },
-    "type": {
-      "gear": "Gear",
-      "weaponry": "Weaponry",
-      "otherStuff": "Other Stuff"
     }
   },
   "crafts": {
@@ -218,6 +226,14 @@
     },
     "emptyState": {
       "notFound": "No crafts found"
+    },
+    "sort": {
+      "profitPerHour": "Profit/hour ↓",
+      "totalProfit": "Total profit ↓"
+    },
+    "card": {
+      "stationLevel": "{station} Lv{level}",
+      "profitPerHour": "{value} ₽/h"
     }
   },
   "fleaMarket": {
@@ -256,13 +272,21 @@
       "guidance": {
         "track": "Track a station to build your list",
         "tap": "Tap for aggregated list"
-      }
+      },
+      "itemsStillNeeded": "{count} items still needed"
     },
     "status": {
       "fullyBuilt": "Fully built"
     },
     "shoppingCard": {
       "label": "SHOPPING LIST"
+    },
+    "summary": {
+      "tracked": "{stations} tracked · {owned} / {total} items owned"
+    },
+    "station": {
+      "meta": "{collected} / {total} items collected · {cost} ₽ needed",
+      "sourceLevel": "{station} L{level}"
     }
   },
   "hideoutDetail": {
@@ -276,14 +300,32 @@
     },
     "section": {
       "bonuses": "BONUSES (UNLOCKS AFTER BUILD)",
-      "prerequisites": "PREREQUISITES"
+      "prerequisites": "PREREQUISITES",
+      "prerequisitesAllMet": "PREREQUISITES · ALL MET"
     },
     "action": {
       "unmarkBuilt": "Unmark as built",
       "markBuilt": "Mark level as built"
     },
     "status": {
-      "wasRequired": "WAS REQUIRED"
+      "wasRequired": "WAS REQUIRED",
+      "requirementMet": "✓ Requirement met",
+      "needMore": "need {count} more",
+      "needMoreWithPrice": "{price} ₽ each · need {count} more",
+      "moneyToGo": "{required} required · {missing} to go"
+    },
+    "error": {
+      "load": "Failed to load station"
+    },
+    "levelTitle": "Level {level}",
+    "lockedMessage": "Complete Level {previousLevel} to unlock",
+    "collapsedSummary": "{items} items · {cost} ₽",
+    "prereq": {
+      "stationLevel": "{station} Level {level}",
+      "traderLoyalty": "{trader} LL{loyalty}"
+    },
+    "resources": {
+      "progress": "RESOURCES · {completed} / {total} COMPLETE"
     }
   },
   "items": {
@@ -331,6 +373,7 @@
       "prices": "Prices",
       "sellTo": "Sell To"
     },
+    "sellToVendor": "Sell to {vendor}",
     "property": {
       "size": "Size",
       "weight": "Weight",
@@ -443,12 +486,24 @@
     },
     "emptyState": {
       "notFound": "No keys found"
+    },
+    "sort": {
+      "name": "A–Z",
+      "priceDesc": "↓ Price",
+      "priceAsc": "↑ Price"
+    },
+    "row": {
+      "lowPrice": "low {price} ₽"
     }
   },
   "maps": {
     "page": {
       "title": "Maps",
       "subtitle": "Tarkov raid locations"
+    },
+    "detail": {
+      "fallbackTitle": "Map",
+      "subtitle": "Raid location"
     },
     "section": {
       "all": "All Maps",
@@ -473,7 +528,10 @@
       "subtitle": "Everything you still need to collect"
     },
     "empty": "Nothing to buy — track a station to build your list",
-    "fleaEstimate": "Flea Market estimate"
+    "fleaEstimate": "Flea Market estimate",
+    "summary": {
+      "title": "{items} items · across {stations} stations"
+    }
   },
   "tasks": {
     "page": {
@@ -503,6 +561,16 @@
     },
     "objective": {
       "optional": "Optional"
+    },
+    "meta": {
+      "levelRequirement": "Level {level}+",
+      "experience": "{amount} XP"
+    },
+    "experienceLabel": "{amount} EXP",
+    "reward": {
+      "priceEach": "{price} ₽ each",
+      "count": "× {count}",
+      "standing": "{trader}: {sign}{amount} reputation"
     }
   },
   "traders": {
@@ -520,6 +588,10 @@
     },
     "time": {
       "moments": "moments"
+    },
+    "card": {
+      "offers": "{count} offers",
+      "barters": "{count} barters"
     }
   },
   "traderDetail": {

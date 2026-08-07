@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/presentation/features/traders_detail/notifiers/trader_barters_notifier.dart';
 import 'package:darkoff/presentation/features/traders_detail/state/trader_barters_state.dart';
 import 'package:darkoff/presentation/features/traders_detail/widgets/barter_card.dart';
@@ -26,7 +27,7 @@ class BartersTab extends ConsumerWidget {
           selectedLevel: selectedLevel,
           onSelectLevel: (l) =>
               ref.read(traderBartersProvider(traderId).notifier).selectLevel(l),
-          emptyLabel: 'No barters for this level',
+          emptyLabel: tr.traderDetail.tab.noBarters,
           itemCount: barters.length,
           itemBuilder: (i) => BarterCard(
             barter: barters[i],

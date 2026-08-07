@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/hideout_detail/model/hideout_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/hideout_detail/widgets/level_badge.dart';
@@ -50,19 +51,19 @@ class LevelCardHeader extends StatelessWidget {
             switch (model.status) {
               HideoutLevelStatus.built => LevelBadge(
                   icon: Icons.check,
-                  label: 'BUILT',
+                  label: tr.hideoutDetail.badge.built,
                   color: colors.profit,
                   background: colors.profitSubtle,
                 ),
               HideoutLevelStatus.nextUp => LevelBadge(
                   icon: Icons.bolt,
-                  label: 'NEXT UP',
+                  label: tr.hideoutDetail.badge.nextUp,
                   color: colors.profit,
                   background: colors.profitSubtle,
                 ),
               HideoutLevelStatus.locked => LevelBadge(
                   icon: Icons.lock_outline,
-                  label: 'LOCKED',
+                  label: tr.hideoutDetail.badge.locked,
                   color: colors.textSecondary,
                   background: colors.surfaceHigh,
                 ),

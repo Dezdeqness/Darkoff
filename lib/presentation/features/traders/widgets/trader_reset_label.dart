@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:flutter/material.dart';
 
 const _tick = Duration(seconds: 60);
@@ -18,13 +19,15 @@ String traderResetLabel(String? resetTime) {
   final remaining = resetAt.difference(now);
 
   if (remaining.isNegative) {
-    return 'Updated ${_formatElapsed(now.difference(resetAt))} ago';
+    return tr.traders.reset.updatedAgo(
+      elapsed: _formatElapsed(now.difference(resetAt)),
+    );
   }
-  if (remaining.inMinutes <= 0) return 'Coming soon';
+  if (remaining.inMinutes <= 0) return tr.traders.reset.comingSoon;
 
   final h = remaining.inHours;
   final m = remaining.inMinutes % 60;
-  return 'Resets in '
+  return '${tr.traders.reset.after}'
       '${h.toString().padLeft(2, '0')}:${m.toString().padLeft(2, '0')}';
 }
 
@@ -33,7 +36,7 @@ String _formatElapsed(Duration d) {
   final m = d.inMinutes % 60;
   if (h > 0) return '${h}h ${m}m';
   if (m > 0) return '${m}m';
-  return 'moments';
+  return tr.traders.time.moments;
 }
 
 class TraderResetLabel extends StatefulWidget {

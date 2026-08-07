@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_filter_chip.dart';
@@ -32,10 +33,10 @@ class _FleaMarketPageState extends ConsumerState<FleaMarketPage> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: PageHeader(
-                title: 'Flea Market',
-                subtitle: 'Price trends & analytics',
+                title: tr.fleaMarket.page.title,
+                subtitle: tr.fleaMarket.page.subtitle,
               ),
             ),
             SliverPersistentHeader(
@@ -98,23 +99,27 @@ class _CategoryTabs extends StatelessWidget {
   final FleaCategory selected;
   final ValueChanged<FleaCategory> onSelect;
 
-  static const _tabs = [
-    (FleaCategory.gainers, Icons.trending_up, 'Gainers'),
-    (FleaCategory.losers, Icons.trending_down, 'Losers'),
-    (FleaCategory.expensive, Icons.monetization_on_outlined, 'Most Expensive'),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final tabs = [
+      (FleaCategory.gainers, Icons.trending_up, tr.fleaMarket.tab.gainers),
+      (FleaCategory.losers, Icons.trending_down, tr.fleaMarket.tab.losers),
+      (
+        FleaCategory.expensive,
+        Icons.monetization_on_outlined,
+        tr.fleaMarket.tab.mostExpensive,
+      ),
+    ];
+
     return SizedBox(
       height: 46,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        itemCount: _tabs.length,
+        itemCount: tabs.length,
         separatorBuilder: (_, _) => const SizedBox(width: 8),
         itemBuilder: (context, i) {
-          final (category, icon, label) = _tabs[i];
+          final (category, icon, label) = tabs[i];
           return Center(
             child: AppFilterChip(
               label: label,

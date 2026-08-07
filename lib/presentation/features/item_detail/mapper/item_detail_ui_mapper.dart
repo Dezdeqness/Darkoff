@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/domain/entities/item_detail_entity.dart';
 import 'package:darkoff/presentation/features/core/model/property_tile_ui_model.dart';
@@ -10,7 +11,7 @@ class ItemDetailUiMapper {
     final properties = _buildProperties(entity);
     final prices = <PriceRowUiModel>[
       PriceRowUiModel(
-        label: 'Flea Market',
+        label: tr.common.price.fleaMarket,
         price: '${formatPrice(fleaPrice)} ₽',
         badge: entity.changeLast48hPercent != null
             ? '${entity.changeLast48hPercent! >= 0 ? '+' : ''}'
@@ -26,7 +27,7 @@ class ItemDetailUiMapper {
 
       prices.add(
         PriceRowUiModel(
-          label: 'Sell to ${best.vendorName}',
+          label: tr.itemDetail.sellToVendor(vendor: best.vendorName),
           price: '${formatPrice(best.price)} ${currencySymbol(best.currency)}',
         ),
       );
@@ -47,7 +48,7 @@ class ItemDetailUiMapper {
 
     return ItemDetailUiModel(
       id: entity.id,
-      displayName: entity.name ?? 'Unknown Item',
+      displayName: entity.name ?? tr.common.item.unknown,
       shortName: entity.shortName,
       labels: labels,
       description: entity.description,
@@ -82,19 +83,19 @@ class ItemDetailUiMapper {
     return <PropertyTileUiModel>[
       if (entity.width != null && entity.height != null)
         PropertyTileUiModel(
-          label: 'Size',
+          label: tr.itemDetail.property.size,
           value: '${entity.width} x ${entity.height}',
         ),
 
       if (entity.weight != null)
         PropertyTileUiModel(
-          label: 'Weight',
+          label: tr.itemDetail.property.weight,
           value: '${entity.weight!.toStringAsFixed(1)} kg',
         ),
 
       if (profit != null)
         PropertyTileUiModel(
-          label: 'Profit',
+          label: tr.itemDetail.property.profit,
           value: '${profit >= 0 ? '+' : ''}${formatPrice(profit)} ₽',
           type: profit >= 0
               ? PropertyValueType.positive
@@ -103,7 +104,7 @@ class ItemDetailUiMapper {
 
       if (perSlot != null)
         PropertyTileUiModel(
-          label: 'Per Slot',
+          label: tr.itemDetail.property.perSlot,
           value: '${formatPrice(perSlot)} ₽',
           type: PropertyValueType.accent,
         ),

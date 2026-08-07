@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/utils/color_utils.dart';
 import 'package:darkoff/core/widgets/app_error_view.dart';
@@ -93,7 +94,7 @@ class ItemDetailPage extends ConsumerWidget {
           const SizedBox(height: 4),
 
           Text(
-            item.categoryLabel.isNotEmpty ? item.categoryLabel : 'Item',
+            item.categoryLabel.isNotEmpty ? item.categoryLabel : tr.items.category.item,
             textAlign: TextAlign.center,
             style: typo.bodySmall.copyWith(color: colors.textSecondary),
           ),
@@ -124,7 +125,7 @@ class ItemDetailPage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppSectionHeader(title: 'Properties'),
+        AppSectionHeader(title: tr.itemDetail.section.properties),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: GridView.count(
@@ -182,7 +183,7 @@ class ItemDetailPage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppSectionHeader(title: 'Prices'),
+        AppSectionHeader(title: tr.itemDetail.section.prices),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(
@@ -274,7 +275,7 @@ class ItemDetailPage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppSectionHeader(title: 'Sell To'),
+        AppSectionHeader(title: tr.itemDetail.section.sellTo),
 
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/item_icon.dart';
 import 'package:darkoff/presentation/features/shopping_list/model/shopping_list_ui_model.dart';
@@ -102,7 +103,7 @@ class ShoppingListSummaryCard extends StatelessWidget {
                     style: typo.labelMedium.copyWith(color: colors.gold),
                   ),
                   Text(
-                    'Flea Market estimate',
+                    tr.shoppingList.fleaEstimate,
                     style: typo.paragraphSmall
                         .copyWith(color: colors.textSecondary),
                   ),

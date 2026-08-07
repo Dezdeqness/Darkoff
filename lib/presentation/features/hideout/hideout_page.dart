@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
@@ -23,10 +24,10 @@ class HideoutPage extends ConsumerWidget {
   }) {
     return state.when(
       loading: () => const SliverLoadingIndicator(),
-      empty: () => const SliverEmptyMessage(message: 'No stations available'),
+      empty: () => SliverEmptyMessage(message: tr.hideout.emptyState.noStations),
       loaded: (model) => buildList(context, model),
       error: (_) => SliverErrorMessage(
-        message: 'Failed to load hideout data',
+        message: tr.hideout.error.load,
         onRetry: () => ref.read(hideoutListProvider.notifier).refresh(),
       ),
     );
@@ -68,10 +69,10 @@ class HideoutPage extends ConsumerWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: PageHeader(
-                title: 'Hideout',
-                subtitle: 'Station upgrades & requirements',
+                title: tr.hideout.page.title,
+                subtitle: tr.hideout.page.subtitle,
               ),
             ),
             buildContent(context: context, ref: ref, state: state),

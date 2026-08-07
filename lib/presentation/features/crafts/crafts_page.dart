@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/page_header.dart';
 import 'package:darkoff/core/widgets/sliver_states.dart';
@@ -26,10 +27,10 @@ class CraftsPage extends ConsumerWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: PageHeader(
-                title: 'Crafts',
-                subtitle: 'Hideout craft recipes & profit',
+                title: tr.crafts.page.title,
+                subtitle: tr.crafts.page.subtitle,
               ),
             ),
             ..._buildContent(state, notifier),
@@ -48,7 +49,7 @@ class CraftsPage extends ConsumerWidget {
       CraftsListLoading() => [const SliverLoadingIndicator()],
       CraftsListError() => [
         SliverErrorMessage(
-          message: 'Failed to load crafts',
+          message: tr.crafts.error.load,
           onRetry: notifier.refresh,
         ),
       ],
@@ -75,7 +76,7 @@ class CraftsPage extends ConsumerWidget {
         ),
       ),
       if (crafts.isEmpty)
-        const SliverEmptyMessage(message: 'No crafts found')
+        SliverEmptyMessage(message: tr.crafts.emptyState.notFound)
       else
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),

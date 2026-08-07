@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_error_view.dart';
@@ -42,7 +43,9 @@ class TradersDetailPage extends ConsumerWidget {
   }
 
   Widget buildHeader(BuildContext context, TraderDetailUiModel? model) {
-    if (model == null) return const PageHeader(title: 'Trader');
+    if (model == null) {
+      return PageHeader(title: tr.traderDetail.fallback.title);
+    }
 
     return PageHeader.subtitleContent(
       title: model.name,
@@ -66,7 +69,7 @@ class TradersDetailPage extends ConsumerWidget {
     return switch (state) {
       TraderDetailLoading() => const Center(child: CircularProgressIndicator()),
       TraderDetailError() => AppErrorView(
-        message: 'Failed to load trader',
+        message: tr.traderDetail.error.load,
         onRetry: () =>
             ref.read(traderDetailProvider(traderId).notifier).refresh(),
       ),

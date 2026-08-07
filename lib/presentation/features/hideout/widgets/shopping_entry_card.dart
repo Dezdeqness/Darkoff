@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/dashed_border_painter.dart';
 import 'package:darkoff/presentation/features/hideout/model/hideout_list_ui_model.dart';
@@ -41,7 +42,7 @@ class ShoppingEntryCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'SHOPPING LIST',
+                        tr.hideout.shoppingCard.label,
                         style: typo.labelSmall.copyWith(
                           color: colors.gold,
                           letterSpacing: 1.5,

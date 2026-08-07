@@ -18,7 +18,9 @@ class BartersListUiMapper {
 
     return BartersListUiModel(
       traders: _traders(barters, selectedTrader),
-      sortLabel: sort == BarterSort.profitDesc ? 'Profit ↓' : 'Profit ↑',
+      sortLabel: sort == BarterSort.profitDesc
+          ? tr.barters.sort.profitDesc
+          : tr.barters.sort.profitAsc,
       rows: filtered.map(_row).toList(),
     );
   }
@@ -86,7 +88,7 @@ class BartersListUiMapper {
     id: item.id,
     iconLink: item.iconLink,
     shortName: item.shortName,
-    countLabel: '${item.count.toInt()}Г—',
+    countLabel: '${item.count.toInt()}×',
   );
 
   int _totalValue(List<ContainedItemEntity> items) =>

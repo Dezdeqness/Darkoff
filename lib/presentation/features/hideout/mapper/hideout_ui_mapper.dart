@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/domain/entities/hideout_entity.dart';
 import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
@@ -36,12 +37,15 @@ class HideoutUiMapper {
 
     return HideoutSummaryUiModel(
       title: tracking
-          ? '${shopping.stationCount} tracked · ${shopping.ownedUnits} / '
-              '${shopping.totalUnits} items owned'
-          : 'No stations tracked',
+          ? tr.hideout.summary.tracked(
+              stations: shopping.stationCount,
+              owned: shopping.ownedUnits,
+              total: shopping.totalUnits,
+            )
+          : tr.hideout.upgrade.empty.title,
       subtitle: tracking
-          ? 'Needed for the next upgrade'
-          : 'Star a station to plan its next upgrade',
+          ? tr.hideout.upgrade.help
+          : tr.hideout.upgrade.guidance,
       displayCost: tracking ? '${formatPrice(shopping.totalCost)} ₽' : null,
     );
   }
@@ -51,11 +55,11 @@ class HideoutUiMapper {
 
     return ShoppingEntryUiModel(
       title: empty
-          ? 'Nothing tracked yet'
-          : '${shopping.totalCount} items still needed',
+          ? tr.hideout.shopping.empty.title
+          : tr.hideout.shopping.itemsStillNeeded(count: shopping.totalCount),
       subtitle: empty
-          ? 'Track a station to build your list'
-          : 'Tap for aggregated list',
+          ? tr.hideout.shopping.guidance.track
+          : tr.hideout.shopping.guidance.tap,
       enabled: !empty,
     );
   }
@@ -74,9 +78,12 @@ class HideoutUiMapper {
       totalLevels: station.levels.length,
       builtLevels: stats.builtLevels,
       metaText: fullyBuilt
-          ? 'Fully built'
-          : '${stats.collectedItems} / ${stats.totalItems} items collected · '
-              '${formatCompactPrice(stats.neededCost)} ₽ needed',
+          ? tr.hideout.status.fullyBuilt
+          : tr.hideout.station.meta(
+              collected: stats.collectedItems,
+              total: stats.totalItems,
+              cost: formatCompactPrice(stats.neededCost),
+            ),
       progress: stats.itemsFraction,
       fullyBuilt: fullyBuilt,
     );

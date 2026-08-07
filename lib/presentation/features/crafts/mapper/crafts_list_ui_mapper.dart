@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/domain/entities/contained_item_entity.dart';
 import 'package:darkoff/domain/entities/craft_entity.dart';
@@ -18,8 +19,8 @@ class CraftsListUiMapper {
     return CraftsListUiModel(
       stations: _stations(crafts, selectedStation),
       sortLabel: sort == CraftSort.profitPerHour
-          ? 'Profit/hour ↓'
-          : 'Total profit ↓',
+          ? tr.crafts.sort.profitPerHour
+          : tr.crafts.sort.totalProfit,
       rows: filtered.map(_row).toList(),
     );
   }
@@ -52,7 +53,7 @@ class CraftsListUiMapper {
     final options = <CraftStationOption>[
       CraftStationOption(
         value: '',
-        label: 'All',
+        label: tr.common.filter.all,
         active: selectedStation.isEmpty,
       ),
     ];
@@ -80,11 +81,14 @@ class CraftsListUiMapper {
       detailItemId: craft.rewardItems.isNotEmpty
           ? craft.rewardItems.first.id
           : null,
-      stationLabel: '${craft.stationName} Lv${craft.level}',
+      stationLabel: tr.crafts.card.stationLevel(
+        station: craft.stationName,
+        level: craft.level,
+      ),
       profit: profit,
       durationLabel: _formatDuration(craft.duration),
       profitPerHourLabel: isProfit
-          ? '${formatPrice(perHour.round())} ₽/h'
+          ? tr.crafts.card.profitPerHour(value: formatPrice(perHour.round()))
           : null,
       requiredItems: craft.requiredItems.map(_item).toList(),
       rewardItems: craft.rewardItems.map(_item).toList(),

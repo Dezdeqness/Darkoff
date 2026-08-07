@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/hideout_detail/model/hideout_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/hideout_detail/widgets/level_bonus_row.dart';
@@ -57,7 +58,7 @@ class LevelCardBody extends StatelessWidget {
           ),
           if (model.bonuses.isNotEmpty) ...[
             const SizedBox(height: 12),
-            const _SectionLabel('BONUSES (UNLOCKS AFTER BUILD)'),
+            _SectionLabel(tr.hideoutDetail.section.bonuses),
             const SizedBox(height: 6),
             ...model.bonuses.map((b) => LevelBonusRow(text: b)),
           ],
@@ -68,7 +69,7 @@ class LevelCardBody extends StatelessWidget {
                 ? TextButton(
                     onPressed: onToggleBuilt,
                     child: Text(
-                      'Unmark as built',
+                      tr.hideoutDetail.action.unmarkBuilt,
                       style: typo.labelMedium
                           .copyWith(color: colors.textSecondary),
                     ),
@@ -80,7 +81,7 @@ class LevelCardBody extends StatelessWidget {
                       side: BorderSide(color: colors.gold),
                     ),
                     icon: const Icon(Icons.check, size: 16),
-                    label: const Text('Mark level as built'),
+                    label: Text(tr.hideoutDetail.action.markBuilt),
                   ),
           ),
         ],

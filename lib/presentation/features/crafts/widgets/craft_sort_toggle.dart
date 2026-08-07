@@ -1,3 +1,4 @@
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/core/widgets/app_filter_chip.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class CraftSortToggle extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'SORT',
+            tr.common.sort,
             style: typo.labelMedium.copyWith(
               color: colors.textTertiary,
               letterSpacing: 1.5,
