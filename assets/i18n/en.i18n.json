@@ -1,0 +1,537 @@
+{
+  "common": {
+    "action": {
+      "retry": "Retry",
+      "tryAgain": "Try again"
+    },
+    "filter": {
+      "all": "All"
+    },
+    "sort": "SORT",
+    "value": {
+      "unknown": "Unknown",
+      "unknownUpper": "UNKNOWN",
+      "noData": "No data"
+    },
+    "item": {
+      "unknown": "Unknown Item"
+    },
+    "price": {
+      "flea": "Flea",
+      "trader": "Trader",
+      "fleaMarket": "Flea Market"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "items": "Items",
+    "maps": "Maps",
+    "tasks": "Tasks",
+    "more": "More"
+  },
+  "shell": {
+    "refresh": {
+      "refreshing": "Refreshing items...",
+      "progress": "Loaded {loaded} items...",
+      "success": "Items refreshed successfully",
+      "failed": "Failed to refresh: {error}"
+    }
+  },
+  "more": {
+    "title": "More",
+    "subtitle": "Tools & reference",
+    "section": {
+      "tools": "Tools",
+      "reference": "Reference",
+      "app": "App"
+    },
+    "item": {
+      "ammoChart": {
+        "title": "Ammo Chart",
+        "subtitle": "Compare ammo by damage & pen"
+      },
+      "hideout": {
+        "title": "Hideout",
+        "subtitle": "Upgrade calculator & status"
+      },
+      "traders": {
+        "title": "Traders",
+        "subtitle": "Trader levels & reset times"
+      },
+      "fleaMarket": {
+        "title": "Flea Market",
+        "subtitle": "Price trends & analytics"
+      },
+      "bosses": {
+        "title": "Bosses",
+        "subtitle": "Boss spawns & locations"
+      },
+      "keys": {
+        "title": "Keys",
+        "subtitle": "Key locations & loot"
+      },
+      "crafts": {
+        "title": "Crafts",
+        "subtitle": "Hideout craft recipes"
+      },
+      "barters": {
+        "title": "Barters",
+        "subtitle": "Trader barter trades"
+      },
+      "settings": {
+        "title": "Settings",
+        "subtitle": "Language, game mode & more"
+      },
+      "about": {
+        "title": "About",
+        "subtitle": "Data from tarkov.dev API"
+      }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": {
+      "title": "Language",
+      "subtitle": "Language for the interface and game data",
+      "en": "English",
+      "ru": "Russian",
+      "de": "German",
+      "fr": "French",
+      "es": "Spanish",
+      "zh": "Chinese"
+    }
+  },
+  "splash": {
+    "status": {
+      "loading": "Loading data...",
+      "ready": "Ready"
+    }
+  },
+  "home": {
+    "market": {
+      "title": "Market Overview",
+      "empty": "No market data",
+      "error": "Failed to load market overview"
+    },
+    "priceChanges": {
+      "title": "Price Changes (24h)",
+      "empty": "No price data",
+      "error": "Failed to load market data"
+    }
+  },
+  "serverStatus": {
+    "label": "SERVER STATUS",
+    "checking": "Checking…",
+    "badge": {
+      "operational": "OPERATIONAL",
+      "updating": "UPDATING",
+      "unstable": "UNSTABLE",
+      "offline": "OFFLINE"
+    },
+    "status": {
+      "online": "Online",
+      "updating": "Updating",
+      "unstable": "Unstable",
+      "down": "Down"
+    }
+  },
+  "ammo": {
+    "page": {
+      "title": "Ammo Chart",
+      "subtitle": "Damage & penetration reference"
+    },
+    "search": {
+      "hint": "Search ammo..."
+    },
+    "error": {
+      "load": "Failed to load ammo data"
+    },
+    "emptyState": {
+      "notFound": "No ammo found"
+    },
+    "column": {
+      "name": "NAME",
+      "damage": "DMG",
+      "penetration": "PEN"
+    },
+    "type": {
+      "tracer": "Tracer"
+    }
+  },
+  "barters": {
+    "page": {
+      "title": "Barters",
+      "subtitle": "Trader barter trades & profit"
+    },
+    "error": {
+      "load": "Failed to load barters"
+    },
+    "emptyState": {
+      "notFound": "No barters found"
+    }
+  },
+  "bosses": {
+    "page": {
+      "title": "Bosses",
+      "subtitle": "Spawn locations & health"
+    },
+    "error": {
+      "load": "Failed to load bosses"
+    }
+  },
+  "bossDetail": {
+    "fallback": {
+      "title": "Boss"
+    },
+    "section": {
+      "health": "Health",
+      "spawnLocations": "Spawn locations",
+      "loot": "Loot"
+    },
+    "bodyPart": {
+      "chest": "Chest",
+      "head": "Head",
+      "stomach": "Stomach",
+      "leftArm": "Left arm",
+      "rightArm": "Right arm",
+      "leftLeg": "Left leg",
+      "rightLeg": "Right leg"
+    }
+  },
+  "categories": {
+    "page": {
+      "title": "Categories"
+    },
+    "type": {
+      "gear": "Gear",
+      "weaponry": "Weaponry",
+      "otherStuff": "Other Stuff"
+    }
+  },
+  "crafts": {
+    "page": {
+      "title": "Crafts",
+      "subtitle": "Hideout craft recipes & profit"
+    },
+    "error": {
+      "load": "Failed to load crafts"
+    },
+    "emptyState": {
+      "notFound": "No crafts found"
+    }
+  },
+  "fleaMarket": {
+    "page": {
+      "title": "Flea Market",
+      "subtitle": "Price trends & analytics"
+    },
+    "tab": {
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "mostExpensive": "Most Expensive"
+    }
+  },
+  "hideout": {
+    "page": {
+      "title": "Hideout",
+      "subtitle": "Station upgrades & requirements"
+    },
+    "emptyState": {
+      "noStations": "No stations available"
+    },
+    "error": {
+      "load": "Failed to load hideout data"
+    },
+    "upgrade": {
+      "empty": {
+        "title": "No stations tracked"
+      },
+      "help": "Needed for the next upgrade",
+      "guidance": "Star a station to plan its next upgrade"
+    },
+    "shopping": {
+      "empty": {
+        "title": "Nothing tracked yet"
+      },
+      "guidance": {
+        "track": "Track a station to build your list",
+        "tap": "Tap for aggregated list"
+      }
+    },
+    "status": {
+      "fullyBuilt": "Fully built"
+    },
+    "shoppingCard": {
+      "label": "SHOPPING LIST"
+    }
+  },
+  "hideoutDetail": {
+    "fallback": {
+      "title": "Station"
+    },
+    "badge": {
+      "built": "BUILT",
+      "nextUp": "NEXT UP",
+      "locked": "LOCKED"
+    },
+    "section": {
+      "bonuses": "BONUSES (UNLOCKS AFTER BUILD)",
+      "prerequisites": "PREREQUISITES"
+    },
+    "action": {
+      "unmarkBuilt": "Unmark as built",
+      "markBuilt": "Mark level as built"
+    },
+    "status": {
+      "wasRequired": "WAS REQUIRED"
+    }
+  },
+  "items": {
+    "page": {
+      "title": "Items",
+      "subtitle": "Browse all Tarkov items"
+    },
+    "search": {
+      "hint": "Search items..."
+    },
+    "emptyState": {
+      "notFound": "No items found"
+    },
+    "category": {
+      "item": "Item"
+    },
+    "type": {
+      "barterItem": "Barter item",
+      "key": "Key",
+      "medicalItem": "Medical item",
+      "ammo": "Ammo",
+      "armor": "Armor",
+      "backpack": "Backpack",
+      "helmet": "Helmet",
+      "rig": "Rig",
+      "headset": "Headset",
+      "visor": "Visor",
+      "weapon": "Weapon",
+      "mod": "Mod",
+      "grenade": "Grenade",
+      "provision": "Provision",
+      "container": "Container",
+      "gear": "Gear"
+    },
+    "filter": {
+      "keys": "Keys",
+      "meds": "Meds",
+      "ammo": "Ammo",
+      "gear": "Gear"
+    }
+  },
+  "itemDetail": {
+    "section": {
+      "properties": "Properties",
+      "prices": "Prices",
+      "sellTo": "Sell To"
+    },
+    "property": {
+      "size": "Size",
+      "weight": "Weight",
+      "profit": "Profit",
+      "perSlot": "Per Slot"
+    }
+  },
+  "properties": {
+    "section": {
+      "ammo": "Ammo Properties",
+      "armor": "Armor Properties",
+      "armorAttachment": "Armor Attachment",
+      "helmet": "Helmet Properties",
+      "weapon": "Weapon Properties",
+      "preset": "Weapon Preset",
+      "medKit": "Medical Kit",
+      "medicalItem": "Medical Item",
+      "painkiller": "Painkiller",
+      "surgicalKit": "Surgical Kit",
+      "stim": "Stimulant",
+      "foodDrink": "Food & Drink",
+      "backpack": "Backpack",
+      "container": "Container",
+      "chestRig": "Chest Rig",
+      "glasses": "Glasses",
+      "grenade": "Grenade",
+      "headphones": "Headphones",
+      "key": "Key",
+      "scope": "Scope",
+      "magazine": "Magazine",
+      "barrel": "Barrel",
+      "weaponMod": "Weapon Mod",
+      "nightVision": "Night Vision",
+      "melee": "Melee",
+      "resource": "Resource",
+      "headwear": "Headwear",
+      "unknown": "Properties"
+    },
+    "label": {
+      "caliber": "Caliber",
+      "damage": "Damage",
+      "armorDamage": "Armor Damage",
+      "penetration": "Penetration",
+      "fragmentation": "Fragmentation",
+      "projectiles": "Projectiles",
+      "ammoType": "Ammo Type",
+      "armorClass": "Class",
+      "durability": "Durability",
+      "material": "Material",
+      "type": "Type",
+      "speedPenalty": "Speed Penalty",
+      "turnPenalty": "Turn Penalty",
+      "ergoPenalty": "Ergo Penalty",
+      "zones": "Zones",
+      "headZones": "Head Zones",
+      "deafening": "Deafening",
+      "blocksHeadset": "Blocks Headset",
+      "blindnessProtection": "Blindness Protection",
+      "fireRate": "Fire Rate",
+      "fireModes": "Fire Modes",
+      "ergonomics": "Ergonomics",
+      "verticalRecoil": "Vertical Recoil",
+      "horizontalRecoil": "Horizontal Recoil",
+      "effectiveDistance": "Effective Distance",
+      "sightingRange": "Sighting Range",
+      "baseWeapon": "Base Weapon",
+      "hp": "HP",
+      "useTime": "Use Time",
+      "maxHealPerUse": "Max Heal/Use",
+      "cures": "Cures",
+      "uses": "Uses",
+      "duration": "Duration",
+      "minLimbHealth": "Min Limb Health",
+      "maxLimbHealth": "Max Limb Health",
+      "energy": "Energy",
+      "hydration": "Hydration",
+      "units": "Units",
+      "capacity": "Capacity",
+      "fuse": "Fuse",
+      "maxDistance": "Max Distance",
+      "fragments": "Fragments",
+      "ambientVolume": "Ambient Volume",
+      "distortion": "Distortion",
+      "distanceModifier": "Distance Modifier",
+      "recoilModifier": "Recoil Modifier",
+      "zoomLevels": "Zoom Levels",
+      "loadModifier": "Load Modifier",
+      "checkModifier": "Check Modifier",
+      "malfunction": "Malfunction",
+      "accuracyModifier": "Accuracy Modifier",
+      "intensity": "Intensity",
+      "noiseIntensity": "Noise Intensity",
+      "noiseScale": "Noise Scale",
+      "diffuseIntensity": "Diffuse Intensity",
+      "slashDamage": "Slash Damage",
+      "stabDamage": "Stab Damage",
+      "hitRadius": "Hit Radius"
+    }
+  },
+  "keys": {
+    "page": {
+      "title": "Keys",
+      "subtitle": "Market prices & locations"
+    },
+    "search": {
+      "hint": "Search keys..."
+    },
+    "error": {
+      "load": "Failed to load keys"
+    },
+    "emptyState": {
+      "notFound": "No keys found"
+    }
+  },
+  "maps": {
+    "page": {
+      "title": "Maps",
+      "subtitle": "Tarkov raid locations"
+    },
+    "section": {
+      "all": "All Maps",
+      "enemies": "Enemies",
+      "bosses": "Bosses",
+      "valuableLoot": "VALUABLE LOOT"
+    },
+    "emptyState": {
+      "notFound": "No maps available"
+    },
+    "error": {
+      "load": "Failed to load maps"
+    },
+    "info": {
+      "players": "Players",
+      "duration": "Duration"
+    }
+  },
+  "shoppingList": {
+    "page": {
+      "title": "Shopping List",
+      "subtitle": "Everything you still need to collect"
+    },
+    "empty": "Nothing to buy — track a station to build your list",
+    "fleaEstimate": "Flea Market estimate"
+  },
+  "tasks": {
+    "page": {
+      "title": "Tasks",
+      "subtitle": "Trader quests & objectives"
+    },
+    "section": {
+      "label": "Tasks"
+    },
+    "search": {
+      "hint": "Search tasks..."
+    },
+    "emptyState": {
+      "notAvailable": "No tasks available",
+      "notFound": "No tasks found"
+    },
+    "error": {
+      "load": "Failed to load tasks",
+      "search": "Failed to search tasks"
+    }
+  },
+  "taskDetail": {
+    "section": {
+      "prerequisites": "PREREQUISITES",
+      "objectives": "OBJECTIVES",
+      "rewards": "COMPLETION REWARDS"
+    },
+    "objective": {
+      "optional": "Optional"
+    }
+  },
+  "traders": {
+    "page": {
+      "title": "Traders",
+      "subtitle": "Offers, barters & reset times"
+    },
+    "error": {
+      "load": "Failed to load traders"
+    },
+    "reset": {
+      "comingSoon": "Coming soon",
+      "after": "Resets in ",
+      "updatedAgo": "Updated {elapsed} ago"
+    },
+    "time": {
+      "moments": "moments"
+    }
+  },
+  "traderDetail": {
+    "fallback": {
+      "title": "Trader"
+    },
+    "error": {
+      "load": "Failed to load trader"
+    },
+    "tab": {
+      "noBarters": "No barters for this level",
+      "noOffers": "No offers for this level"
+    }
+  }
+}

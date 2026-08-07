@@ -1,4 +1,5 @@
 import 'package:darkoff/core/localization/language_code.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:flutter/widgets.dart';
 
 class AppLanguage {
@@ -21,6 +22,11 @@ class AppLanguage {
   ];
 
   static Locale toLocale(LanguageCode language) => Locale(language.code);
+
+  static AppLocale toSlangLocale(LanguageCode language) => switch (language) {
+        LanguageCode.ru => AppLocale.ru,
+        _ => AppLocale.en,
+      };
 
   static LanguageCode resolve(String? code) {
     final parsed = LanguageCode.tryParse(code);

@@ -1,0 +1,537 @@
+{
+  "common": {
+    "action": {
+      "retry": "Повторить",
+      "tryAgain": "Попробовать снова"
+    },
+    "filter": {
+      "all": "Все"
+    },
+    "sort": "СОРТ",
+    "value": {
+      "unknown": "Неизвестно",
+      "unknownUpper": "НЕИЗВЕСТНО",
+      "noData": "Нет данных"
+    },
+    "item": {
+      "unknown": "Неизвестный предмет"
+    },
+    "price": {
+      "flea": "Барахолка",
+      "trader": "Торговец",
+      "fleaMarket": "Барахолка"
+    }
+  },
+  "nav": {
+    "home": "Главная",
+    "items": "Предметы",
+    "maps": "Карты",
+    "tasks": "Задачи",
+    "more": "Ещё"
+  },
+  "shell": {
+    "refresh": {
+      "refreshing": "Обновление предметов...",
+      "progress": "Загружено {loaded} предметов...",
+      "success": "Предметы успешно обновлены",
+      "failed": "Ошибка обновления: {error}"
+    }
+  },
+  "more": {
+    "title": "Ещё",
+    "subtitle": "Инструменты и справочник",
+    "section": {
+      "tools": "Инструменты",
+      "reference": "Справочник",
+      "app": "Приложение"
+    },
+    "item": {
+      "ammoChart": {
+        "title": "Таблица патронов",
+        "subtitle": "Сравнение по урону и пробитию"
+      },
+      "hideout": {
+        "title": "Убежище",
+        "subtitle": "Калькулятор улучшений и статус"
+      },
+      "traders": {
+        "title": "Торговцы",
+        "subtitle": "Уровни и время сброса"
+      },
+      "fleaMarket": {
+        "title": "Барахолка",
+        "subtitle": "Тренды цен и аналитика"
+      },
+      "bosses": {
+        "title": "Боссы",
+        "subtitle": "Места появления боссов"
+      },
+      "keys": {
+        "title": "Ключи",
+        "subtitle": "Локации и лут ключей"
+      },
+      "crafts": {
+        "title": "Крафты",
+        "subtitle": "Рецепты крафта в убежище"
+      },
+      "barters": {
+        "title": "Бартеры",
+        "subtitle": "Бартерные сделки торговцев"
+      },
+      "settings": {
+        "title": "Настройки",
+        "subtitle": "Язык, режим игры и другое"
+      },
+      "about": {
+        "title": "О приложении",
+        "subtitle": "Данные из API tarkov.dev"
+      }
+    }
+  },
+  "settings": {
+    "title": "Настройки",
+    "language": {
+      "title": "Язык",
+      "subtitle": "Язык интерфейса и игровых данных",
+      "en": "Английский",
+      "ru": "Русский",
+      "de": "Немецкий",
+      "fr": "Французский",
+      "es": "Испанский",
+      "zh": "Китайский"
+    }
+  },
+  "splash": {
+    "status": {
+      "loading": "Загрузка данных...",
+      "ready": "Готово"
+    }
+  },
+  "home": {
+    "market": {
+      "title": "Обзор рынка",
+      "empty": "Нет данных рынка",
+      "error": "Не удалось загрузить обзор рынка"
+    },
+    "priceChanges": {
+      "title": "Изменения цен (24ч)",
+      "empty": "Нет данных о ценах",
+      "error": "Не удалось загрузить данные рынка"
+    }
+  },
+  "serverStatus": {
+    "label": "СТАТУС СЕРВЕРА",
+    "checking": "Проверка…",
+    "badge": {
+      "operational": "РАБОТАЕТ",
+      "updating": "ОБНОВЛЕНИЕ",
+      "unstable": "НЕСТАБИЛЬНО",
+      "offline": "ОФФЛАЙН"
+    },
+    "status": {
+      "online": "Онлайн",
+      "updating": "Обновление",
+      "unstable": "Нестабильно",
+      "down": "Не работает"
+    }
+  },
+  "ammo": {
+    "page": {
+      "title": "Таблица патронов",
+      "subtitle": "Справочник урона и пробития"
+    },
+    "search": {
+      "hint": "Поиск патронов..."
+    },
+    "error": {
+      "load": "Не удалось загрузить данные патронов"
+    },
+    "emptyState": {
+      "notFound": "Патроны не найдены"
+    },
+    "column": {
+      "name": "НАЗВАНИЕ",
+      "damage": "УРОН",
+      "penetration": "ПРОБ"
+    },
+    "type": {
+      "tracer": "Трассер"
+    }
+  },
+  "barters": {
+    "page": {
+      "title": "Бартеры",
+      "subtitle": "Бартерные сделки и прибыль"
+    },
+    "error": {
+      "load": "Не удалось загрузить бартеры"
+    },
+    "emptyState": {
+      "notFound": "Бартеры не найдены"
+    }
+  },
+  "bosses": {
+    "page": {
+      "title": "Боссы",
+      "subtitle": "Места появления и здоровье"
+    },
+    "error": {
+      "load": "Не удалось загрузить боссов"
+    }
+  },
+  "bossDetail": {
+    "fallback": {
+      "title": "Босс"
+    },
+    "section": {
+      "health": "Здоровье",
+      "spawnLocations": "Места появления",
+      "loot": "Лут"
+    },
+    "bodyPart": {
+      "chest": "Грудь",
+      "head": "Голова",
+      "stomach": "Живот",
+      "leftArm": "Левая рука",
+      "rightArm": "Правая рука",
+      "leftLeg": "Левая нога",
+      "rightLeg": "Правая нога"
+    }
+  },
+  "categories": {
+    "page": {
+      "title": "Категории"
+    },
+    "type": {
+      "gear": "Снаряжение",
+      "weaponry": "Оружие",
+      "otherStuff": "Прочее"
+    }
+  },
+  "crafts": {
+    "page": {
+      "title": "Крафты",
+      "subtitle": "Рецепты крафта и прибыль"
+    },
+    "error": {
+      "load": "Не удалось загрузить крафты"
+    },
+    "emptyState": {
+      "notFound": "Крафты не найдены"
+    }
+  },
+  "fleaMarket": {
+    "page": {
+      "title": "Барахолка",
+      "subtitle": "Тренды цен и аналитика"
+    },
+    "tab": {
+      "gainers": "Растущие",
+      "losers": "Падающие",
+      "mostExpensive": "Самые дорогие"
+    }
+  },
+  "hideout": {
+    "page": {
+      "title": "Убежище",
+      "subtitle": "Улучшения станций и требования"
+    },
+    "emptyState": {
+      "noStations": "Нет доступных станций"
+    },
+    "error": {
+      "load": "Не удалось загрузить данные убежища"
+    },
+    "upgrade": {
+      "empty": {
+        "title": "Нет отслеживаемых станций"
+      },
+      "help": "Необходимо для следующего улучшения",
+      "guidance": "Отметьте станцию звёздочкой для планирования улучшения"
+    },
+    "shopping": {
+      "empty": {
+        "title": "Пока ничего не отслеживается"
+      },
+      "guidance": {
+        "track": "Отслеживайте станцию для формирования списка",
+        "tap": "Нажмите для сводного списка"
+      }
+    },
+    "status": {
+      "fullyBuilt": "Полностью построено"
+    },
+    "shoppingCard": {
+      "label": "СПИСОК ПОКУПОК"
+    }
+  },
+  "hideoutDetail": {
+    "fallback": {
+      "title": "Станция"
+    },
+    "badge": {
+      "built": "ПОСТРОЕНО",
+      "nextUp": "СЛЕДУЮЩЕЕ",
+      "locked": "ЗАБЛОКИРОВАНО"
+    },
+    "section": {
+      "bonuses": "БОНУСЫ (РАЗБЛОКИРУЮТСЯ ПОСЛЕ ПОСТРОЙКИ)",
+      "prerequisites": "ТРЕБОВАНИЯ"
+    },
+    "action": {
+      "unmarkBuilt": "Отменить постройку",
+      "markBuilt": "Отметить уровень построенным"
+    },
+    "status": {
+      "wasRequired": "БЫЛО НЕОБХОДИМО"
+    }
+  },
+  "items": {
+    "page": {
+      "title": "Предметы",
+      "subtitle": "Все предметы Таркова"
+    },
+    "search": {
+      "hint": "Поиск предметов..."
+    },
+    "emptyState": {
+      "notFound": "Предметы не найдены"
+    },
+    "category": {
+      "item": "Предмет"
+    },
+    "type": {
+      "barterItem": "Бартерный предмет",
+      "key": "Ключ",
+      "medicalItem": "Медицинский предмет",
+      "ammo": "Патроны",
+      "armor": "Броня",
+      "backpack": "Рюкзак",
+      "helmet": "Шлем",
+      "rig": "Разгрузка",
+      "headset": "Наушники",
+      "visor": "Очки",
+      "weapon": "Оружие",
+      "mod": "Модификация",
+      "grenade": "Граната",
+      "provision": "Провизия",
+      "container": "Контейнер",
+      "gear": "Снаряжение"
+    },
+    "filter": {
+      "keys": "Ключи",
+      "meds": "Медицина",
+      "ammo": "Патроны",
+      "gear": "Снаряжение"
+    }
+  },
+  "itemDetail": {
+    "section": {
+      "properties": "Характеристики",
+      "prices": "Цены",
+      "sellTo": "Продать"
+    },
+    "property": {
+      "size": "Размер",
+      "weight": "Вес",
+      "profit": "Прибыль",
+      "perSlot": "За слот"
+    }
+  },
+  "properties": {
+    "section": {
+      "ammo": "Характеристики патронов",
+      "armor": "Характеристики брони",
+      "armorAttachment": "Броневая пластина",
+      "helmet": "Характеристики шлема",
+      "weapon": "Характеристики оружия",
+      "preset": "Пресет оружия",
+      "medKit": "Аптечка",
+      "medicalItem": "Медицинский предмет",
+      "painkiller": "Обезболивающее",
+      "surgicalKit": "Хирургический набор",
+      "stim": "Стимулятор",
+      "foodDrink": "Еда и напитки",
+      "backpack": "Рюкзак",
+      "container": "Контейнер",
+      "chestRig": "Разгрузка",
+      "glasses": "Очки",
+      "grenade": "Граната",
+      "headphones": "Наушники",
+      "key": "Ключ",
+      "scope": "Прицел",
+      "magazine": "Магазин",
+      "barrel": "Ствол",
+      "weaponMod": "Модификация оружия",
+      "nightVision": "Ночное видение",
+      "melee": "Холодное оружие",
+      "resource": "Ресурс",
+      "headwear": "Головной убор",
+      "unknown": "Характеристики"
+    },
+    "label": {
+      "caliber": "Калибр",
+      "damage": "Урон",
+      "armorDamage": "Урон брони",
+      "penetration": "Пробитие",
+      "fragmentation": "Фрагментация",
+      "projectiles": "Снаряды",
+      "ammoType": "Тип патронов",
+      "armorClass": "Класс",
+      "durability": "Прочность",
+      "material": "Материал",
+      "type": "Тип",
+      "speedPenalty": "Штраф к скорости",
+      "turnPenalty": "Штраф к развороту",
+      "ergoPenalty": "Штраф к эргономике",
+      "zones": "Зоны",
+      "headZones": "Зоны головы",
+      "deafening": "Оглушение",
+      "blocksHeadset": "Блокирует наушники",
+      "blindnessProtection": "Защита от ослепления",
+      "fireRate": "Скорострельность",
+      "fireModes": "Режимы огня",
+      "ergonomics": "Эргономика",
+      "verticalRecoil": "Вертикальная отдача",
+      "horizontalRecoil": "Горизонтальная отдача",
+      "effectiveDistance": "Эффективная дистанция",
+      "sightingRange": "Прицельная дальность",
+      "baseWeapon": "Базовое оружие",
+      "hp": "HP",
+      "useTime": "Время использования",
+      "maxHealPerUse": "Макс. лечение/исп.",
+      "cures": "Лечит",
+      "uses": "Использований",
+      "duration": "Длительность",
+      "minLimbHealth": "Мин. здоровье конечности",
+      "maxLimbHealth": "Макс. здоровье конечности",
+      "energy": "Энергия",
+      "hydration": "Гидратация",
+      "units": "Единицы",
+      "capacity": "Ёмкость",
+      "fuse": "Взрыватель",
+      "maxDistance": "Макс. дистанция",
+      "fragments": "Осколки",
+      "ambientVolume": "Громкость окружения",
+      "distortion": "Искажение",
+      "distanceModifier": "Модификатор дистанции",
+      "recoilModifier": "Модификатор отдачи",
+      "zoomLevels": "Уровни увеличения",
+      "loadModifier": "Модификатор зарядки",
+      "checkModifier": "Модификатор проверки",
+      "malfunction": "Заклинивание",
+      "accuracyModifier": "Модификатор точности",
+      "intensity": "Интенсивность",
+      "noiseIntensity": "Интенсивность шума",
+      "noiseScale": "Масштаб шума",
+      "diffuseIntensity": "Интенсивность рассеивания",
+      "slashDamage": "Режущий урон",
+      "stabDamage": "Колющий урон",
+      "hitRadius": "Радиус удара"
+    }
+  },
+  "keys": {
+    "page": {
+      "title": "Ключи",
+      "subtitle": "Рыночные цены и локации"
+    },
+    "search": {
+      "hint": "Поиск ключей..."
+    },
+    "error": {
+      "load": "Не удалось загрузить ключи"
+    },
+    "emptyState": {
+      "notFound": "Ключи не найдены"
+    }
+  },
+  "maps": {
+    "page": {
+      "title": "Карты",
+      "subtitle": "Локации рейдов Таркова"
+    },
+    "section": {
+      "all": "Все карты",
+      "enemies": "Противники",
+      "bosses": "Боссы",
+      "valuableLoot": "ЦЕННЫЙ ЛУТ"
+    },
+    "emptyState": {
+      "notFound": "Карты недоступны"
+    },
+    "error": {
+      "load": "Не удалось загрузить карты"
+    },
+    "info": {
+      "players": "Игроки",
+      "duration": "Длительность"
+    }
+  },
+  "shoppingList": {
+    "page": {
+      "title": "Список покупок",
+      "subtitle": "Всё, что осталось собрать"
+    },
+    "empty": "Нечего покупать — отслеживайте станцию для формирования списка",
+    "fleaEstimate": "Оценка Барахолки"
+  },
+  "tasks": {
+    "page": {
+      "title": "Задачи",
+      "subtitle": "Квесты торговцев и цели"
+    },
+    "section": {
+      "label": "Задачи"
+    },
+    "search": {
+      "hint": "Поиск задач..."
+    },
+    "emptyState": {
+      "notAvailable": "Нет доступных задач",
+      "notFound": "Задачи не найдены"
+    },
+    "error": {
+      "load": "Не удалось загрузить задачи",
+      "search": "Не удалось выполнить поиск задач"
+    }
+  },
+  "taskDetail": {
+    "section": {
+      "prerequisites": "ТРЕБОВАНИЯ",
+      "objectives": "ЦЕЛИ",
+      "rewards": "НАГРАДЫ ЗА ВЫПОЛНЕНИЕ"
+    },
+    "objective": {
+      "optional": "Необязательно"
+    }
+  },
+  "traders": {
+    "page": {
+      "title": "Торговцы",
+      "subtitle": "Предложения, бартеры и время сброса"
+    },
+    "error": {
+      "load": "Не удалось загрузить торговцев"
+    },
+    "reset": {
+      "comingSoon": "Скоро",
+      "after": "Сброс через ",
+      "updatedAgo": "Обновлено {elapsed} назад"
+    },
+    "time": {
+      "moments": "мгновения"
+    }
+  },
+  "traderDetail": {
+    "fallback": {
+      "title": "Торговец"
+    },
+    "error": {
+      "load": "Не удалось загрузить торговца"
+    },
+    "tab": {
+      "noBarters": "Нет бартеров для этого уровня",
+      "noOffers": "Нет предложений для этого уровня"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+base_locale: en
+fallback_strategy: base_locale
+input_directory: assets/i18n
+input_file_pattern: .i18n.json
+output_directory: lib/core/localization
+output_file_name: strings.g.dart
+locale_handling: true
+flutter_integration: true
+translate_var: tr
+string_interpolation: braces
