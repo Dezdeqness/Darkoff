@@ -7,11 +7,17 @@ version: 0.0.1+1
 environment:
   sdk: ">=3.10.0 <4.0.0"
 
+workspace:
+  - packages/ui_kit
+  - widgetbook
+
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  ui_kit:
+    path: packages/ui_kit
 
   intl: 0.20.2
   slang: 4.19.0
