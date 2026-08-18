@@ -1,4 +1,4 @@
-import 'package:darkoff/core/theme/app_theme.dart';
+import 'package:ui_kit/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class AppThemeProvider extends InheritedWidget {

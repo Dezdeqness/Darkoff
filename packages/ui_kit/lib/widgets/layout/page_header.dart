@@ -1,5 +1,4 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
+import 'package:ui_kit/theme/extension/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 class PageHeader extends StatelessWidget {
@@ -8,6 +7,7 @@ class PageHeader extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.showBack = true,
+    this.onBack,
     this.trailing,
   }) : subtitleWidget = null;
 
@@ -16,6 +16,7 @@ class PageHeader extends StatelessWidget {
     required this.title,
     required Widget subtitle,
     this.showBack = true,
+    this.onBack,
     this.trailing,
   })  : subtitleWidget = subtitle,
         subtitle = null;
@@ -25,6 +26,7 @@ class PageHeader extends StatelessWidget {
 
   final Widget? subtitleWidget;
   final bool showBack;
+  final VoidCallback? onBack;
 
   final Widget? trailing;
 
@@ -47,7 +49,7 @@ class PageHeader extends StatelessWidget {
         children: [
           if (showBack) ...[
             GestureDetector(
-              onTap: () => context.router.maybePop(),
+              onTap: onBack,
               behavior: HitTestBehavior.opaque,
               child: Icon(
                 Icons.arrow_back_ios_new,

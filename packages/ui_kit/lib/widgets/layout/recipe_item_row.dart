@@ -1,5 +1,5 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/item_icon.dart';
+import 'package:ui_kit/theme/extension/theme_extensions.dart';
+import 'package:ui_kit/widgets/media/item_icon.dart';
 import 'package:flutter/material.dart';
 
 class RecipeItemRow extends StatelessWidget {

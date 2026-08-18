@@ -1,4 +1,3 @@
-import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:flutter/material.dart';
 
 class AppErrorView extends StatelessWidget {
@@ -6,11 +5,13 @@ class AppErrorView extends StatelessWidget {
     super.key,
     required this.message,
     required this.onRetry,
+    this.retryLabel = 'Retry',
     this.icon = Icons.error_outline,
   });
 
   final String message;
   final VoidCallback onRetry;
+  final String retryLabel;
   final IconData icon;
 
   @override
@@ -25,7 +26,7 @@ class AppErrorView extends StatelessWidget {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: onRetry,
-            child: Text(tr.common.action.retry),
+            child: Text(retryLabel),
           ),
         ],
       ),

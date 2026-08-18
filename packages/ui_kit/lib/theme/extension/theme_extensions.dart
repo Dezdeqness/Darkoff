@@ -1,9 +1,9 @@
-import 'package:darkoff/core/theme/app_theme.dart';
-import 'package:darkoff/core/theme/themes/color_theme.dart';
-import 'package:darkoff/core/theme/themes/shape_theme.dart';
-import 'package:darkoff/core/theme/themes/sizing_theme.dart';
-import 'package:darkoff/core/theme/themes/spacing_theme.dart';
-import 'package:darkoff/core/theme/themes/typography_theme.dart';
+import 'package:ui_kit/theme/app_theme.dart';
+import 'package:ui_kit/theme/themes/color_theme.dart';
+import 'package:ui_kit/theme/themes/shape_theme.dart';
+import 'package:ui_kit/theme/themes/sizing_theme.dart';
+import 'package:ui_kit/theme/themes/spacing_theme.dart';
+import 'package:ui_kit/theme/themes/typography_theme.dart';
 import 'package:flutter/material.dart';
 
 extension ThemeExtensions on BuildContext {
@@ -27,8 +27,8 @@ extension ThemeExtensions on BuildContext {
 
 extension ThemeDataExtension on ThemeData {
   AppTheme get appTheme {
-    final ext = extension<AppTheme>();
-    assert(ext != null, 'AppTheme is not found in ThemeData');
-    return ext!;
+    final theme = extension<AppTheme>();
+    assert(theme != null, 'AppTheme is not found in ThemeData');
+    return theme!;
   }
 }

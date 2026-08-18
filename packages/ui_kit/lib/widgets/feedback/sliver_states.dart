@@ -1,5 +1,4 @@
-import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
+import 'package:ui_kit/theme/extension/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 class SliverLoadingIndicator extends StatelessWidget {
@@ -23,10 +22,12 @@ class SliverErrorMessage extends StatelessWidget {
     super.key,
     required this.message,
     required this.onRetry,
+    this.retryLabel = 'Retry',
   });
 
   final String message;
   final VoidCallback onRetry;
+  final String retryLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class SliverErrorMessage extends StatelessWidget {
             const SizedBox(height: 8),
             TextButton(
               onPressed: onRetry,
-              child: Text(tr.common.action.retry),
+              child: Text(retryLabel),
             ),
           ],
         ),

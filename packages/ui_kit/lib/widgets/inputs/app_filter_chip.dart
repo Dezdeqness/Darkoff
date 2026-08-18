@@ -1,4 +1,4 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
+import 'package:ui_kit/theme/extension/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 class AppFilterChip extends StatelessWidget {

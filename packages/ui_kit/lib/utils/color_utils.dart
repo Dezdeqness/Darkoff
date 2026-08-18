@@ -1,7 +1,8 @@
 import 'dart:ui';
 
-import 'package:darkoff/core/theme/themes/color_theme.dart';
-import 'package:darkoff/presentation/features/core/model/property_tile_ui_model.dart';
+import 'package:ui_kit/theme/themes/color_theme.dart';
+
+enum PropertyValueType { positive, negative, accent, normal }
 
 Color parseHexColor(String colorString, {Color fallback = const Color(0xFF9E9E9E)}) {
   try {

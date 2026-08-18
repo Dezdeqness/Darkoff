@@ -1,4 +1,4 @@
-import 'package:darkoff/core/utils/sizing.dart';
+import 'package:ui_kit/utils/lerp_double.dart';
 import 'package:flutter/material.dart';
 
 class SizingTheme extends ThemeExtension<SizingTheme> {
