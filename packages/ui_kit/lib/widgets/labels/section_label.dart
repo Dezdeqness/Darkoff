@@ -5,7 +5,7 @@ class SectionLabel extends StatelessWidget {
   const SectionLabel(
     this.text, {
     super.key,
-    this.padding = const EdgeInsets.fromLTRB(16, 20, 16, 8),
+    this.padding = const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
     this.letterSpacing = 2.0,
   });
 

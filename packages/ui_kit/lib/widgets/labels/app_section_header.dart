@@ -12,7 +12,7 @@ class AppSectionHeader extends StatelessWidget {
     final colors = context.colorTheme;
     final typo = context.typographyTheme;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 24, 16, 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Text(
         title.toUpperCase(),
         style: typo.labelMedium.copyWith(

@@ -7,11 +7,13 @@ class AnimatedProgressBar extends StatefulWidget {
     this.value,
     this.width = 240,
     this.height = 3,
+    this.duration = const Duration(milliseconds: 1400),
   });
 
   final double? value;
   final double width;
   final double height;
+  final Duration duration;
 
   @override
   State<AnimatedProgressBar> createState() => _AnimatedProgressBarState();
@@ -26,7 +28,7 @@ class _AnimatedProgressBarState extends State<AnimatedProgressBar>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1400),
+      duration: widget.duration,
     );
 
     _syncController();

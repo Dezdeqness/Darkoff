@@ -12,7 +12,6 @@ export 'theme/themes/shape_theme.dart';
 
 // Utils
 export 'utils/color_utils.dart';
-export 'utils/price_utils.dart';
 export 'utils/lerp_double.dart';
 
 // Widgets — inputs

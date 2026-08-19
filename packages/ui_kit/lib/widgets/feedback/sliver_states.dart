@@ -1,5 +1,6 @@
-import 'package:ui_kit/theme/extension/theme_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/widgets/feedback/app_empty_view.dart';
+import 'package:ui_kit/widgets/feedback/app_error_view.dart';
 
 class SliverLoadingIndicator extends StatelessWidget {
   const SliverLoadingIndicator({super.key, this.padding = 48});
@@ -31,24 +32,11 @@ class SliverErrorMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.colorTheme;
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          children: [
-            Text(
-              message,
-              style: TextStyle(color: colors.loss),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-            TextButton(
-              onPressed: onRetry,
-              child: Text(retryLabel),
-            ),
-          ],
-        ),
+      child: AppErrorView(
+        message: message,
+        onRetry: onRetry,
+        retryLabel: retryLabel,
       ),
     );
   }
@@ -62,16 +50,7 @@ class SliverEmptyMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Center(
-          child: Text(
-            message,
-            style: const TextStyle(color: Color(0xFF888888)),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
+      child: AppEmptyView(message: message),
     );
   }
 }

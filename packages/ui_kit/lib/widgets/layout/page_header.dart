@@ -44,7 +44,7 @@ class PageHeader extends StatelessWidget {
             : null);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
       child: Row(
         children: [
           if (showBack) ...[
@@ -87,7 +87,7 @@ class PageHeader extends StatelessWidget {
           ),
           if (trailing != null) ...[
             const SizedBox(width: 8),
-            trailing!,
+            ?trailing,
           ],
         ],
       ),
