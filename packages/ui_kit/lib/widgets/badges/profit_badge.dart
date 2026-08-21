@@ -52,7 +52,7 @@ class PercentChangeBadge extends StatelessWidget {
     final color = isPositive ? colors.profit : colors.loss;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       decoration: BoxDecoration(
         color: color.withAlpha(25),
         borderRadius: shape.radiusXS,

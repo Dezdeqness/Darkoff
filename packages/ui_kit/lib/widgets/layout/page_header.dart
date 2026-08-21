@@ -18,8 +18,8 @@ class PageHeader extends StatelessWidget {
     this.showBack = true,
     this.onBack,
     this.trailing,
-  })  : subtitleWidget = subtitle,
-        subtitle = null;
+  }) : subtitleWidget = subtitle,
+       subtitle = null;
 
   final String title;
   final String? subtitle;
@@ -35,7 +35,8 @@ class PageHeader extends StatelessWidget {
     final colors = context.colorTheme;
     final typo = context.typographyTheme;
 
-    final subtitleChild = subtitleWidget ??
+    final subtitleChild =
+        subtitleWidget ??
         (subtitle != null
             ? Text(
                 subtitle!,
@@ -44,7 +45,7 @@ class PageHeader extends StatelessWidget {
             : null);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
           if (showBack) ...[
@@ -62,6 +63,7 @@ class PageHeader extends StatelessWidget {
           Expanded(
             child: subtitleChild != null
                 ? Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -85,10 +87,7 @@ class PageHeader extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
           ),
-          if (trailing != null) ...[
-            const SizedBox(width: 8),
-            ?trailing,
-          ],
+          if (trailing != null) ...[const SizedBox(width: 8), ?trailing],
         ],
       ),
     );

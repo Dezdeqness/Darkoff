@@ -7,50 +7,32 @@ class AppCard extends StatelessWidget {
     required this.child,
     this.onTap,
     this.padding = const EdgeInsets.all(16),
-    this.shape,
-    this.clipContent = false,
+    this.borderRadius,
   });
 
   final Widget child;
   final VoidCallback? onTap;
   final EdgeInsets padding;
-  final ShapeBorder? shape;
-  final bool clipContent;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
-    final shapeTheme = context.shapeTheme;
-    final radius = shapeTheme.radiusMD;
+    final radius = borderRadius ?? context.shapeTheme.radiusMD;
 
-    Widget card;
-    if (shape != null) {
-      card = DecoratedBox(
-        decoration: ShapeDecoration(
-          color: colors.surface,
-          shape: shape!,
-        ),
-        child: Padding(
-          padding: clipContent ? EdgeInsets.zero : padding,
-          child: child,
-        ),
-      );
-    } else {
-      card = Container(
+    Widget card = ClipRRect(
+      borderRadius: radius,
+      child: Container(
         decoration: BoxDecoration(
           color: colors.surface,
           border: Border.all(color: colors.border),
           borderRadius: radius,
         ),
-        clipBehavior: clipContent ? Clip.antiAlias : Clip.none,
-        padding: clipContent ? EdgeInsets.zero : padding,
+        clipBehavior: Clip.antiAlias,
+        padding: padding,
         child: child,
-      );
-    }
-
-    if (clipContent && shape == null) {
-      card = ClipRRect(borderRadius: radius, child: card);
-    }
+      ),
+    );
 
     if (onTap != null) {
       card = GestureDetector(

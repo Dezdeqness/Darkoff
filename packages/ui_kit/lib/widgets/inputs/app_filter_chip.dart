@@ -64,7 +64,7 @@ class AppFilterChipRow extends StatelessWidget {
     required this.items,
     required this.selectedIndex,
     required this.onSelected,
-    this.height = 40,
+    this.height = 32,
   });
 
   final List<ChipItem> items;
@@ -74,19 +74,21 @@ class AppFilterChipRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        itemCount: items.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 8),
-        itemBuilder: (ctx, i) => AppFilterChip(
-          label: items[i].label,
-          isActive: selectedIndex == i,
-          onTap: () => onSelected(i),
-          icon: items[i].icon,
-        ),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          for (var i = 0; i < items.length; i++) ...[
+            if (i > 0) const SizedBox(width: 8),
+            AppFilterChip(
+              label: items[i].label,
+              isActive: selectedIndex == i,
+              onTap: () => onSelected(i),
+              icon: items[i].icon,
+            ),
+          ],
+        ],
       ),
     );
   }
