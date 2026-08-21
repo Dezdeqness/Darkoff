@@ -1,8 +1,7 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_card.dart';
 import 'package:darkoff/presentation/features/traders_detail/model/trader_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/traders_detail/widgets/trader_item_thumb.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class BarterCard extends StatelessWidget {
   const BarterCard({super.key, required this.barter, required this.onOpenItem});

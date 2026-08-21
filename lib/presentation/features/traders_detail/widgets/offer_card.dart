@@ -1,8 +1,6 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_card.dart';
-import 'package:darkoff/core/widgets/item_icon.dart';
 import 'package:darkoff/presentation/features/traders_detail/model/trader_detail_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class OfferCard extends StatelessWidget {
   const OfferCard({super.key, required this.offer, required this.onTap});

@@ -1,6 +1,5 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_card.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class TaskDetailSection extends StatelessWidget {
   const TaskDetailSection({
@@ -19,7 +18,6 @@ class TaskDetailSection extends StatelessWidget {
     final shape = context.shapeTheme;
 
     return AppCard(
-      clipContent: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

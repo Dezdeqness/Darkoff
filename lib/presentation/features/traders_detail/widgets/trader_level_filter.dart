@@ -1,6 +1,6 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/widgets/app_filter_chip.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class TraderLevelFilter extends StatelessWidget {
   const TraderLevelFilter({

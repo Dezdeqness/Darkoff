@@ -1,9 +1,6 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_card.dart';
-import 'package:darkoff/core/widgets/item_icon.dart';
-import 'package:darkoff/core/widgets/profit_badge.dart';
 import 'package:darkoff/presentation/features/flea_market/model/flea_item_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class FleaItemRow extends StatelessWidget {
   const FleaItemRow({
@@ -24,7 +21,6 @@ class FleaItemRow extends StatelessWidget {
 
     return AppCard(
       padding: const EdgeInsets.all(10),
-      useMDRadius: false,
       onTap: onTap,
       child: Row(
         children: [

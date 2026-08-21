@@ -1,6 +1,6 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/boss_detail/model/boss_detail_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class BossHealthGrid extends StatelessWidget {
   const BossHealthGrid({super.key, required this.parts});

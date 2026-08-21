@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_card.dart';
 import 'package:darkoff/presentation/features/home/home_keys.dart';
 import 'package:darkoff/presentation/features/home/notifiers/market_snapshot_notifier.dart';
 import 'package:darkoff/presentation/features/home/notifiers/price_changes_notifier.dart';
@@ -15,6 +13,7 @@ import 'package:darkoff/presentation/features/home/widgets/market_overview_card.
 import 'package:darkoff/presentation/features/home/widgets/price_change_row.dart';
 import 'package:darkoff/presentation/features/home/widgets/server_status_card.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()

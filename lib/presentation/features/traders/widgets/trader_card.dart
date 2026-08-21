@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_card.dart';
-import 'package:darkoff/core/widgets/item_icon.dart';
 import 'package:darkoff/presentation/features/traders/model/trader_list_ui_model.dart';
 import 'package:darkoff/presentation/features/traders/widgets/trader_reset_label.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class TraderCard extends StatelessWidget {
   const TraderCard({super.key, required this.model});

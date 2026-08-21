@@ -1,8 +1,6 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_card.dart';
-import 'package:darkoff/core/widgets/item_icon.dart';
 import 'package:darkoff/presentation/features/task_detail/model/task_detail_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class TaskHeroCard extends StatelessWidget {
   const TaskHeroCard({super.key, required this.task});
@@ -16,7 +14,6 @@ class TaskHeroCard extends StatelessWidget {
     final shape = context.shapeTheme;
 
     return AppCard(
-      clipContent: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

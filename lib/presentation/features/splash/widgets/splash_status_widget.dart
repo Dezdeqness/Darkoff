@@ -1,7 +1,6 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/animated_progress_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 enum StatusMode { loading, error, done }
 

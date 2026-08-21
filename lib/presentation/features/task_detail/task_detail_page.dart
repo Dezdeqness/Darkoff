@@ -1,8 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_error_view.dart';
-import 'package:darkoff/core/widgets/page_header.dart';
 import 'package:darkoff/presentation/features/task_detail/model/task_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/task_detail/notifiers/task_detail_notifier.dart';
 import 'package:darkoff/presentation/features/task_detail/state/task_detail_state.dart';
@@ -12,6 +9,7 @@ import 'package:darkoff/presentation/features/task_detail/widgets/task_objective
 import 'package:darkoff/presentation/features/task_detail/widgets/task_prerequisite_list.dart';
 import 'package:darkoff/presentation/features/task_detail/widgets/task_reward_list.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()

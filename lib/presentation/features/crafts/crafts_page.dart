@@ -1,8 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/page_header.dart';
-import 'package:darkoff/core/widgets/sliver_states.dart';
 import 'package:darkoff/presentation/features/crafts/model/crafts_list_ui_model.dart';
 import 'package:darkoff/presentation/features/crafts/notifiers/crafts_list_notifier.dart';
 import 'package:darkoff/presentation/features/crafts/state/crafts_list_state.dart';
@@ -10,6 +7,7 @@ import 'package:darkoff/presentation/features/crafts/widgets/craft_card.dart';
 import 'package:darkoff/presentation/features/crafts/widgets/craft_sort_toggle.dart';
 import 'package:darkoff/presentation/features/crafts/widgets/craft_station_filter.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()

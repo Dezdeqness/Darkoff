@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_card.dart';
-import 'package:darkoff/core/widgets/item_icon.dart';
 import 'package:darkoff/presentation/features/keys/model/keys_list_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class KeyRow extends StatelessWidget {
   const KeyRow({super.key, required this.row});
@@ -18,7 +16,6 @@ class KeyRow extends StatelessWidget {
 
     return AppCard(
       padding: const EdgeInsets.all(10),
-      useMDRadius: false,
       onTap: () => context.router.push(ItemDetailRoute(itemId: row.id)),
       child: Row(
         children: [

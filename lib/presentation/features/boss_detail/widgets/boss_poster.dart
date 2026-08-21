@@ -1,6 +1,5 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class BossPoster extends StatelessWidget {
   const BossPoster({super.key, required this.url});

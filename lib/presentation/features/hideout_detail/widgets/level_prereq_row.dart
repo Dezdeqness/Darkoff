@@ -1,6 +1,6 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/hideout_detail/model/hideout_detail_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class LevelPrereqRow extends StatelessWidget {
   const LevelPrereqRow({super.key, required this.prereq});

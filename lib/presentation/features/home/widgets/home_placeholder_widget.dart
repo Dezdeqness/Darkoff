@@ -1,6 +1,6 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class HomePlaceholderWidget extends StatelessWidget {
   const HomePlaceholderWidget({

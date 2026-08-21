@@ -1,6 +1,6 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/hideout/model/hideout_list_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class HideoutSummaryCard extends StatelessWidget {
   const HideoutSummaryCard({super.key, required this.model});

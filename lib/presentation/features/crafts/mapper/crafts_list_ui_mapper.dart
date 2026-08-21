@@ -1,5 +1,6 @@
-import 'package:darkoff/core/localization/strings.g.dart';
+
 import 'package:darkoff/core/utils/price_utils.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/domain/entities/contained_item_entity.dart';
 import 'package:darkoff/domain/entities/craft_entity.dart';
 import 'package:darkoff/presentation/features/crafts/model/crafts_list_ui_model.dart';
@@ -85,7 +86,8 @@ class CraftsListUiMapper {
         station: craft.stationName,
         level: craft.level,
       ),
-      profit: profit,
+      profitLabel: '${profit >= 0 ? '+' : ''}${formatPrice(profit)} ₽',
+      isProfit: isProfit,
       durationLabel: _formatDuration(craft.duration),
       profitPerHourLabel: isProfit
           ? tr.crafts.card.profitPerHour(value: formatPrice(perHour.round()))

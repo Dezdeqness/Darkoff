@@ -1,5 +1,4 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/maps/model/map_ui_model.dart';
 import 'package:darkoff/presentation/features/maps/widgets/map_boss_spawn_row.dart';
 import 'package:darkoff/presentation/features/maps/widgets/map_enemy_chip.dart';
@@ -7,6 +6,7 @@ import 'package:darkoff/presentation/features/maps/widgets/map_loot_section.dart
 import 'package:darkoff/presentation/features/maps/widgets/map_section_label.dart';
 import 'package:darkoff/presentation/features/maps/widgets/map_stat_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class MapDetailView extends StatelessWidget {
   const MapDetailView({super.key, required this.map});

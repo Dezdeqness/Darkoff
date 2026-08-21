@@ -1,8 +1,7 @@
-import 'package:darkoff/core/widgets/app_info_row.dart';
-import 'package:darkoff/core/widgets/app_section_header.dart';
 import 'package:darkoff/domain/entities/item_detail_entity.dart';
 import 'package:darkoff/presentation/features/item_detail/utils/properties_section_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class PropertiesSection extends StatelessWidget {
   const PropertiesSection({super.key, required this.properties});

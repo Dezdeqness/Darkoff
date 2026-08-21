@@ -1,7 +1,7 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/widgets/app_filter_chip.dart';
 import 'package:darkoff/presentation/features/ammo/model/ammo_list_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class AmmoCaliberFilter extends StatelessWidget {
   const AmmoCaliberFilter({

@@ -3,9 +3,9 @@ import 'package:darkoff/core/localization/app_language.dart';
 import 'package:darkoff/core/localization/language_code.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/settings/notifiers/language_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()

@@ -1,8 +1,8 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/ammo/model/ammo_list_ui_model.dart';
 import 'package:darkoff/presentation/features/ammo/widgets/ammo_row.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class AmmoGroupCard extends StatelessWidget {
   const AmmoGroupCard({super.key, required this.group});

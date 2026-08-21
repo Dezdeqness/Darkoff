@@ -1,6 +1,6 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/more/model/more_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class MoreMenuRow extends StatelessWidget {
   const MoreMenuRow({

@@ -1,6 +1,6 @@
-import 'package:darkoff/core/theme/themes/color_theme.dart';
 import 'package:darkoff/presentation/features/home/model/price_change_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 extension PriceTrendColor on PriceTrend {
   Color color(ColorTheme colors) => switch (this) {

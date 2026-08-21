@@ -1,16 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_error_view.dart';
-import 'package:darkoff/core/widgets/item_icon.dart';
-import 'package:darkoff/core/widgets/page_header.dart';
 import 'package:darkoff/presentation/features/traders/widgets/trader_reset_label.dart';
 import 'package:darkoff/presentation/features/traders_detail/model/trader_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/traders_detail/notifiers/trader_detail_notifier.dart';
 import 'package:darkoff/presentation/features/traders_detail/state/trader_detail_state.dart';
 import 'package:darkoff/presentation/features/traders_detail/widgets/trader_trades_view.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()

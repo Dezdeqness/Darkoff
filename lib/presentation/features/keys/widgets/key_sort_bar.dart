@@ -1,6 +1,6 @@
-import 'package:darkoff/core/widgets/app_filter_chip.dart';
 import 'package:darkoff/presentation/features/keys/model/keys_list_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class KeySortBar extends StatelessWidget {
   const KeySortBar({super.key, required this.chips, required this.onSelected});

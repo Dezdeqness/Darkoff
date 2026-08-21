@@ -1,5 +1,4 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/widgets/app_section_header.dart';
 import 'package:darkoff/presentation/features/boss_detail/model/boss_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/boss_detail/model/boss_loot_ui_model.dart';
 import 'package:darkoff/presentation/features/boss_detail/notifiers/boss_loot_notifier.dart';
@@ -8,6 +7,7 @@ import 'package:darkoff/presentation/features/boss_detail/widgets/boss_loot_row.
 import 'package:darkoff/presentation/features/boss_detail/widgets/boss_poster.dart';
 import 'package:darkoff/presentation/features/boss_detail/widgets/boss_spawn_card.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BossDetailView extends ConsumerWidget {

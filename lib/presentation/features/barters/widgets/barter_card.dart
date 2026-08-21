@@ -1,12 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_card.dart';
-import 'package:darkoff/core/widgets/profit_badge.dart';
-import 'package:darkoff/core/widgets/recipe_item_row.dart';
 import 'package:darkoff/presentation/features/barters/model/barters_list_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class BarterCard extends StatelessWidget {
   const BarterCard({super.key, required this.barter});
@@ -38,7 +35,10 @@ class BarterCard extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              ProfitBadge(value: barter.profit),
+              ProfitBadge(
+                label: barter.profitLabel,
+                isPositive: barter.isProfit,
+              ),
             ],
           ),
           const SizedBox(height: 10),

@@ -1,12 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_search_bar.dart';
-import 'package:darkoff/core/widgets/sliver_states.dart';
 import 'package:darkoff/presentation/features/items/notifiers/items_search_notifier.dart';
 import 'package:darkoff/presentation/features/items/state/items_search_state.dart';
 import 'package:darkoff/presentation/features/items/widgets/item_card.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()

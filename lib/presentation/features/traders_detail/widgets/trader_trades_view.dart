@@ -1,8 +1,8 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/traders_detail/model/trader_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/traders_detail/widgets/barters_tab.dart';
 import 'package:darkoff/presentation/features/traders_detail/widgets/offers_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class TraderTradesView extends StatelessWidget {
   const TraderTradesView({

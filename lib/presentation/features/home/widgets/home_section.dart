@@ -1,5 +1,5 @@
-import 'package:darkoff/core/widgets/section_label.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class HomeSection extends StatelessWidget {
   HomeSection({super.key, required this.title, required this.child});

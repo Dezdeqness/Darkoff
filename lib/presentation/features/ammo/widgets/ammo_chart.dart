@@ -1,11 +1,10 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/app_section_header.dart';
 import 'package:darkoff/presentation/features/ammo/ammo_chart_keys.dart';
 import 'package:darkoff/presentation/features/ammo/model/ammo_chart_ui_model.dart';
 import 'package:darkoff/presentation/features/ammo/notifiers/ammo_chart_notifier.dart';
 import 'package:darkoff/presentation/features/ammo/state/ammo_chart_state.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AmmoChart extends ConsumerWidget {

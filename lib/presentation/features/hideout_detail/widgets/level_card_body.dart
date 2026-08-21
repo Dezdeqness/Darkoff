@@ -1,11 +1,11 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/hideout_detail/model/hideout_detail_ui_model.dart';
 import 'package:darkoff/presentation/features/hideout_detail/widgets/level_bonus_row.dart';
 import 'package:darkoff/presentation/features/hideout_detail/widgets/level_item_row.dart';
 import 'package:darkoff/presentation/features/hideout_detail/widgets/level_money_row.dart';
 import 'package:darkoff/presentation/features/hideout_detail/widgets/level_prereq_row.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class LevelCardBody extends StatelessWidget {
   const LevelCardBody({

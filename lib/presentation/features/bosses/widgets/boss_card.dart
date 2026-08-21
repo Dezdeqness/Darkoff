@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/bosses/model/boss_list_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class BossCard extends StatelessWidget {
   const BossCard({super.key, required this.boss});

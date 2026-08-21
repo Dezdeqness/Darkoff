@@ -1,6 +1,6 @@
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/traders_detail/widgets/trader_level_filter.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 const double _kFilterExtent = 52;
 

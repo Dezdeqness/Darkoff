@@ -1,5 +1,6 @@
-import 'package:darkoff/core/localization/strings.g.dart';
+
 import 'package:darkoff/core/utils/price_utils.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/domain/entities/item_entity.dart';
 import 'package:darkoff/domain/entities/item_type.dart';
 import 'package:darkoff/presentation/features/items/model/item_ui_model.dart';

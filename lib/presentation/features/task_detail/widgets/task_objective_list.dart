@@ -1,7 +1,7 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
 import 'package:darkoff/presentation/features/task_detail/model/task_detail_ui_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class TaskObjectiveList extends StatelessWidget {
   const TaskObjectiveList({super.key, required this.objectives});

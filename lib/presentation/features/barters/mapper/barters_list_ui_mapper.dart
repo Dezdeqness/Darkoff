@@ -1,5 +1,6 @@
-import 'package:darkoff/core/localization/strings.g.dart';
+
 import 'package:darkoff/core/utils/price_utils.dart';
+import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/domain/entities/barter_entity.dart';
 import 'package:darkoff/domain/entities/contained_item_entity.dart';
 import 'package:darkoff/presentation/features/barters/model/barters_list_ui_model.dart';
@@ -71,18 +72,23 @@ class BartersListUiMapper {
     return options;
   }
 
-  BarterRowUiModel _row(BarterEntity barter) => BarterRowUiModel(
-    id: barter.id,
-    detailItemId: barter.rewardItems.isNotEmpty
-        ? barter.rewardItems.first.id
-        : null,
-    traderLabel: '${barter.traderName} LL${barter.level}',
-    profit: _profit(barter),
-    costLabel: '${formatPrice(_totalValue(barter.requiredItems))} ₽',
-    valueLabel: '${formatPrice(_totalValue(barter.rewardItems))} ₽',
-    requiredItems: barter.requiredItems.map(_item).toList(),
-    rewardItems: barter.rewardItems.map(_item).toList(),
-  );
+  BarterRowUiModel _row(BarterEntity barter) {
+    final profit = _profit(barter);
+
+    return BarterRowUiModel(
+      id: barter.id,
+      detailItemId: barter.rewardItems.isNotEmpty
+          ? barter.rewardItems.first.id
+          : null,
+      traderLabel: '${barter.traderName} LL${barter.level}',
+      profitLabel: '${profit >= 0 ? '+' : ''}${formatPrice(profit)} ₽',
+      isProfit: profit >= 0,
+      costLabel: '${formatPrice(_totalValue(barter.requiredItems))} ₽',
+      valueLabel: '${formatPrice(_totalValue(barter.rewardItems))} ₽',
+      requiredItems: barter.requiredItems.map(_item).toList(),
+      rewardItems: barter.rewardItems.map(_item).toList(),
+    );
+  }
 
   BarterItemUiModel _item(ContainedItemEntity item) => BarterItemUiModel(
     id: item.id,

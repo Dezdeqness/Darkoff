@@ -1,8 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/core/theme/extension/theme_extensions.dart';
-import 'package:darkoff/core/widgets/page_header.dart';
-import 'package:darkoff/core/widgets/sliver_states.dart';
 import 'package:darkoff/presentation/features/barters/model/barters_list_ui_model.dart';
 import 'package:darkoff/presentation/features/barters/notifiers/barters_list_notifier.dart';
 import 'package:darkoff/presentation/features/barters/state/barters_list_state.dart';
@@ -10,6 +7,7 @@ import 'package:darkoff/presentation/features/barters/widgets/barter_card.dart';
 import 'package:darkoff/presentation/features/barters/widgets/barter_sort_toggle.dart';
 import 'package:darkoff/presentation/features/barters/widgets/barter_trader_filter.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()

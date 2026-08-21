@@ -3,9 +3,6 @@ import 'package:darkoff/core/localization/app_language.dart';
 import 'package:darkoff/core/localization/language_store.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.dart';
-import 'package:darkoff/core/theme/app_theme.dart';
-import 'package:darkoff/core/theme/app_theme_provider.dart';
-import 'package:darkoff/core/theme/themes/color_theme.dart';
 import 'package:darkoff/firebase_options.dart';
 import 'package:darkoff/presentation/features/settings/notifiers/language_notifier.dart';
 import 'package:darkoff/service_locator/service_locator.dart';
@@ -13,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
