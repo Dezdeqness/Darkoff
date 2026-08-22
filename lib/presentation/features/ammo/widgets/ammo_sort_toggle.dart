@@ -18,7 +18,7 @@ class AmmoSortToggle extends StatelessWidget {
     final typo = context.typographyTheme;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 10, 16, 4),
+      padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
       child: Row(
         children: [
           Text(

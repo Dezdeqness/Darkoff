@@ -13,7 +13,7 @@ class TaskHeroCard extends StatelessWidget {
     final typo = context.typographyTheme;
     final shape = context.shapeTheme;
 
-    return AppCard(
+    return AppCard.clipPadding(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

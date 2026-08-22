@@ -90,6 +90,7 @@ class _FleaMarketPageState extends ConsumerState<FleaMarketPage> {
   }
 }
 
+// TODO: Scalable list
 class _CategoryTabs extends StatelessWidget {
   const _CategoryTabs({required this.selected, required this.onSelect});
 

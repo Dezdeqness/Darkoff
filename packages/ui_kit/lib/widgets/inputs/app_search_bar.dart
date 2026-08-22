@@ -7,7 +7,7 @@ class AppSearchBar extends StatelessWidget {
     required this.controller,
     required this.onChanged,
     this.hintText = 'Search...',
-    this.padding = const EdgeInsets.fromLTRB(16, 16, 16, 0),
+    this.padding = const EdgeInsets.all(16),
     this.enabled = true,
     this.readOnlyMode = false,
     this.onTap,

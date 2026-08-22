@@ -33,7 +33,6 @@ class _ItemsPageState extends ConsumerState<ItemsPage> {
           context.router.push(ItemsSearchRoute());
         },
         readOnlyMode: true,
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       ),
     );
   }

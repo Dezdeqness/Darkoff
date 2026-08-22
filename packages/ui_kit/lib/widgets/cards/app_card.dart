@@ -10,9 +10,22 @@ class AppCard extends StatelessWidget {
     this.borderRadius,
   });
 
+  factory AppCard.clipPadding({
+    Key? key,
+    required Widget child,
+    VoidCallback? onTap,
+    BorderRadius? borderRadius,
+  }) => AppCard(
+    key: key,
+    onTap: onTap,
+    borderRadius: borderRadius,
+    padding: null,
+    child: child,
+  );
+
   final Widget child;
   final VoidCallback? onTap;
-  final EdgeInsets padding;
+  final EdgeInsets? padding;
   final BorderRadius? borderRadius;
 
   @override
