@@ -1,4 +1,4 @@
-import 'package:darkoff/core/localization/language_code.dart';
+import 'package:app_localization/app_localization.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:flutter/widgets.dart';
 

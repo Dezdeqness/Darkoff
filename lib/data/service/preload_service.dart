@@ -1,5 +1,5 @@
+import 'package:app_localization/app_localization.dart';
 import 'package:darkoff/core/config/game_mode.dart';
-import 'package:darkoff/core/localization/language_store.dart';
 import 'package:darkoff/data/datasources/localization/localization_data_source.dart';
 import 'package:darkoff/data/local/dao/items_dao.dart';
 import 'package:darkoff/data/local/dao/reference_dao.dart';

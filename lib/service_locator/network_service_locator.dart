@@ -1,4 +1,5 @@
-import 'package:darkoff/core/config/app_config.dart';
+import 'package:app_config/app_config.dart';
+import 'package:darkoff/core/config/env_keys.dart';
 import 'package:darkoff/data/service/http/api/barters_service.dart';
 import 'package:darkoff/data/service/http/api/crafts_service.dart';
 import 'package:darkoff/data/service/http/api/hideout_service.dart';
@@ -19,8 +20,10 @@ import 'package:logger/logger.dart';
 final getIt = GetIt.instance;
 
 Future<void> setupNetworkServiceLocator() async {
+  final config = getIt<AppConfig>();
+
   getIt.registerLazySingleton<BaseOptions>(() {
-    final baseUrl = AppConfig.apiBaseUrl;
+    final baseUrl = config.getString(EnvKeys.tarkovJsonUrl);
     final normalized = baseUrl.endsWith('/') ? baseUrl : '$baseUrl/';
 
     return BaseOptions(
@@ -46,7 +49,7 @@ Future<void> setupNetworkServiceLocator() async {
     service.interceptors.addAll([
       getIt<InMemoryCacheInterceptor>(),
       getIt<RetryInterceptor>(),
-      if (AppConfig.isDevelopment) getIt<RequestLogInterceptor>(),
+      if (config.isDevelopment) getIt<RequestLogInterceptor>(),
     ]);
 
     return service;

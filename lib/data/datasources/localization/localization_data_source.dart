@@ -1,5 +1,5 @@
+import 'package:app_localization/app_localization.dart';
 import 'package:darkoff/core/config/game_mode.dart';
-import 'package:darkoff/core/localization/language_store.dart';
 import 'package:darkoff/data/service/http/api/localization_service.dart';
 import 'package:dio/dio.dart';
 

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:app_localization/app_localization.dart';
 import 'package:darkoff/core/localization/app_language.dart';
-import 'package:darkoff/core/localization/language_code.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.gr.dart';
 import 'package:darkoff/presentation/features/settings/notifiers/language_notifier.dart';

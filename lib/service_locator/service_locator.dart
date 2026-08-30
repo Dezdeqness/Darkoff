@@ -15,7 +15,8 @@ import 'package:darkoff/service_locator/preload_service_locator.dart';
 import 'package:darkoff/service_locator/traders_service_locator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:darkoff/service_locator/tasks_service_locator.dart';
-import 'package:darkoff/core/localization/language_store.dart';
+import 'package:app_localization/app_localization.dart';
+import 'package:darkoff/core/localization/app_language.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,7 +26,9 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton<Logger>(() => Logger(filter: ProductionFilter()));
 
   final prefs = await SharedPreferences.getInstance();
-  getIt.registerSingleton<LanguageStore>(LanguageStore(prefs));
+  getIt.registerSingleton<LanguageStore>(
+    LanguageStore(prefs, resolver: AppLanguage.resolve),
+  );
 
   await setupNetworkServiceLocator();
 

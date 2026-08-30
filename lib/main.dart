@@ -1,10 +1,12 @@
-import 'package:darkoff/core/config/app_config.dart';
+import 'package:app_config/app_config.dart';
+import 'package:app_localization/app_localization.dart';
 import 'package:darkoff/core/localization/app_language.dart';
-import 'package:darkoff/core/localization/language_store.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/core/navigation/app_router.dart';
 import 'package:darkoff/firebase_options.dart';
 import 'package:darkoff/presentation/features/settings/notifiers/language_notifier.dart';
+import 'package:darkoff/service_locator/config_service_locator.dart'
+    show setupConfigServiceLocator;
 import 'package:darkoff/service_locator/service_locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -16,9 +18,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AppConfig.initialize();
+
+  await setupConfigServiceLocator();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions(getIt<AppConfig>()).currentPlatform,
   );
   FlutterError.onError =
       FirebaseCrashlytics.instance.recordFlutterFatalError;

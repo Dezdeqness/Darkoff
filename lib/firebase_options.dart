@@ -1,10 +1,15 @@
+import 'package:app_config/app_config.dart';
+import 'package:darkoff/core/config/env_keys.dart';
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kDebugMode, kIsWeb, TargetPlatform;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DefaultFirebaseOptions {
-  static FirebaseOptions get currentPlatform {
+  const DefaultFirebaseOptions(this._config);
+
+  final AppConfig _config;
+
+  FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       throw UnsupportedError(
         'DefaultFirebaseOptions have not been configured for web - '
@@ -38,36 +43,36 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static String _env(String key) {
-    final value = dotenv.env[key];
+  String _require(String key) {
+    final value = _config.maybeGetString(key);
     if (value == null || value.isEmpty) {
       throw StateError('Missing $key in .env');
     }
     return value;
   }
 
-  static FirebaseOptions get android => FirebaseOptions(
-        apiKey: _env('FIREBASE_ANDROID_API_KEY'),
-        appId: _env('FIREBASE_ANDROID_APP_ID'),
-        messagingSenderId: _env('FIREBASE_MESSAGING_SENDER_ID'),
-        projectId: _env('FIREBASE_PROJECT_ID'),
-        storageBucket: _env('FIREBASE_STORAGE_BUCKET'),
+  FirebaseOptions get android => FirebaseOptions(
+        apiKey: _require(EnvKeys.firebaseAndroidApiKey),
+        appId: _require(EnvKeys.firebaseAndroidAppId),
+        messagingSenderId: _require(EnvKeys.firebaseMessagingSenderId),
+        projectId: _require(EnvKeys.firebaseProjectId),
+        storageBucket: _require(EnvKeys.firebaseStorageBucket),
       );
 
-  static FirebaseOptions get androidDebug => FirebaseOptions(
-        apiKey: _env('FIREBASE_ANDROID_API_KEY'),
-        appId: _env('FIREBASE_ANDROID_DEBUG_APP_ID'),
-        messagingSenderId: _env('FIREBASE_MESSAGING_SENDER_ID'),
-        projectId: _env('FIREBASE_PROJECT_ID'),
-        storageBucket: _env('FIREBASE_STORAGE_BUCKET'),
+  FirebaseOptions get androidDebug => FirebaseOptions(
+        apiKey: _require(EnvKeys.firebaseAndroidApiKey),
+        appId: _require(EnvKeys.firebaseAndroidDebugAppId),
+        messagingSenderId: _require(EnvKeys.firebaseMessagingSenderId),
+        projectId: _require(EnvKeys.firebaseProjectId),
+        storageBucket: _require(EnvKeys.firebaseStorageBucket),
       );
 
-  static FirebaseOptions get ios => FirebaseOptions(
-        apiKey: _env('FIREBASE_IOS_API_KEY'),
-        appId: _env('FIREBASE_IOS_APP_ID'),
-        messagingSenderId: _env('FIREBASE_MESSAGING_SENDER_ID'),
-        projectId: _env('FIREBASE_PROJECT_ID'),
-        storageBucket: _env('FIREBASE_STORAGE_BUCKET'),
-        iosBundleId: _env('FIREBASE_IOS_BUNDLE_ID'),
+  FirebaseOptions get ios => FirebaseOptions(
+        apiKey: _require(EnvKeys.firebaseIosApiKey),
+        appId: _require(EnvKeys.firebaseIosAppId),
+        messagingSenderId: _require(EnvKeys.firebaseMessagingSenderId),
+        projectId: _require(EnvKeys.firebaseProjectId),
+        storageBucket: _require(EnvKeys.firebaseStorageBucket),
+        iosBundleId: _require(EnvKeys.firebaseIosBundleId),
       );
 }

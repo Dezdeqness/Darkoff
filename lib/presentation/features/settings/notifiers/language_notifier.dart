@@ -1,6 +1,5 @@
+import 'package:app_localization/app_localization.dart';
 import 'package:darkoff/core/localization/app_language.dart';
-import 'package:darkoff/core/localization/language_code.dart';
-import 'package:darkoff/core/localization/language_store.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
 import 'package:darkoff/service_locator/service_locator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
