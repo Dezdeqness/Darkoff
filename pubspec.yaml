@@ -12,6 +12,8 @@ workspace:
   - packages/infrastructure/app_config
   - packages/infrastructure/app_http
   - packages/infrastructure/app_localization
+  - packages/contracts/ammo
+  - packages/contracts/keys
   - widgetbook
 
 dependencies:
@@ -27,6 +29,10 @@ dependencies:
     path: packages/infrastructure/app_http
   app_localization:
     path: packages/infrastructure/app_localization
+  ammo_contract:
+    path: packages/contracts/ammo
+  keys_contract:
+    path: packages/contracts/keys
 
   intl: 0.20.2
   slang: 4.19.0
