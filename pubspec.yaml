@@ -10,6 +10,7 @@ environment:
 workspace:
   - packages/ui_kit
   - packages/infrastructure/app_config
+  - packages/infrastructure/app_http
   - packages/infrastructure/app_localization
   - widgetbook
 
@@ -22,6 +23,8 @@ dependencies:
     path: packages/ui_kit
   app_config:
     path: packages/infrastructure/app_config
+  app_http:
+    path: packages/infrastructure/app_http
   app_localization:
     path: packages/infrastructure/app_localization
 

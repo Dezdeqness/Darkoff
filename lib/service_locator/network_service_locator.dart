@@ -1,4 +1,5 @@
 import 'package:app_config/app_config.dart';
+import 'package:app_http/app_http.dart';
 import 'package:darkoff/core/config/env_keys.dart';
 import 'package:darkoff/data/service/http/api/barters_service.dart';
 import 'package:darkoff/data/service/http/api/crafts_service.dart';
@@ -10,9 +11,6 @@ import 'package:darkoff/data/service/http/api/prices_service.dart';
 import 'package:darkoff/data/service/http/api/status_service.dart';
 import 'package:darkoff/data/service/http/api/tasks_service.dart';
 import 'package:darkoff/data/service/http/api/traders_service.dart';
-import 'package:darkoff/data/service/http/interceptors/in_memory_cache_interceptor.dart';
-import 'package:darkoff/data/service/http/interceptors/request_log_interceptor.dart';
-import 'package:darkoff/data/service/http/interceptors/retry_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
