@@ -13,7 +13,15 @@ workspace:
   - packages/infrastructure/app_http
   - packages/infrastructure/app_localization
   - packages/contracts/ammo
+  - packages/contracts/boss
+  - packages/contracts/flea
+  - packages/contracts/hideout
+  - packages/contracts/hideout_progress
   - packages/contracts/keys
+  - packages/contracts/maps
+  - packages/contracts/market
+  - packages/contracts/server_status
+  - packages/contracts/tasks
   - widgetbook
 
 dependencies:
@@ -31,8 +39,24 @@ dependencies:
     path: packages/infrastructure/app_localization
   ammo_contract:
     path: packages/contracts/ammo
+  boss_contract:
+    path: packages/contracts/boss
+  flea_contract:
+    path: packages/contracts/flea
+  hideout_contract:
+    path: packages/contracts/hideout
+  hideout_progress_contract:
+    path: packages/contracts/hideout_progress
   keys_contract:
     path: packages/contracts/keys
+  maps_contract:
+    path: packages/contracts/maps
+  market_contract:
+    path: packages/contracts/market
+  server_status_contract:
+    path: packages/contracts/server_status
+  tasks_contract:
+    path: packages/contracts/tasks
 
   intl: 0.20.2
   slang: 4.19.0
@@ -73,6 +97,7 @@ dev_dependencies:
   flutter_lints: 6.0.0
   drift_dev: 2.31.0
   retrofit_generator: 10.2.1
+  melos: ^6.3.0
 
 flutter:
   uses-material-design: true

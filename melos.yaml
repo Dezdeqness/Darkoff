@@ -1,0 +1,31 @@
+name: darkoff
+
+packages:
+  - .
+  - packages/**
+  - widgetbook
+
+command:
+  bootstrap:
+    runPubGetInParallel: false
+
+scripts:
+  gen:
+    description: Run build_runner in every package that uses code generation.
+    run: melos exec --concurrency=1 --fail-fast --depends-on="build_runner" -- fvm dart run build_runner build --delete-conflicting-outputs
+
+  gen:watch:
+    description: build_runner watch mode. Scope to a package with --scope="<name>".
+    run: melos exec --concurrency=1 --depends-on="build_runner" -- fvm dart run build_runner watch --delete-conflicting-outputs
+
+  analyze:
+    description: Analyze every package.
+    run: melos exec --concurrency=4 -- fvm flutter analyze .
+
+  format:
+    description: Format every package.
+    run: melos exec --concurrency=4 -- fvm dart format .
+
+  clean:
+    description: flutter clean in every Flutter package.
+    run: melos exec --concurrency=4 -- fvm flutter clean
