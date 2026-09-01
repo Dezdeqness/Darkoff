@@ -1,6 +1,5 @@
 import 'package:darkoff/data/datasources/keys/keys_data_source.dart';
-import 'package:darkoff/domain/entities/key_entity.dart';
-import 'package:darkoff/domain/repositories/keys_repository.dart';
+import 'package:keys_contract/keys_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 class KeysRepositoryImpl implements KeysRepository {

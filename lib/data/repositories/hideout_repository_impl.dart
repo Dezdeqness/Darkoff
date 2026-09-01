@@ -1,6 +1,5 @@
 import 'package:darkoff/data/datasources/hideout/hideout_data_source.dart';
-import 'package:darkoff/domain/entities/hideout_entity.dart';
-import 'package:darkoff/domain/repositories/hideout_repository.dart';
+import 'package:hideout_contract/hideout_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 class HideoutRepositoryImpl implements HideoutRepository {

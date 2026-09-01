@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:darkoff/domain/entities/ammo_entity.dart';
+import 'package:ammo_contract/ammo_contract.dart';
 import 'package:darkoff/presentation/features/ammo/model/ammo_chart_ui_model.dart';
 
 class AmmoChartUiMapper {

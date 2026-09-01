@@ -1,7 +1,7 @@
 import 'package:darkoff/data/models/hideout_api.dart';
 import 'package:darkoff/data/models/item_api.dart' show ContainedRefApi;
 import 'package:darkoff/data/models/trader_dump_api.dart';
-import 'package:darkoff/domain/entities/hideout_entity.dart';
+import 'package:hideout_contract/hideout_contract.dart';
 import 'package:darkoff/domain/entities/item_mini_info.dart';
 
 class HideoutMapper {

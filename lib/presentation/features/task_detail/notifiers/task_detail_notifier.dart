@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/repositories/tasks_repository.dart';
+import 'package:tasks_contract/tasks_contract.dart';
 import 'package:darkoff/presentation/features/task_detail/mapper/task_detail_ui_mapper.dart';
 import 'package:darkoff/presentation/features/task_detail/state/task_detail_state.dart';
 import 'package:darkoff/service_locator/tasks_service_locator.dart';

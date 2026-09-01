@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:darkoff/data/cache/cache_value.dart';
 import 'package:darkoff/data/cache/market_cache_manager.dart';
-import 'package:darkoff/domain/entities/market_item_entity.dart';
+import 'package:market_contract/market_contract.dart';
 import 'package:darkoff/presentation/features/home/mapper/market_item_ui_mapper.dart';
 import 'package:darkoff/presentation/features/home/state/market_snapshot_state.dart';
 import 'package:darkoff/service_locator/service_locator.dart';

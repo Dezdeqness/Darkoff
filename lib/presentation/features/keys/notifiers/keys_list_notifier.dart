@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/entities/key_entity.dart';
+import 'package:keys_contract/keys_contract.dart';
 import 'package:darkoff/presentation/features/keys/mapper/keys_list_ui_mapper.dart';
 import 'package:darkoff/presentation/features/keys/model/keys_list_ui_model.dart';
 import 'package:darkoff/presentation/features/keys/notifiers/keys_notifier.dart';

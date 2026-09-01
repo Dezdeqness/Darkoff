@@ -1,6 +1,5 @@
 import 'package:darkoff/data/local/dao/hideout_progress_dao.dart';
-import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
-import 'package:darkoff/domain/repositories/hideout_progress_repository.dart';
+import 'package:hideout_progress_contract/hideout_progress_contract.dart';
 
 class HideoutProgressRepositoryImpl implements HideoutProgressRepository {
   HideoutProgressRepositoryImpl({required HideoutProgressDao dao}) : _dao = dao;

@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/entities/key_entity.dart';
+import 'package:keys_contract/keys_contract.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'keys_state.freezed.dart';

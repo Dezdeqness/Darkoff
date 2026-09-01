@@ -1,7 +1,6 @@
 import 'package:darkoff/data/datasources/tasks/tasks_data_source.dart';
 import 'package:darkoff/data/local/dao/tasks_dao.dart';
-import 'package:darkoff/domain/entities/task_entity.dart';
-import 'package:darkoff/domain/repositories/tasks_repository.dart';
+import 'package:tasks_contract/tasks_contract.dart';
 import 'package:result_dart/functions.dart';
 import 'package:result_dart/result_dart.dart';
 

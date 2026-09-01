@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/entities/ammo_entity.dart';
+import 'package:ammo_contract/ammo_contract.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ammo_state.freezed.dart';

@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/repositories/server_status_repository.dart';
+import 'package:server_status_contract/server_status_contract.dart';
 import 'package:darkoff/presentation/features/home/mapper/server_status_ui_mapper.dart';
 import 'package:darkoff/presentation/features/home/state/server_status_state.dart';
 import 'package:darkoff/service_locator/service_locator.dart';

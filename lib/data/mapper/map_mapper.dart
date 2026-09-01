@@ -1,5 +1,5 @@
 import 'package:darkoff/data/models/map_api.dart';
-import 'package:darkoff/domain/entities/map_entity.dart';
+import 'package:maps_contract/maps_contract.dart';
 
 class MapMapper {
   const MapMapper();

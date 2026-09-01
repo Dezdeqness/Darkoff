@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/entities/map_entity.dart';
+import 'package:maps_contract/maps_contract.dart';
 import 'package:darkoff/presentation/features/maps/model/map_ui_model.dart';
 
 class MapUiMapper {

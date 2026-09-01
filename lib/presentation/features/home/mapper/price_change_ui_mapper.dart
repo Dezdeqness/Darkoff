@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/entities/flea_item_entity.dart';
+import 'package:flea_contract/flea_contract.dart';
 import 'package:darkoff/presentation/features/home/model/price_change_ui_model.dart';
 
 const _minPrice = 50000;

@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/repositories/flea_repository.dart';
+import 'package:flea_contract/flea_contract.dart';
 import 'package:darkoff/presentation/features/flea_market/mapper/flea_item_ui_mapper.dart';
 import 'package:darkoff/presentation/features/flea_market/state/flea_state.dart';
 import 'package:darkoff/service_locator/flea_service_locator.dart';

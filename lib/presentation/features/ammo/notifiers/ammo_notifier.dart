@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/repositories/ammo_repository.dart';
+import 'package:ammo_contract/ammo_contract.dart';
 import 'package:darkoff/presentation/features/ammo/state/ammo_state.dart';
 import 'package:darkoff/service_locator/ammo_service_locator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

@@ -3,7 +3,7 @@ import 'package:darkoff/core/result_utils.dart';
 import 'package:darkoff/data/datasources/localization/localization_data_source.dart';
 import 'package:darkoff/data/mapper/map_mapper.dart';
 import 'package:darkoff/data/service/http/api/maps_service.dart';
-import 'package:darkoff/domain/entities/map_entity.dart';
+import 'package:maps_contract/maps_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 class MapsDataSource {

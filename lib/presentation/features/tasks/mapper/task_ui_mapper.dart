@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/entities/task_entity.dart';
+import 'package:tasks_contract/tasks_contract.dart';
 import 'package:darkoff/presentation/features/tasks/model/task_ui_model.dart';
 
 class TaskUiMapper {

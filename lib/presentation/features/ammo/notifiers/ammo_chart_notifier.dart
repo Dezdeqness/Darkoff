@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/repositories/ammo_repository.dart';
+import 'package:ammo_contract/ammo_contract.dart';
 import 'package:darkoff/presentation/features/ammo/mapper/ammo_chart_ui_mapper.dart';
 import 'package:darkoff/presentation/features/ammo/state/ammo_chart_state.dart';
 import 'package:darkoff/service_locator/ammo_service_locator.dart';

@@ -1,7 +1,6 @@
 import 'package:darkoff/data/cache/base_cache_manager.dart';
 import 'package:darkoff/data/local/dao/flea_cache_dao.dart';
-import 'package:darkoff/domain/entities/flea_item_entity.dart';
-import 'package:darkoff/domain/repositories/flea_repository.dart';
+import 'package:flea_contract/flea_contract.dart';
 
 class FleaCacheManager extends BaseCacheManager<List<FleaItemEntity>> {
   FleaCacheManager({

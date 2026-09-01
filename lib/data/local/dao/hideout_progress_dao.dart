@@ -1,5 +1,5 @@
 import 'package:darkoff/data/local/database.dart';
-import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
+import 'package:hideout_progress_contract/hideout_progress_contract.dart';
 import 'package:drift/drift.dart';
 
 class HideoutProgressDao {

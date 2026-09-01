@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/entities/boss_entity.dart';
+import 'package:boss_contract/boss_contract.dart';
 import 'package:darkoff/presentation/features/bosses/model/boss_list_ui_model.dart';
 
 class BossListUiMapper {

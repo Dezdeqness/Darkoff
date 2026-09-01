@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/entities/hideout_entity.dart';
+import 'package:hideout_contract/hideout_contract.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'hideout_state.freezed.dart';

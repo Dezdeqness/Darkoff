@@ -3,7 +3,7 @@ import 'package:darkoff/data/models/item_api.dart' show ContainedRefApi;
 import 'package:darkoff/data/models/task_api.dart';
 import 'package:darkoff/data/models/trader_dump_api.dart';
 import 'package:darkoff/domain/entities/item_mini_info.dart';
-import 'package:darkoff/domain/entities/task_entity.dart';
+import 'package:tasks_contract/tasks_contract.dart';
 import 'package:drift/drift.dart';
 
 class TaskMapper {

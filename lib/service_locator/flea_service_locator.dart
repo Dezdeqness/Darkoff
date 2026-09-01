@@ -3,7 +3,7 @@ import 'package:darkoff/data/datasources/flea/flea_data_source.dart';
 import 'package:darkoff/data/local/dao/flea_cache_dao.dart';
 import 'package:darkoff/data/local/dao/items_dao.dart';
 import 'package:darkoff/data/repositories/flea_repository_impl.dart';
-import 'package:darkoff/domain/repositories/flea_repository.dart';
+import 'package:flea_contract/flea_contract.dart';
 import 'package:darkoff/presentation/features/flea_market/mapper/flea_item_ui_mapper.dart';
 import 'package:get_it/get_it.dart';
 

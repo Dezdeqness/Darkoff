@@ -5,7 +5,7 @@ import 'package:darkoff/data/local/dao/items_dao.dart';
 import 'package:darkoff/data/mapper/hideout_mapper.dart';
 import 'package:darkoff/data/service/http/api/hideout_service.dart';
 import 'package:darkoff/data/service/http/api/traders_service.dart';
-import 'package:darkoff/domain/entities/hideout_entity.dart';
+import 'package:hideout_contract/hideout_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 const _mode = GameMode.pve;

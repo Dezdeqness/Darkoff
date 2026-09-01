@@ -3,7 +3,7 @@ import 'package:darkoff/core/result_utils.dart';
 import 'package:darkoff/data/datasources/localization/localization_data_source.dart';
 import 'package:darkoff/data/mapper/boss_mapper.dart';
 import 'package:darkoff/data/service/http/api/maps_service.dart';
-import 'package:darkoff/domain/entities/boss_entity.dart';
+import 'package:boss_contract/boss_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 const _mode = GameMode.pve;

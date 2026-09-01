@@ -1,5 +1,5 @@
 import 'package:darkoff/data/models/map_api.dart';
-import 'package:darkoff/domain/entities/boss_entity.dart';
+import 'package:boss_contract/boss_contract.dart';
 
 class BossMapper {
   const BossMapper();

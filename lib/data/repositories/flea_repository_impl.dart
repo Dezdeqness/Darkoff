@@ -1,6 +1,5 @@
 import 'package:darkoff/data/datasources/flea/flea_data_source.dart';
-import 'package:darkoff/domain/entities/flea_item_entity.dart';
-import 'package:darkoff/domain/repositories/flea_repository.dart';
+import 'package:flea_contract/flea_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 class FleaRepositoryImpl implements FleaRepository {

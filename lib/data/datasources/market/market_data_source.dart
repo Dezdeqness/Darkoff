@@ -1,6 +1,6 @@
 import 'package:darkoff/core/result_utils.dart';
 import 'package:darkoff/data/local/dao/items_dao.dart';
-import 'package:darkoff/domain/entities/market_item_entity.dart';
+import 'package:market_contract/market_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 const kMarketSnapshotIds = <String>[

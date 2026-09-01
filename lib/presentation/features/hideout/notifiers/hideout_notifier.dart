@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/repositories/hideout_repository.dart';
+import 'package:hideout_contract/hideout_contract.dart';
 import 'package:darkoff/presentation/features/hideout/state/hideout_state.dart';
 import 'package:darkoff/service_locator/hideout_service_locator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

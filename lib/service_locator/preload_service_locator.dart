@@ -7,7 +7,7 @@ import 'package:darkoff/data/mapper/trader_mapper.dart';
 import 'package:darkoff/data/service/http/api/traders_service.dart';
 import 'package:darkoff/data/service/preload_service.dart';
 import 'package:darkoff/domain/repositories/items_repository.dart';
-import 'package:darkoff/domain/repositories/tasks_repository.dart';
+import 'package:tasks_contract/tasks_contract.dart';
 import 'package:logger/logger.dart';
 
 import 'barters_service_locator.dart';

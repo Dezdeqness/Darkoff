@@ -1,6 +1,6 @@
 import 'package:darkoff/core/result_utils.dart';
 import 'package:darkoff/data/local/dao/items_dao.dart';
-import 'package:darkoff/domain/entities/ammo_entity.dart';
+import 'package:ammo_contract/ammo_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 class AmmoDataSource {

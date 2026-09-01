@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/repositories/maps_repository.dart';
+import 'package:maps_contract/maps_contract.dart';
 import 'package:darkoff/presentation/features/maps/mapper/map_ui_mapper.dart';
 import 'package:darkoff/presentation/features/maps/state/maps_state.dart';
 import 'package:darkoff/service_locator/maps_service_locator.dart';

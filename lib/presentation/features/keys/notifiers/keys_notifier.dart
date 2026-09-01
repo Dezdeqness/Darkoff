@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/repositories/keys_repository.dart';
+import 'package:keys_contract/keys_contract.dart';
 import 'package:darkoff/presentation/features/keys/state/keys_state.dart';
 import 'package:darkoff/service_locator/keys_service_locator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

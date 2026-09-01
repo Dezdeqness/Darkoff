@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:darkoff/data/cache/cache_value.dart';
 import 'package:darkoff/data/cache/flea_cache_manager.dart';
-import 'package:darkoff/domain/entities/flea_item_entity.dart';
+import 'package:flea_contract/flea_contract.dart';
 import 'package:darkoff/presentation/features/home/mapper/price_change_ui_mapper.dart';
 import 'package:darkoff/presentation/features/home/state/price_changes_state.dart';
 import 'package:darkoff/service_locator/service_locator.dart';

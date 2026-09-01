@@ -1,5 +1,5 @@
 import 'package:darkoff/core/utils/price_utils.dart';
-import 'package:darkoff/domain/entities/flea_item_entity.dart';
+import 'package:flea_contract/flea_contract.dart';
 import 'package:darkoff/presentation/features/flea_market/model/flea_item_ui_model.dart';
 
 class FleaItemUiMapper {

@@ -1,15 +1,15 @@
 import 'package:darkoff/data/mapper/item_mapper.dart';
 import 'package:darkoff/data/local/database.dart';
-import 'package:darkoff/domain/entities/ammo_entity.dart';
+import 'package:ammo_contract/ammo_contract.dart';
 import 'package:darkoff/domain/entities/boss_loot_item_entity.dart';
 import 'package:darkoff/domain/entities/contained_item_entity.dart';
-import 'package:darkoff/domain/entities/flea_item_entity.dart';
+import 'package:flea_contract/flea_contract.dart';
 import 'package:darkoff/domain/entities/item_category_info.dart';
 import 'package:darkoff/domain/entities/item_detail_entity.dart';
 import 'package:darkoff/domain/entities/item_entity.dart';
 import 'package:darkoff/domain/entities/item_mini_info.dart';
-import 'package:darkoff/domain/entities/key_entity.dart';
-import 'package:darkoff/domain/entities/market_item_entity.dart';
+import 'package:keys_contract/keys_contract.dart';
+import 'package:market_contract/market_contract.dart';
 import 'package:darkoff/domain/entities/trader_entity.dart';
 import 'package:drift/drift.dart';
 

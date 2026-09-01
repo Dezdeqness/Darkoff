@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/entities/boss_entity.dart';
+import 'package:boss_contract/boss_contract.dart';
 import 'package:darkoff/presentation/features/boss_detail/mapper/boss_detail_ui_mapper.dart';
 import 'package:darkoff/presentation/features/boss_detail/state/boss_detail_state.dart';
 import 'package:darkoff/presentation/features/bosses/notifiers/bosses_notifier.dart';

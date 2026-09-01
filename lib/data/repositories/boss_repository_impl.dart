@@ -1,6 +1,5 @@
 import 'package:darkoff/data/datasources/boss/boss_data_source.dart';
-import 'package:darkoff/domain/entities/boss_entity.dart';
-import 'package:darkoff/domain/repositories/boss_repository.dart';
+import 'package:boss_contract/boss_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 class BossRepositoryImpl implements BossRepository {

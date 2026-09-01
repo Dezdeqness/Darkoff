@@ -5,7 +5,7 @@ import 'package:darkoff/data/local/dao/items_dao.dart';
 import 'package:darkoff/data/mapper/task_mapper.dart';
 import 'package:darkoff/data/service/http/api/tasks_service.dart';
 import 'package:darkoff/data/service/http/api/traders_service.dart';
-import 'package:darkoff/domain/entities/task_entity.dart';
+import 'package:tasks_contract/tasks_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 class TasksDataSource {

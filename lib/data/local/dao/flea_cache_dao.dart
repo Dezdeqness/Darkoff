@@ -1,5 +1,5 @@
 import 'package:darkoff/data/local/database.dart';
-import 'package:darkoff/domain/entities/flea_item_entity.dart';
+import 'package:flea_contract/flea_contract.dart';
 import 'package:drift/drift.dart';
 
 class FleaCacheDao {

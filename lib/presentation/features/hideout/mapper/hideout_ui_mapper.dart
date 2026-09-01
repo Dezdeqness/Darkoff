@@ -1,8 +1,8 @@
 
 import 'package:darkoff/core/utils/price_utils.dart';
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/domain/entities/hideout_entity.dart';
-import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
+import 'package:hideout_contract/hideout_contract.dart';
+import 'package:hideout_progress_contract/hideout_progress_contract.dart';
 import 'package:darkoff/presentation/features/hideout/model/hideout_list_ui_model.dart';
 import 'package:darkoff/presentation/features/hideout/utils/hideout_progress_utils.dart';
 

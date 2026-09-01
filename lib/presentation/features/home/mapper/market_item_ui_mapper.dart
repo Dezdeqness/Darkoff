@@ -1,5 +1,5 @@
 import 'package:darkoff/core/utils/price_utils.dart';
-import 'package:darkoff/domain/entities/market_item_entity.dart';
+import 'package:market_contract/market_contract.dart';
 import 'package:darkoff/presentation/features/home/model/market_item_ui_model.dart';
 import 'package:darkoff/presentation/features/home/model/price_change_ui_model.dart';
 

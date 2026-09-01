@@ -1,6 +1,6 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/domain/entities/hideout_entity.dart';
-import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
+import 'package:hideout_contract/hideout_contract.dart';
+import 'package:hideout_progress_contract/hideout_progress_contract.dart';
 
 const hideoutCurrencyItemIds = {
   '5449016a4bdc2d6f028b456f', // Roubles

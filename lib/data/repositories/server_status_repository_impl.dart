@@ -1,6 +1,5 @@
 import 'package:darkoff/data/datasources/server_status/server_status_data_source.dart';
-import 'package:darkoff/domain/entities/server_status_entity.dart';
-import 'package:darkoff/domain/repositories/server_status_repository.dart';
+import 'package:server_status_contract/server_status_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 class ServerStatusRepositoryImpl implements ServerStatusRepository {

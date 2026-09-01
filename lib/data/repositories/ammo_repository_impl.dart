@@ -1,6 +1,5 @@
 import 'package:darkoff/data/datasources/ammo/ammo_data_source.dart';
-import 'package:darkoff/domain/entities/ammo_entity.dart';
-import 'package:darkoff/domain/repositories/ammo_repository.dart';
+import 'package:ammo_contract/ammo_contract.dart';
 import 'package:result_dart/result_dart.dart';
 
 class AmmoRepositoryImpl implements AmmoRepository {

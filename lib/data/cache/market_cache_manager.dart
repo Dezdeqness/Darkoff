@@ -1,7 +1,6 @@
 import 'package:darkoff/data/cache/base_cache_manager.dart';
 import 'package:darkoff/data/local/dao/market_snapshot_dao.dart';
-import 'package:darkoff/domain/entities/market_item_entity.dart';
-import 'package:darkoff/domain/repositories/market_repository.dart';
+import 'package:market_contract/market_contract.dart';
 
 class MarketCacheManager extends BaseCacheManager<List<MarketItemEntity>> {
   MarketCacheManager({

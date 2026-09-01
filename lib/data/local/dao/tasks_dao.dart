@@ -1,7 +1,7 @@
 import 'package:darkoff/data/mapper/task_mapper.dart';
 import 'package:darkoff/data/local/database.dart';
 import 'package:darkoff/domain/entities/item_mini_info.dart';
-import 'package:darkoff/domain/entities/task_entity.dart';
+import 'package:tasks_contract/tasks_contract.dart';
 import 'package:drift/drift.dart';
 
 class TasksDao {

@@ -3,7 +3,7 @@ import 'package:darkoff/data/datasources/localization/localization_data_source.d
 import 'package:darkoff/data/mapper/boss_mapper.dart';
 import 'package:darkoff/data/repositories/boss_repository_impl.dart';
 import 'package:darkoff/data/service/http/api/maps_service.dart';
-import 'package:darkoff/domain/repositories/boss_repository.dart';
+import 'package:boss_contract/boss_contract.dart';
 import 'package:darkoff/presentation/features/boss_detail/mapper/boss_detail_ui_mapper.dart';
 import 'package:darkoff/presentation/features/bosses/mapper/boss_list_ui_mapper.dart';
 import 'package:get_it/get_it.dart';

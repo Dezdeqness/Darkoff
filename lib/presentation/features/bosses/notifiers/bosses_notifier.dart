@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/repositories/boss_repository.dart';
+import 'package:boss_contract/boss_contract.dart';
 import 'package:darkoff/presentation/features/bosses/state/bosses_state.dart';
 import 'package:darkoff/service_locator/boss_service_locator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

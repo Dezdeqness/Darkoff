@@ -1,5 +1,4 @@
-import 'package:darkoff/domain/entities/hideout_progress_entity.dart';
-import 'package:darkoff/domain/repositories/hideout_progress_repository.dart';
+import 'package:hideout_progress_contract/hideout_progress_contract.dart';
 import 'package:darkoff/service_locator/hideout_service_locator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

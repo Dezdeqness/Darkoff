@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:darkoff/domain/repositories/tasks_repository.dart';
+import 'package:tasks_contract/tasks_contract.dart';
 import 'package:darkoff/presentation/features/tasks/mapper/task_ui_mapper.dart';
 import 'package:darkoff/presentation/features/tasks/state/tasks_search_state.dart';
 import 'package:darkoff/service_locator/tasks_service_locator.dart';

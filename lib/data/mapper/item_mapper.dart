@@ -6,14 +6,14 @@ import 'package:darkoff/data/models/items_response.dart'
     show ItemCategoryApi, ItemsData;
 import 'package:darkoff/data/models/item_api.dart';
 import 'package:darkoff/data/models/trader_dump_api.dart';
-import 'package:darkoff/domain/entities/ammo_entity.dart';
-import 'package:darkoff/domain/entities/flea_item_entity.dart';
+import 'package:ammo_contract/ammo_contract.dart';
+import 'package:flea_contract/flea_contract.dart';
 import 'package:darkoff/domain/entities/item_category_info.dart';
 import 'package:darkoff/domain/entities/item_detail_entity.dart';
 import 'package:darkoff/domain/entities/item_entity.dart';
 import 'package:darkoff/domain/entities/item_type.dart';
-import 'package:darkoff/domain/entities/key_entity.dart';
-import 'package:darkoff/domain/entities/market_item_entity.dart';
+import 'package:keys_contract/keys_contract.dart';
+import 'package:market_contract/market_contract.dart';
 import 'package:drift/drift.dart';
 
 class ItemMapContext {

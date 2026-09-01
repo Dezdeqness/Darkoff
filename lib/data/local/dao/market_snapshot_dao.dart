@@ -1,5 +1,5 @@
 import 'package:darkoff/data/local/database.dart';
-import 'package:darkoff/domain/entities/market_item_entity.dart';
+import 'package:market_contract/market_contract.dart';
 import 'package:drift/drift.dart';
 
 class MarketSnapshotDao {

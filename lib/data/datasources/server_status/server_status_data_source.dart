@@ -1,5 +1,5 @@
 import 'package:darkoff/data/service/http/api/status_service.dart';
-import 'package:darkoff/domain/entities/server_status_entity.dart';
+import 'package:server_status_contract/server_status_contract.dart';
 import 'package:result_dart/functions.dart';
 import 'package:result_dart/result_dart.dart';
 

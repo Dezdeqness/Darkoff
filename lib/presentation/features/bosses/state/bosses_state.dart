@@ -1,4 +1,4 @@
-import 'package:darkoff/domain/entities/boss_entity.dart';
+import 'package:boss_contract/boss_contract.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bosses_state.freezed.dart';

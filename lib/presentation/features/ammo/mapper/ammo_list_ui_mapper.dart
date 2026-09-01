@@ -1,5 +1,5 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/domain/entities/ammo_entity.dart';
+import 'package:ammo_contract/ammo_contract.dart';
 import 'package:darkoff/presentation/features/ammo/model/ammo_list_ui_model.dart';
 
 class AmmoListUiMapper {

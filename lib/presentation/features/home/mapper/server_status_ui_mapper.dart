@@ -1,5 +1,5 @@
 import 'package:darkoff/core/localization/strings.g.dart';
-import 'package:darkoff/domain/entities/server_status_entity.dart';
+import 'package:server_status_contract/server_status_contract.dart';
 import 'package:darkoff/presentation/features/home/model/server_status_ui_model.dart';
 
 class ServerStatusUiMapper {
